@@ -9,7 +9,6 @@
 #import "tempViewController.h"
 #import "showView.h"
 #import "HCoreText.h"
-#define R 16
 @interface tempViewController()<CTViewTouchDelegate>
 
 @end
@@ -24,6 +23,7 @@
     config.autoAdjustHeight = 1;
     NSString *content =@"<image src=\"image3\" width=\"200\" height=\"120\">@XXOO<font name=\"Futura\" size=\"20\" color=\"blue\" >Love T&^朱子豪*四)个大傻逼<font name=\"Futura\" size=\"12\" color=\"red\">you  I believe that Anything is possible 10 to CoreTextDome, but to the 19 today or generation of packaging, had love who know why ah?Please ask!<font name=\"Futura\" size=\"12\">";
     CoreTextData *data = [FrameParser parserWithPropertyContent:content defaultConfig:config];
+    data = [FrameParser parserContent:content withConfig:config];
 //    CoreTextData *data = [FrameParser parserWithPropertyContent2:content defaultConfig:config];
     [view drawWithCoreTextData:data];
     [view setBeginTouchEvent:YES];

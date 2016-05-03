@@ -16,9 +16,14 @@
 #import "paragraphConfig.h"
 #import <objc/runtime.h>
 @implementation FrameParser
-+(CoreTextData *)parseContent:(NSString *)content withConfig:(FrameParserConfig *)config{
++(CoreTextData *)parserContent:(NSString *)content withConfig:(FrameParserConfig *)config{
     NSDictionary *dic = [config defaultAttribute];
     NSAttributedString *attString = [[NSAttributedString alloc]initWithString:content attributes:dic];
+    TextMessage *textMsg = [[TextMessage alloc]init];
+    textMsg.type = textType;
+    textMsg.contentRange = NSMakeRange(0, content.length);
+    textMsg.showContent = content;
+    textMsg.content = content;
     CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
     /**计算需要的空间*/
     CGSize size = config.contentSize;
@@ -31,8 +36,9 @@
     CoreTextData *data = [[CoreTextData alloc]init];
     data.contentString = content;
     [data setValue:@(config.autoAdjustHeight) forKey:@"autoAdjustHeight"];
-    data.realContentHeight = size.height;
+    data.realContentHeight = contSize.height;
     data.frameRef = frameRef;
+    data.msgArray = [NSMutableArray arrayWithObject:textMsg];
     CFRelease(setter);
     CFRelease(pathRef);
     return data;

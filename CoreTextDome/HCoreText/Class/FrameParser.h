@@ -31,7 +31,7 @@ typedef NSArray *(^keywordsBlock)(SourceType type,NSString * argumentString);
  *
  *  @return
  */
-+(CoreTextData *)parseContent:(NSString *)content withConfig:(FrameParserConfig *)config;
++(CoreTextData *)parserContent:(NSString *)content withConfig:(FrameParserConfig *)config;
 /**
  *  最基础的文字解析
  *  使用这个解析器方法   你需要完整的提供 1：整个文本分块操作 2：需要解析的关键字 3：怎么通过关键字 从文本中解析到对应的值
