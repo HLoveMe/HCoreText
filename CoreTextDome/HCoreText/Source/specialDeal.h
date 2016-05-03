@@ -73,7 +73,7 @@ static Message * parserSection(NSString *partString,parserValueCallBack valueBac
         ImageMessage *imgMsg = [[ImageMessage alloc]init];
         imgMsg.type = type;
         [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")\\w+",key];
+            NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",key];
             NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
             NSTextCheckingResult *result = [regular firstMatchInString:partString options:0 range:NSMakeRange(0, partString.length)];
             NSString *conRes = [partString substringWithRange:result.range];

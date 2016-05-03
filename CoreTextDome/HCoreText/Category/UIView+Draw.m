@@ -9,6 +9,7 @@
 #import "UIView+Draw.h"
 #import <objc/runtime.h>
 #import "partMessage.h"
+#import "HImageBox.h"
 @implementation UIView (Draw)
 -(void)setDelegate:(id<CTViewTouchDelegate>)delegate{
     objc_setAssociatedObject(self, @selector(delegate), delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -78,8 +79,15 @@
                             CGFloat lineY = origins[i].y;
                             
                             CGRect imgRect = CGRectMake(lineXOffset+runXOffset, lineY, wid, ascent);
-                            UIImage *img =  [UIImage imageNamed:imgMsg.src];
-                            CGContextDrawImage(ref, imgRect,img.CGImage);
+//                            UIImage *img =  [UIImage imageNamed:imgMsg.src];
+//                            CGContextDrawImage(ref, imgRect,img.CGImage);
+                            [HImageBox getImageWithSource:imgMsg.src option:^(UIImage *img,BOOL isFirst) {
+                                if (isFirst) {
+                                    [self setNeedsDisplay];
+                                }else{
+                                    CGContextDrawImage(ref, imgRect,img.CGImage);
+                                }
+                            }];
                         }
                     }
                 }

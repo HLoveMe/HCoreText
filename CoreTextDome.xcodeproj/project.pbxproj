@@ -15,6 +15,7 @@
 		B2C045681CCDC7A700BE7C2A /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C045671CCDC7A700BE7C2A /* paragraphConfig.m */; };
 		B2C0456B1CCDF92900BE7C2A /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C0456A1CCDF92900BE7C2A /* FrameParser.m */; };
 		B2C0456E1CCE029F00BE7C2A /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C0456D1CCE029F00BE7C2A /* FontConfig.m */; };
+		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
 		DBDEE32A1CCC9BA400D4D942 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */; };
 		DBDEE32B1CCC9BA400D4D942 /* UIView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3191CCC9BA400D4D942 /* UIView+Draw.m */; };
 		DBDEE32C1CCC9BA400D4D942 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE31B1CCC9BA400D4D942 /* UIView+Extension.m */; };
@@ -63,6 +64,8 @@
 		B2C0456A1CCDF92900BE7C2A /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
 		B2C0456C1CCE029F00BE7C2A /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
 		B2C0456D1CCE029F00BE7C2A /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
+		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
+		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
 		DBDEE3161CCC9BA400D4D942 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		DBDEE3181CCC9BA400D4D942 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
@@ -124,12 +127,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB9EF73B1CD88A7D00BD9579 /* HImage */ = {
+			isa = PBXGroup;
+			children = (
+				DB9EF73C1CD88A7D00BD9579 /* Class */,
+			);
+			path = HImage;
+			sourceTree = "<group>";
+		};
+		DB9EF73C1CD88A7D00BD9579 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */,
+				DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
 		DBDEE3141CCC9BA400D4D942 /* HCoreText */ = {
 			isa = PBXGroup;
 			children = (
+				DBDEE3251CCC9BA400D4D942 /* HCoreText.h */,
 				DBDEE3151CCC9BA400D4D942 /* Category */,
 				DBDEE31C1CCC9BA400D4D942 /* Class */,
-				DBDEE3251CCC9BA400D4D942 /* HCoreText.h */,
 				DBDEE3261CCC9BA400D4D942 /* Source */,
 			);
 			path = HCoreText;
@@ -211,6 +231,7 @@
 				B27450EE1CCF63BE009F0F89 /* image.png */,
 				B27450F21CCF65F5009F0F89 /* image2.png */,
 				B27450F41CCF6740009F0F89 /* image3.png */,
+				DB9EF73B1CD88A7D00BD9579 /* HImage */,
 				DBDEE3141CCC9BA400D4D942 /* HCoreText */,
 				DBF4CD4E1CCA05F800E5804E /* Main.storyboard */,
 				DBF4CD511CCA05F800E5804E /* Assets.xcassets */,
@@ -400,6 +421,7 @@
 				DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */,
 				DBDEE32A1CCC9BA400D4D942 /* UIColor+Hex.m in Sources */,
 				DBDEE32C1CCC9BA400D4D942 /* UIView+Extension.m in Sources */,
+				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
 				B27450ED1CCF4372009F0F89 /* tempViewController.m in Sources */,
 				B2C0456B1CCDF92900BE7C2A /* FrameParser.m in Sources */,
 				DBDEE32F1CCC9BA400D4D942 /* FrameParserConfig.m in Sources */,
