@@ -12,20 +12,10 @@
 		<string>fontName</string>
 		<string>NSString</string>
 	</array>
-	<key>LineSpace</key>
-	<array>
-		<string>LineSpace</string>
-		<string>NSNumber</string>
-	</array>
 	<key>color</key>
 	<array>
 		<string>textColor</string>
 		<string>UIColor</string>
-	</array>
-	<key>font</key>
-	<array>
-		<string>font</string>
-		<string>UIFont</string>
 	</array>
 </dict>
 </plist>

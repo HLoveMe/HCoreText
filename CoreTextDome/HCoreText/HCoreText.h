@@ -11,8 +11,9 @@
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
 #import "FrameParserConfig.h"
+#import "paragraphConfig.h"
 #import "FrameParser.h"
-#import "CoretextData.h"
+#import "CoreTextData.h"
 #import "UIView+Draw.h"
-#import "partConfig.h"
+#import "partMessage.h"
 #endif

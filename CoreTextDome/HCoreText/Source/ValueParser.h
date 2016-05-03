@@ -7,15 +7,14 @@
 //
 #ifndef ValueParser_h
 #define ValueParser_h
-#import "UIColor+Hex.h"
-@class partConfig;
+@class Message;
 /**
  *  enum 来标记该段内容是形式
  *   textType 文本内容
  *   imageType 图片内容
  */
 typedef enum{
-    textType,
+    textType = 1,
     imageType
 }SourceType;
 /**
@@ -26,14 +25,7 @@ typedef enum{
  *  @return 片段集合
  */
 typedef NSMutableArray<NSString *>* (*parserContentSplitBack)(NSString *wholeContent);
-/**
- *  给定某个片段的内容 创建属于该片段的 partConfig对象
- *
- *  @param parserSectionCallBack
- *
- *  @return
- */
-typedef partConfig *(*parserSectionCallBack)(NSString *partString);
+
 /**
  * 从片段中得到将要展示的内容
  *
@@ -53,7 +45,14 @@ typedef NSString *(*parserShowContentBack)(SourceType type,NSString *partString)
  *  @return 把关键字的值解析为clazz 具体的值
  */
 typedef id (*parserValueCallBack)(NSString * key,NSString *value,Class clazz);
-
+/**
+ *  给定某个片段的内容 创建属于该片段的 TextMessage对象
+ *
+ *  @param parserSectionCallBack
+ *
+ *  @return
+ */
+typedef Message *(*parserSectionCallBack)(NSString *partString,parserValueCallBack valueBack);
 
 typedef struct {
     parserContentSplitBack contentBack;

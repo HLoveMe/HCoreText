@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "ValueParser.h"
+#import "paragraphConfig.h"
+@class FontConfig;
+@class FrameParserConfig;
 /**
  *  用于解析文字 (文字和配置参数)得到文字 I Love you <font name="">  得到 I Love you 文本
  *
@@ -49,41 +52,99 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  */
 @property(nonatomic,copy,readonly)NSString *keyPath;
 /**
- *  对应FrameParserConfig属性的值 的Class keyword_keyPath.plist
+ *  对应FrameParserConfig属性的值 的Class keyword_keyPath_text.plist
  */
 @property(nonatomic,assign,readonly)Class clazz;
 /**
- *  根据keyword_keyPath配置文件的对应值 把解析的结果 转化为FrameParserConfig属性的值
+ *  根据keyword_keyPath_text配置文件的对应值 把解析的结果 转化为FontConfig属性的值
  *  如果是通过创建 struct parserCallBacks 来解析文本  该属性 不需要赋值
+ *  valueHandle valueBack 按照解析方式 给其中一个赋值
  */
 @property(nonatomic,copy)parserValueHandle valueHandle;
 /**
- *  解析的正则表达式对象 通过该对象解析得到 关键字的值
+ *  通过该函数得到 参数的具体值 （转化为FontConfig属性的值）
+ *  valueHandle valueBack 按照解析方式 给其中一个赋值
+ */
+@property(nonatomic,assign)parserValueCallBack valueBack;
+/**
+ *  解析的正则表达式对象 通过该对象解析得到 关键字的值 
  */
 @property(nonatomic,strong)NSRegularExpression *expression;
 @end
 
 
 //*************************************************************************************
- 
-/**
- *  这是一个分块配置类
- */
-@interface partConfig : NSObject
+@interface Message:NSObject
 /**
  *  该段内容的形式  text image
  */
 @property(nonatomic,assign)SourceType type;
 /**
- *  该段落所有的（关键字-值）对象
- */
-@property(nonatomic,strong)NSArray<keyValue *> *keyValues;
-/**
  *  该part段落文本
  */
 @property(nonatomic,copy)NSString *content;
 /**
+ *  该文本在整体文本的Range
+ */
+@property(nonatomic,assign)NSRange contentRange;
+/**
+ *将要显示出来的文本
+ */
+@property(nonatomic,copy)NSString *showContent;
+/**
  *  通过该回调函数 得到需要显示的具体文本
  */
 @property(nonatomic,copy)parserContentHandle parserHandle;
+/**
+ *   通过该回调函数 得到需要显示的具体文本
+ */
+@property(nonatomic,assign)parserShowContentBack showBack;
 @end
+
+/**
+ *  这是一个文本分块信息类
+ */
+@interface TextMessage : Message
+/**
+ * 文本字体配置
+ */
+@property(nonatomic,strong)FontConfig *fontCig;
+/**
+ *  该段落所有的（关键字-值）对象
+ */
+@property(nonatomic,strong)NSArray<keyValue *> *keyValues;
+
+/**
+ *  段落配置信息
+ */
+@property(nonatomic,strong)paragraphConfig *paragraConfig;
+/**
+ * 给定默认的全局配置  和FontConfig 得到文本属性字典
+ */
+-(NSDictionary *)partAttribute:(FrameParserConfig *)defaultConfig;
+@end
+
+
+
+@interface ImageMessage : Message
+
+/**
+ *  图片宽
+ */
+@property(nonatomic,assign)CGFloat width;
+/**
+ *  图片高
+ */
+@property(nonatomic,assign)CGFloat height;
+/**
+ *  图片源
+ */
+@property(nonatomic,copy)NSString *src;
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
+-(NSDictionary *)partAttribute;
+@end
+

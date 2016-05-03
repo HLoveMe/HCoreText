@@ -7,33 +7,35 @@
 //
 
 #import "FrameParserConfig.h"
+#import "paragraphConfig.h"
 #import <objc/runtime.h>
+@interface FrameParserConfig()
+@property(nonatomic,strong)paragraphConfig *parCig;
+@end
 @implementation FrameParserConfig
--(instancetype)init{
-    if(self=[super init]){
-        self.fontSize = 14.f;
-        _font = [UIFont systemFontOfSize:self.fontSize];
-        self.fontName = @".SFUIText-Regular";
-        self.LineSpace = 3.0f;
-        self.textColor = [UIColor blackColor];
-        self.autoAdjustHeight = NO;
-        self.firstLineIndent=2*self.fontSize;
-//        self.contentInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+-(NSDictionary *)defaultAttribute{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    dic[(id)kCTFontAttributeName] = (__bridge id _Nullable)((__bridge CTFontRef)self.fontCig.font);
+    dic[(id)kCTForegroundColorAttributeName] =  (__bridge id _Nullable)(self.fontCig.textColor.CGColor);
+    dic[(id)kCTParagraphStyleAttributeName]= (id)self.parCig.style;
+    return dic;
+}
++(instancetype)defaultConfigWithContentSize:(CGSize)size{
+    FrameParserConfig *config = [[FrameParserConfig alloc]init];
+    config.contentSize = size;
+    config.autoAdjustHeight = NO;
+    config.parCig = [[paragraphConfig alloc]init];
+    config.fontCig = [[FontConfig alloc]init];
+    return config;
+}
+-(instancetype)initParperConfigWithContentSize:(CGSize)size paragraph:(paragraphConfig *)cfg{
+    if (self = [super init]) {
+        self.contentSize=size;
+        self.autoAdjustHeight= NO;
+        self.parCig = cfg;
+        self.fontCig = [[FontConfig alloc]init];
     }
     return self;
-}
--(void)setFontName:(NSString *)fontName{
-    _fontName = fontName;
-    _font = [UIFont fontWithName:fontName size:self.fontSize];
-}
--(void)setFontSize:(CGFloat)fontSize{
-    _fontSize = fontSize;
-    _font = [UIFont fontWithDescriptor:[self.font fontDescriptor] size:fontSize];
-}
-
-+(instancetype)defaultConfig{
-    FrameParserConfig *config = [[FrameParserConfig alloc]init];
-    return config;
 }
 -(instancetype)copy{
     FrameParserConfig *config = [[FrameParserConfig alloc]init];

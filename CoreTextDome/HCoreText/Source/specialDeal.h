@@ -10,7 +10,7 @@
  *  如果你所需要解析的文本和该格式一致(或者按照该格式创建你的文本)那么你就可以直接使用
  *  这些C++函数来作为你的解析器参数 。或者重写struct parserCallBacks对应的函数
  *  note:如果你使用了这些函数作为你的解析函数 那么你需要具体需求改变某些参数
-        修改该函数即可:
+ 修改该函数即可:
  *       static partConfig * parserSection(NSString *partString )
  *  格式
  *  @"I<font name=\"Futura\" size=\"20\" color=\"blue\" >Love <font name=\"Futura\" size=\"12\" color=\"red\"><img src=\"\" width=\"\" height=\"\">you<font name=\"Futura\" size=\"25\">"
@@ -20,7 +20,7 @@
 #ifndef specialDeal_h
 #define specialDeal_h
 #import <UIKit/UIKit.h>
-#import "partConfig.h"
+#import "partMessage.h"
 /**
  *  用于回调 把整个文本 按照开发者的需求分割为 几个片段（将要显示的内容 和 该内容的配置信息 的结合）
  *
@@ -46,14 +46,16 @@ static NSMutableArray<NSString *>*  contentSplit(NSString *wholeContent){
  *
  *  @return
  */
-static partConfig * parserSection(NSString *partString ){
-    partConfig *config = [[partConfig alloc]init];
+static Message * parserSection(NSString *partString,parserValueCallBack valueBack){
+    Message *result;
     /**该文本的内容*/
     SourceType type = [partString containsString:@"<font"]?textType:imageType;
-    config.type = type;
-    if (config.type == textType) {
-         /**配置的关键字*/
-        NSArray *keywords =@[@"name",@"size",@"color"];
+    if (type== textType) {
+        TextMessage *config = [[TextMessage alloc]init];
+        config.content = partString;
+        config.type = type;
+        /**配置的关键字*/
+        NSArray *keywords =[[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyword_keyPath_text" ofType:@"plist"]] allKeys];
         NSMutableArray<keyValue *>* keyVs = [NSMutableArray array];
         [keywords enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             keyValue *oneKV = [[keyValue alloc]init];
@@ -61,14 +63,25 @@ static partConfig * parserSection(NSString *partString ){
             oneKV.keyword = obj;
             NSString *Pattern = [NSString stringWithFormat:@"(?<=%@=\")\\w+",obj];
             oneKV.expression = [[NSRegularExpression alloc]initWithPattern:Pattern options:0 error:nil];
+            oneKV.valueBack = valueBack;
             [keyVs addObject:oneKV];
         }];
         config.keyValues = keyVs;
+        result = config;
     }else{
-#warning 图片处理
-        
+         NSArray<NSString *> *keys = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyword_keyPath_image" ofType:@"plist"]] allKeys];
+        ImageMessage *imgMsg = [[ImageMessage alloc]init];
+        imgMsg.type = type;
+        [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")\\w+",key];
+            NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
+            NSTextCheckingResult *result = [regular firstMatchInString:partString options:0 range:NSMakeRange(0, partString.length)];
+            NSString *conRes = [partString substringWithRange:result.range];
+            [imgMsg setValue:conRes forKey:key];
+        }];
+        result = imgMsg;
     }
-    return config;
+    return result;
 }
 /**
  * 从片段中得到将要展示的内容

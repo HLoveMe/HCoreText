@@ -1,6 +1,4 @@
 //
-//  UIView+viewExtend.m
-//  微博
 //
 //  Created by lx on 15/9/12.
 //  Copyright (c) 2015年 朱子豪. All rights reserved.

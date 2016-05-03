@@ -1,19 +1,24 @@
 //
-//  CoretextData.m
+//  CoreTextData.m
 //  CoreQuart2D_00
 //
 //  Created by 朱子豪 on 16/4/20.
 //  Copyright © 2016年 朱子豪. All rights reserved.
 //
 
-#import "CoretextData.h"
+#import "CoreTextData.h"
 #import "FrameParserConfig.h"
 
-@interface CoretextData()
+@interface CoreTextData()
 
 @end
-@implementation CoretextData
-
+@implementation CoreTextData
+-(NSMutableArray<Message *> *)msgArray{
+    if (!_msgArray) {
+        _msgArray= [NSMutableArray array];
+    }
+    return _msgArray;
+}
 -(void)setFrameRef:(CTFrameRef)frameRef{
     if (_frameRef!=frameRef) {
         if (_frameRef != nil) {

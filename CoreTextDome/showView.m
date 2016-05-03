@@ -7,7 +7,7 @@
 //
 
 #import "showView.h"
-
+#import "HCoreText.h"
 @implementation showView
 //用于显示内容的UIView 必须是自定义控件 并加入-(void)drawRect:(CGRect)rect
 //这个问题有待解决
