@@ -5,6 +5,7 @@
    创建FrameParserConfig类的对象（该类是对整体解析进行配置）
    
    利用FrameParser提供的方法，对文本进行解析
+   
     1：+(CoreTextData *)parserContent: defaultConfig: sectionHandle: partContentDeal:
         使用该方法你需要提供完整的解析流程参数（如何把整块分片，如何从片中得到文本参数）
     
@@ -14,6 +15,7 @@
               Love<font name=\"XX\" size=\"12\" color=\"red\">
               <image src="" withd="" height="">you<font name=\"\" size=\"25\">
             格式文本的解析
+            
     3:另一种解决方案（和上面的一致 只是实现原理不一样）        
     +(CoreTextData *)parserContent:defaultConfig: callBack:  
     +(CoreTextData *)parserWithPropertyContent2: defaultConfig:;       
