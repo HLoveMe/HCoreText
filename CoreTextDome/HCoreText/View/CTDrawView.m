@@ -1,31 +1,23 @@
 //
-//  UIView+Draw.m
-//  CoreQuart2D_00
+//  CTDrawView.m
+//  CoreTextDome
 //
-//  Created by 朱子豪 on 16/4/20.
+//  Created by 朱子豪 on 16/5/4.
 //  Copyright © 2016年 朱子豪. All rights reserved.
 //
 
-#import "UIView+Draw.h"
+#import "CTDrawView.h"
 #import <objc/runtime.h>
 #import "partMessage.h"
 #import "HImageBox.h"
-@implementation UIView (Draw)
--(void)setDelegate:(id<CTViewTouchDelegate>)delegate{
-    objc_setAssociatedObject(self, @selector(delegate), delegate, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
--(id<CTViewTouchDelegate>)delegate{
-    return  objc_getAssociatedObject(self, _cmd);
-}
--(void)setBeginTouchEvent:(BOOL)beginTouchEvent{
-    objc_setAssociatedObject(self, @selector(beginTouchEvent), @(beginTouchEvent), OBJC_ASSOCIATION_ASSIGN);
-}
--(BOOL)beginTouchEvent{
-    id value = objc_getAssociatedObject(self, _cmd);
-    if (value) {
-        return  [value boolValue];
+#import "CoreTextData.h"
+#import "UIView+Extension.h"
+@implementation CTDrawView
+-(instancetype)init{
+    if (self = [super init]) {
+        self.beginTouchEvent = 1;
     }
-    return YES;
+    return self;
 }
 
 -(void)drawWithCoreTextData:(CoreTextData *)data{
@@ -34,7 +26,6 @@
     objc_setAssociatedObject(self, "coreDatas", @[data], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [self setNeedsDisplay];
 }
-
 
 -(void)drawRect:(CGRect)rect{
     CGContextRef ref=UIGraphicsGetCurrentContext();
@@ -79,8 +70,8 @@
                             CGFloat lineY = origins[i].y;
                             
                             CGRect imgRect = CGRectMake(lineXOffset+runXOffset, lineY, wid, ascent);
-//                            UIImage *img =  [UIImage imageNamed:imgMsg.src];
-//                            CGContextDrawImage(ref, imgRect,img.CGImage);
+                            //                            UIImage *img =  [UIImage imageNamed:imgMsg.src];
+                            //                            CGContextDrawImage(ref, imgRect,img.CGImage);
                             [HImageBox getImageWithSource:imgMsg.src option:^(UIImage *img,BOOL isFirst) {
                                 if (isFirst) {
                                     [self setNeedsDisplay];
@@ -146,7 +137,7 @@
                 }
             }
             if (flag) {break;}
-           
+            
         }
     }];
 }

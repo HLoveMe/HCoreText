@@ -40,7 +40,7 @@ typedef NSArray *(^keywordsBlock)(SourceType type,NSString * argumentString);
  *  @param defaultC   默认的文本配置
  *  @param size       整个文本渲染在默认视图 size就是该视图的
  *  @param handle     提供NSRegularExpression以便解析器 解析整个文本 按照样式 分为不同的部分
- *  @param parthandle 传递某个片段 解析者提供partConfig对象
+ *  @param parthandle 传递某个片段 解析者提供Message对象
  *
  *  @return
  */

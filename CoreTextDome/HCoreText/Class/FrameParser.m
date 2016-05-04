@@ -142,7 +142,7 @@
     //image<image src=\"sss\" width=\"\" height=\"\">
     ImageMessage *imgMsg = [[ImageMessage alloc]init];
     [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
-        NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")\\w+",key];
+        NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",key];
         NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
         NSTextCheckingResult *result = [regular firstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
         NSString *conRes = [content substringWithRange:result.range];

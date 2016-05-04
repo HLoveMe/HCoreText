@@ -14,6 +14,6 @@
 #import "paragraphConfig.h"
 #import "FrameParser.h"
 #import "CoreTextData.h"
-#import "UIView+Draw.h"
+#import "CTDrawView.h"
 #import "partMessage.h"
 #endif

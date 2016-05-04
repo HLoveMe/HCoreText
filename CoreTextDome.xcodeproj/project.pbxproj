@@ -15,9 +15,9 @@
 		B2C045681CCDC7A700BE7C2A /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C045671CCDC7A700BE7C2A /* paragraphConfig.m */; };
 		B2C0456B1CCDF92900BE7C2A /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C0456A1CCDF92900BE7C2A /* FrameParser.m */; };
 		B2C0456E1CCE029F00BE7C2A /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C0456D1CCE029F00BE7C2A /* FontConfig.m */; };
+		DB08BB381CD98D1F00BDFE1C /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB08BB371CD98D1F00BDFE1C /* CTDrawView.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
 		DBDEE32A1CCC9BA400D4D942 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */; };
-		DBDEE32B1CCC9BA400D4D942 /* UIView+Draw.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3191CCC9BA400D4D942 /* UIView+Draw.m */; };
 		DBDEE32C1CCC9BA400D4D942 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE31B1CCC9BA400D4D942 /* UIView+Extension.m */; };
 		DBDEE32D1CCC9BA400D4D942 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE31E1CCC9BA400D4D942 /* CoreTextData.m */; };
 		DBDEE32F1CCC9BA400D4D942 /* FrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3221CCC9BA400D4D942 /* FrameParserConfig.m */; };
@@ -31,7 +31,6 @@
 		DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBF4CD531CCA05F800E5804E /* LaunchScreen.storyboard */; };
 		DBF4CD601CCA05F900E5804E /* CoreTextDomeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD5F1CCA05F900E5804E /* CoreTextDomeTests.m */; };
 		DBF4CD6B1CCA05F900E5804E /* CoreTextDomeUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD6A1CCA05F900E5804E /* CoreTextDomeUITests.m */; };
-		DBF4CD921CCA07A300E5804E /* showView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD911CCA07A300E5804E /* showView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,12 +63,12 @@
 		B2C0456A1CCDF92900BE7C2A /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
 		B2C0456C1CCE029F00BE7C2A /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
 		B2C0456D1CCE029F00BE7C2A /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
+		DB08BB361CD98D1F00BDFE1C /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
+		DB08BB371CD98D1F00BDFE1C /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
 		DBDEE3161CCC9BA400D4D942 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		DBDEE3181CCC9BA400D4D942 /* UIView+Draw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Draw.h"; sourceTree = "<group>"; };
-		DBDEE3191CCC9BA400D4D942 /* UIView+Draw.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Draw.m"; sourceTree = "<group>"; };
 		DBDEE31A1CCC9BA400D4D942 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		DBDEE31B1CCC9BA400D4D942 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		DBDEE31D1CCC9BA400D4D942 /* CoreTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
@@ -98,8 +97,6 @@
 		DBF4CD661CCA05F900E5804E /* CoreTextDomeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTextDomeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF4CD6A1CCA05F900E5804E /* CoreTextDomeUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreTextDomeUITests.m; sourceTree = "<group>"; };
 		DBF4CD6C1CCA05F900E5804E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DBF4CD901CCA07A300E5804E /* showView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showView.h; sourceTree = "<group>"; };
-		DBF4CD911CCA07A300E5804E /* showView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB08BB351CD98BE900BDFE1C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB08BB361CD98D1F00BDFE1C /* CTDrawView.h */,
+				DB08BB371CD98D1F00BDFE1C /* CTDrawView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DB9EF73B1CD88A7D00BD9579 /* HImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				DBDEE3251CCC9BA400D4D942 /* HCoreText.h */,
+				DB08BB351CD98BE900BDFE1C /* View */,
 				DBDEE3151CCC9BA400D4D942 /* Category */,
 				DBDEE31C1CCC9BA400D4D942 /* Class */,
 				DBDEE3261CCC9BA400D4D942 /* Source */,
@@ -160,8 +167,6 @@
 			children = (
 				DBDEE3161CCC9BA400D4D942 /* UIColor+Hex.h */,
 				DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */,
-				DBDEE3181CCC9BA400D4D942 /* UIView+Draw.h */,
-				DBDEE3191CCC9BA400D4D942 /* UIView+Draw.m */,
 				DBDEE31A1CCC9BA400D4D942 /* UIView+Extension.h */,
 				DBDEE31B1CCC9BA400D4D942 /* UIView+Extension.m */,
 			);
@@ -221,7 +226,6 @@
 		DBF4CD441CCA05F800E5804E /* CoreTextDome */ = {
 			isa = PBXGroup;
 			children = (
-				DBF4CD8C1CCA077E00E5804E /* View */,
 				DBF4CD481CCA05F800E5804E /* AppDelegate.h */,
 				DBF4CD491CCA05F800E5804E /* AppDelegate.m */,
 				DBF4CD4B1CCA05F800E5804E /* ViewController.h */,
@@ -266,15 +270,6 @@
 				DBF4CD6C1CCA05F900E5804E /* Info.plist */,
 			);
 			path = CoreTextDomeUITests;
-			sourceTree = "<group>";
-		};
-		DBF4CD8C1CCA077E00E5804E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				DBF4CD901CCA07A300E5804E /* showView.h */,
-				DBF4CD911CCA07A300E5804E /* showView.m */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,16 +411,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2C045681CCDC7A700BE7C2A /* paragraphConfig.m in Sources */,
-				DBDEE32B1CCC9BA400D4D942 /* UIView+Draw.m in Sources */,
 				DBDEE32D1CCC9BA400D4D942 /* CoreTextData.m in Sources */,
 				DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */,
 				DBDEE32A1CCC9BA400D4D942 /* UIColor+Hex.m in Sources */,
 				DBDEE32C1CCC9BA400D4D942 /* UIView+Extension.m in Sources */,
 				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
+				DB08BB381CD98D1F00BDFE1C /* CTDrawView.m in Sources */,
 				B27450ED1CCF4372009F0F89 /* tempViewController.m in Sources */,
 				B2C0456B1CCDF92900BE7C2A /* FrameParser.m in Sources */,
 				DBDEE32F1CCC9BA400D4D942 /* FrameParserConfig.m in Sources */,
-				DBF4CD921CCA07A300E5804E /* showView.m in Sources */,
 				B2C0456E1CCE029F00BE7C2A /* FontConfig.m in Sources */,
 				DBDEE3301CCC9BA400D4D942 /* partMessage.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
