@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class CoreTextData;
 @protocol CTViewTouchDelegate<NSObject>
+@optional
 /**
  *  点击事件开启之后才会生效 针对文字内容
  *
@@ -16,9 +17,9 @@
  *  @param range   点击文本的范文
  *  @param content 点击的文本
  */
--(void)touchView:(UIView *)view contentRange:(NSRange)range contentString:(NSString *)content;
+-(void)touchView:(UIView *)view contentRange:(NSRange)range contentString:(NSString *)content attributes:(NSMutableDictionary*)attribute;
 /**
- *  点击事件开启后才会生效 针对图片
+ *  点击事件开启后才会生效 针对图片 通过HImageBox得到对于图片
  *
  *  @param view   当前视图
  *  @param range  图片占位位置范围

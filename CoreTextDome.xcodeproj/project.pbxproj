@@ -17,6 +17,7 @@
 		B2C0456E1CCE029F00BE7C2A /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = B2C0456D1CCE029F00BE7C2A /* FontConfig.m */; };
 		DB08BB381CD98D1F00BDFE1C /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB08BB371CD98D1F00BDFE1C /* CTDrawView.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
+		DBDEA9441CE2D548007CA7C6 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEA9431CE2D548007CA7C6 /* FrameParserHandle.m */; };
 		DBDEE32A1CCC9BA400D4D942 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */; };
 		DBDEE32C1CCC9BA400D4D942 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE31B1CCC9BA400D4D942 /* UIView+Extension.m */; };
 		DBDEE32D1CCC9BA400D4D942 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DBDEE31E1CCC9BA400D4D942 /* CoreTextData.m */; };
@@ -67,6 +68,9 @@
 		DB08BB371CD98D1F00BDFE1C /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
+		DBDEA9411CE2C277007CA7C6 /* FrameParserDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrameParserDelegate.h; sourceTree = "<group>"; };
+		DBDEA9421CE2D548007CA7C6 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
+		DBDEA9431CE2D548007CA7C6 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
 		DBDEE3161CCC9BA400D4D942 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		DBDEE3171CCC9BA400D4D942 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		DBDEE31A1CCC9BA400D4D942 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 			children = (
 				DBDEE31D1CCC9BA400D4D942 /* CoreTextData.h */,
 				DBDEE31E1CCC9BA400D4D942 /* CoreTextData.m */,
+				DBDEA9411CE2C277007CA7C6 /* FrameParserDelegate.h */,
 				B2C045691CCDF92900BE7C2A /* FrameParser.h */,
 				B2C0456A1CCDF92900BE7C2A /* FrameParser.m */,
 				DBDEE3211CCC9BA400D4D942 /* FrameParserConfig.h */,
@@ -199,6 +204,8 @@
 				DBDEE3271CCC9BA400D4D942 /* keyword_keyPath_text.plist */,
 				DBDEE3281CCC9BA400D4D942 /* specialDeal.h */,
 				DBDEE3291CCC9BA400D4D942 /* ValueParser.h */,
+				DBDEA9421CE2D548007CA7C6 /* FrameParserHandle.h */,
+				DBDEA9431CE2D548007CA7C6 /* FrameParserHandle.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -423,6 +430,7 @@
 				B2C0456E1CCE029F00BE7C2A /* FontConfig.m in Sources */,
 				DBDEE3301CCC9BA400D4D942 /* partMessage.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
+				DBDEA9441CE2D548007CA7C6 /* FrameParserHandle.m in Sources */,
 				DBF4CD471CCA05F800E5804E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

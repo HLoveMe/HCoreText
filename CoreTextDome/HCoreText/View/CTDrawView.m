@@ -122,7 +122,10 @@
                             if (msg.contentRange.location<=runRange.location&&msgEnd>=runEnd) {
                                 if (self.delegate) {
                                     if (msg.type == textType) {
-                                        [self.delegate touchView:self contentRange:msg.contentRange contentString:msg.showContent];
+                                        if ([self.delegate respondsToSelector:@selector(touchView:contentRange:contentString:attributes:)]) {
+                                           [self.delegate touchView:self contentRange:msg.contentRange contentString:msg.showContent attributes:[msg attributeDic]];
+                                        }
+                                        
                                     }else {
                                         [self.delegate touchView:self contentRange:msg.contentRange imageName:[(ImageMessage*)msg src]];
                                     }

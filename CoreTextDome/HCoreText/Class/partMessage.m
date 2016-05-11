@@ -33,21 +33,10 @@
 }
 @end
 
+@interface Message()
 
+@end
 @implementation Message
--(NSString *)showContent{
-    if (_showContent) {
-        return  _showContent;
-    }
-    if (self.parserHandle) {
-        _showContent = self.parserHandle(self.type,self.content).copy;
-    }else{
-        _showContent = self.showBack(self.type,self.content).copy;
-    }
-    
-    return _showContent;
-}
-
 @end
 @implementation TextMessage
 - (instancetype)init{
@@ -57,24 +46,28 @@
     }
     return self;
 }
--(NSDictionary *)partAttribute:(FrameParserConfig *)defaultConfig{
+-(NSMutableDictionary *)partAttribute:(FrameParserConfig *)defaultConfig{
     NSAssert(self.keyValues, @"在解析之后再获取该属性参数");
-    FontConfig *config = [[FontConfig alloc]initWithFontConfig:defaultConfig.fontCig];
-    [self.keyValues enumerateObjectsUsingBlock:^(keyValue * _Nonnull keyValue, NSUInteger idx, BOOL * _Nonnull stop) {
-        id value;
-        if (keyValue.valueHandle) {
-            value = keyValue.valueHandle(keyValue.keyword,keyValue.value,keyValue.clazz);
-        }else{
-            value = keyValue.valueBack(keyValue.keyword,keyValue.value,keyValue.clazz);
-        }
-        [config setValue:value forKeyPath:keyValue.keyPath];
-    }];
-    _fontCig = config;
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    dic[(id)kCTFontAttributeName] = (__bridge id _Nullable)((__bridge CTFontRef)self.fontCig.font);
-    dic[(id)kCTForegroundColorAttributeName] =  (__bridge id _Nullable)(self.fontCig.textColor.CGColor);
-    dic[(id)kCTParagraphStyleAttributeName]= (id)self.paragraConfig.style;
-    return dic;
+    if (!self.attributeDic) {
+        FontConfig *config = [[FontConfig alloc]initWithFontConfig:defaultConfig.fontCig];
+        //解析参数值
+        [self.keyValues enumerateObjectsUsingBlock:^(keyValue * _Nonnull keyValue, NSUInteger idx, BOOL * _Nonnull stop) {
+            id value;
+            if (keyValue.valueHandle) {
+                value = keyValue.valueHandle(keyValue.keyword,keyValue.value,keyValue.clazz);
+            }else{
+                value = keyValue.valueBack(keyValue.keyword,keyValue.value,keyValue.clazz);
+            }
+            [config setValue:value forKeyPath:keyValue.keyPath];
+        }];
+        _fontCig = config;
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        dic[(id)kCTFontAttributeName] = (__bridge id _Nullable)((__bridge CTFontRef)self.fontCig.font);
+        dic[(id)kCTForegroundColorAttributeName] =  (__bridge id _Nullable)(self.fontCig.textColor.CGColor);
+        dic[(id)kCTParagraphStyleAttributeName]= (id)self.paragraConfig.style;
+        self.attributeDic =dic;
+    }
+    return self.attributeDic;
 }
 
 @end
@@ -97,16 +90,20 @@ CGFloat getWidth(void * refCon ){
     ImageMessage *msg = (__bridge ImageMessage *)(refCon);
     return msg.width;
 }
--(NSDictionary *)partAttribute{
+-(NSMutableDictionary *)partAttribute{
     if (self.src==nil||self.src.length==0) { NSAssert(false, @"图片源解析错误");}
-    CTRunDelegateCallbacks callBack;
-    callBack.version = kCTRunDelegateVersion1;
-    callBack.dealloc = dealloc;
-    callBack.getAscent = getAscent;
-    callBack.getDescent = getDescent;
-    callBack.getWidth = getWidth;
-    CTRunDelegateRef ref = CTRunDelegateCreate(&callBack, (__bridge void * _Nullable)(self));
-    return @{(id)kCTRunDelegateAttributeName:(__bridge id)ref};
+    if (!self.attributeDic) {
+        CTRunDelegateCallbacks callBack;
+        callBack.version = kCTRunDelegateVersion1;
+        callBack.dealloc = dealloc;
+        callBack.getAscent = getAscent;
+        callBack.getDescent = getDescent;
+        callBack.getWidth = getWidth;
+        CTRunDelegateRef ref = CTRunDelegateCreate(&callBack, (__bridge void * _Nullable)(self));
+        self.attributeDic =[NSMutableDictionary dictionaryWithDictionary: @{(id)kCTRunDelegateAttributeName:(__bridge id)ref}];
+    }
+    
+    return self.attributeDic;
 }
 
 @end

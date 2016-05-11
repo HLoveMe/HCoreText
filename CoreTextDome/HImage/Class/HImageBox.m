@@ -70,11 +70,11 @@
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (!error) {
             image = [UIImage imageWithData:data];
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                block(image,YES);
-            });
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [data writeToFile:imagePath atomically:YES];
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    block(image,YES);
+                });
             });
         }
         [dic removeObjectForKey:imagePath];
