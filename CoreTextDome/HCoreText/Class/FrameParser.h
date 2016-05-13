@@ -79,5 +79,5 @@
  *  @param defaultConfig 提供默认的配置参数
  *  @return
  */
-+(CoreTextData *)parserWithPropertyContent2:(NSString *)content defaultConfig:(FrameParserConfig *)defaultConfig;
++(CoreTextData *)parserWithPropertyContent:(NSString *)content defaultConfig:(FrameParserConfig *)defaultConfig;
 @end

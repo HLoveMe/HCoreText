@@ -23,8 +23,7 @@
     TextMessage *textMsg = [[TextMessage alloc]init];
     textMsg.type = textType;
     textMsg.contentRange = NSMakeRange(0, content.length);
-    textMsg.showContent = content;
-    textMsg.content = content;
+    textMsg.attSring = attString;
     CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
     /**计算需要的空间*/
     CGSize size = config.contentSize;
@@ -35,7 +34,8 @@
     
     CTFrameRef frameRef = CTFramesetterCreateFrame(setter, CFRangeMake(0, 0), pathRef, NULL);
     CoreTextData *data = [[CoreTextData alloc]init];
-    data.contentString = content;
+    data.parserCfg = config;
+    data.contentString = attString;
     [data setValue:@(config.autoAdjustHeight) forKey:@"autoAdjustHeight"];
     data.realContentHeight = contSize.height;
     data.frameRef = frameRef;
@@ -55,24 +55,28 @@
         [msgArray addObject:msg];
         if (msg.type==textType) {
             TextMessage *textMsg = (TextMessage *)msg;
+            NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
-                textMsg.showContent = [delegate parserShowText:textType text:onePart];
+                showContent = [delegate parserShowText:textType text:onePart];
             }else{
-               textMsg.showContent= (NSString *)[[onePart componentsSeparatedByString:@"<font"] firstObject];
+               showContent= (NSString *)[[onePart componentsSeparatedByString:@"<font"] firstObject];
             }
-            NSDictionary *dic = [textMsg partAttribute:defaultC];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:textMsg.showContent attributes:dic];
+            NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
+            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            textMsg.attSring=one;
             textMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
         }else{
             ImageMessage *imgMsg = (ImageMessage *)msg;
+            NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
-                imgMsg.showContent = [delegate parserShowText:textType text:onePart];
+                showContent = [delegate parserShowText:textType text:onePart];
             }else{
-                imgMsg.showContent= @" ";
+                showContent= @" ";
             }
             NSDictionary *dic = [imgMsg partAttribute];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:imgMsg.showContent attributes:dic];
+            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
         }
@@ -85,8 +89,8 @@
     CGPathAddRect(path, nil, rect);
     
     CTFrameRef frameRef = CTFramesetterCreateFrame(sett, CFRangeMake(0, 0), path, nil);
-    
-    data.contentString = contentAtt.string;
+    data.parserCfg = defaultC;
+    data.contentString = contentAtt;
     data.msgArray =msgArray;
     [data setValue:@(defaultC.autoAdjustHeight) forKey:@"autoAdjustHeight"];
     data.realContentHeight = contentSize.height;
@@ -117,9 +121,10 @@
             TextMessage *TConfig = (TextMessage *)pConfig;
             NSString *showContent = calls.showContentBack(pConfig.type,obj);
             FrameParserConfig *config = [FrameParserConfig defaultConfigWithContentSize:size];
-            NSDictionary *dic = [TConfig partAttribute:config];
+            NSDictionary *dic = [TConfig partAttribute:config.fontCig];
             NSAttributedString *oneAtt = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             TConfig.contentRange = NSMakeRange(contentAtt.string.length, showContent.length);
+            TConfig.attSring= oneAtt;
             [contentAtt appendAttributedString:oneAtt];
         }else{
             ImageMessage *imgMsg = (ImageMessage *)pConfig;
@@ -127,6 +132,7 @@
             NSDictionary *dic = [imgMsg partAttribute];
             NSAttributedString *oneAtt = [[NSAttributedString alloc]initWithString:showCon attributes:dic];
             imgMsg.contentRange =NSMakeRange(contentAtt.string.length, showCon.length);
+            imgMsg.attSring = oneAtt;
             [contentAtt appendAttributedString:oneAtt];
         }
         [msgArr addObject:pConfig];
@@ -137,7 +143,8 @@
     CGMutablePathRef pathRef = CGPathCreateMutable();
     CGPathAddRect(pathRef, NULL, rect);
     CTFrameRef frameRef = CTFramesetterCreateFrame(setter, CFRangeMake(0, 0), pathRef, NULL);
-    data.contentString = contentAtt.string;
+    data.parserCfg = defaultC;
+    data.contentString = contentAtt;
     data.msgArray= msgArr;
     [data setValue:@(defaultC.autoAdjustHeight) forKey:@"autoAdjustHeight"];
     data.frameRef = frameRef;
@@ -147,7 +154,7 @@
     CFRelease(frameRef);
     return data;
 }
-+(CoreTextData *)parserWithPropertyContent2:(NSString *)content  defaultConfig:(FrameParserConfig *)defaultConfig{
++(CoreTextData *)parserWithPropertyContent:(NSString *)content  defaultConfig:(FrameParserConfig *)defaultConfig{
     parserCallBacks callBacks;
     callBacks.contentBack = contentSplit;
     callBacks.sectionBack = parserSection;

@@ -40,7 +40,7 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  */
 @property(nonatomic,copy,readonly)NSString *value;
 /**
- *  配置参数对于的值,值对应FrameParserConfig的属性名
+ *  配置参数对于的值,值对应FontConfig的属性名
  */
 @property(nonatomic,copy,readonly)NSString *keyPath;
 /**
@@ -72,11 +72,6 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  */
 @property(nonatomic,assign)SourceType type;
 /**
- *  该part段落文本 
- *  Note:在创建时赋值
- */
-@property(nonatomic,copy)NSString *content;
-/**
  *  该文本在整体文本的Range 
  *  Note:在解析之后就会赋值
  */
@@ -84,12 +79,12 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 /**
  *将要显示出来的文本
  */
-@property(nonatomic,copy)NSString *showContent;
+//@property(nonatomic,copy)NSString *showContent;
 /**
- *  该段文本的属性参数
- *  解析之后会有有值
+ *  该part段落文本
+ *  Note:解析之后就会有值
  */
-@property(nonatomic,strong)NSMutableDictionary *attributeDic;
+@property(nonatomic,strong)NSAttributedString *attSring;
 /**
  *   通过该回调函数 得到需要显示的具体文本 
  *   Note:在从创建时赋值 在使用C函数解析时需要
@@ -121,7 +116,7 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 /**
  * 给定默认的全局配置  和FontConfig 得到文本属性字典
  */
--(NSMutableDictionary *)partAttribute:(FrameParserConfig *)defaultConfig;
+-(NSMutableDictionary *)partAttribute:(FontConfig *)defaultConfig;
 @end
 
 

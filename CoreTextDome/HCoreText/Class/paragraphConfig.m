@@ -15,7 +15,7 @@
         self.headIndent =0.0;
         self.tailIndent = 0.0;
         self.breakMode = kCTLineBreakByWordWrapping;
-        self.lineSpace = 0.0;
+        self.lineSpace = 1.0;
         self.MinLineSpace = 0.0;
         self.MaxLineSpace = CGFLOAT_MAX;
         self.direction = kCTWritingDirectionNatural;

@@ -12,7 +12,15 @@
 #import "HImageBox.h"
 #import "CoreTextData.h"
 #import "UIView+Extension.h"
-@implementation CTDrawView
+#import "FontConfig.h"
+@interface CTDrawView()
+@property(nonatomic,strong)Message *tempMsg;
+@property(nonatomic,strong)FontConfig *tempFont;
+@end
+@implementation CTDrawView{
+    UIColor *hightColor;
+    NSMutableArray *hightRectArray;
+}
 -(instancetype)init{
     if (self = [super init]) {
         self.beginTouchEvent = 1;
@@ -33,6 +41,17 @@
     CGContextTranslateCTM(ref, 0, self.bounds.size.height);
     CGContextScaleCTM(ref, 1, -1);
     NSArray<CoreTextData *> *datas = objc_getAssociatedObject(self, "coreDatas");
+    if (hightColor&&hightRectArray) {
+        [hightColor set];
+        [hightRectArray enumerateObjectsUsingBlock:^(NSValue *rectValue, NSUInteger idx, BOOL * _Nonnull stop) {
+            CGRect rect = [rectValue CGRectValue];
+//            CGMutablePathRef pathRef = CGPathCreateMutable();
+//            CGPathAddRect(pathRef, NULL, rect);
+            CGPathRef pathRef = [self getRoundRect:rect];
+            CGContextAddPath(ref, pathRef);
+            CGContextFillPath(ref);
+        }];
+    }
     for (CoreTextData * obj in datas) {
         //画所有文字
         CTFrameDraw(obj.frameRef, ref);
@@ -44,7 +63,7 @@
         CTFrameGetLineOrigins(obj.frameRef, CFRangeMake(0, 0), origins);
         for (Message * _Nonnull msg in obj.msgArray) {
             if (msg.type == textType){
-                NSString *showStr = msg.showContent;
+                NSString *showStr = msg.attSring.string;
                 location += showStr.length;
             } else if (msg.type == imageType) {
                 ImageMessage *imgMsg = (ImageMessage *)msg;
@@ -87,6 +106,8 @@
         }
     }
     
+    
+    
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
@@ -121,14 +142,7 @@
                             long runEnd = runRange.location+runRange.length;
                             if (msg.contentRange.location<=runRange.location&&msgEnd>=runEnd) {
                                 if (self.delegate) {
-                                    if (msg.type == textType) {
-                                        if ([self.delegate respondsToSelector:@selector(touchView:contentRange:contentString:attributes:)]) {
-                                           [self.delegate touchView:self contentRange:msg.contentRange contentString:msg.showContent attributes:[msg attributeDic]];
-                                        }
-                                        
-                                    }else {
-                                        [self.delegate touchView:self contentRange:msg.contentRange imageName:[(ImageMessage*)msg src]];
-                                    }
+                                    [self transferDelegate:msg];
                                 }
                                 *stop2 = YES;
                             }
@@ -144,6 +158,116 @@
         }
     }];
 }
+-(void)transferDelegate:(Message *)msg{
+    if (msg.type == textType) {
+        if ([self.delegate respondsToSelector:@selector(touchView:contentRange:contentString:)]) {
+            UIColor *cfg = [self.delegate touchView:self contentRange:msg.contentRange contentString:msg.attSring.string];
+            if (cfg) {
+                hightColor = cfg;
+               hightRectArray = [self getTouchFrameCurrentMsg:(TextMessage *)msg];
+                [self setNeedsDisplay];
+            }
+        }
+        
+    }else {
+        if( [self.delegate respondsToSelector:@selector(touchView:contentRange:imageName:)]){
+            [self.delegate touchView:self contentRange:msg.contentRange imageName:[(ImageMessage*)msg src]];
+        }
+    }
+}
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{
+    NSLog(@"touchesEnded");
+    hightRectArray=nil;
+    hightColor = nil;
+    [self setNeedsDisplay];
+}
+/**
+ *  得到所有应该高亮的rect 数组
+ *
+ *  @param msg <#msg description#>
+ *
+ *  @return <#return value description#>
+ */
+-(NSMutableArray *)getTouchFrameCurrentMsg:(TextMessage *)msg{
+    NSMutableArray *rectArray = [NSMutableArray array];
+    NSArray<CoreTextData *> *datas = objc_getAssociatedObject(self, "coreDatas");
+    [datas enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
+        CFArrayRef lines = CTFrameGetLines(data.frameRef);
+        int count =(int)CFArrayGetCount(lines);
+        CGPoint points[count];
+        CTFrameGetLineOrigins(data.frameRef, CFRangeMake(0, 0), points);
+        for (int i=0; i<count; i++) {//遍历行
+            CTLineRef oneLine = CFArrayGetValueAtIndex(lines, i);
+            CFArrayRef runs = CTLineGetGlyphRuns(oneLine);
+            int runCount = (int)CFArrayGetCount(runs);
+            NSMutableArray *runFrams = [NSMutableArray array];
+            for (int j=0; j<runCount; j++) {
+                CTRunRef oneRun = CFArrayGetValueAtIndex(runs, j);
+                CFRange runRange = CTRunGetStringRange(oneRun);
+                long msgEnd = msg.contentRange.location+msg.contentRange.length;
+                long runEnd = runRange.location+runRange.length;
+                if (runRange.location>=msg.contentRange.location&&msgEnd>=runEnd) {
+                    const CGPoint *position = CTRunGetPositionsPtr(oneRun);
+                    CGFloat ascent;
+                    CGFloat width = CTRunGetTypographicBounds(oneRun, CFRangeMake(0, 0), &ascent, nil, nil)+2;
+                    ascent+=msg.fontCig.fontSize * 0.25;
+                    CGPoint lineOrigin = points[i];
+                    CGFloat runX = lineOrigin.x + position->x;
+                    CGFloat runY = lineOrigin.y-msg.fontCig.fontSize * 0.3;
+                    CGRect rect = CGRectMake(runX, runY, width, ascent);
+                    
+                    NSValue *oneValue = [NSValue value:&rect withObjCType:@encode(CGRect)];
+                    //得到Line 所有应该高亮的Run  rect
+                    [runFrams addObject:oneValue];
+                }
+            }
+            if (runFrams.count>=1) {
+                CGFloat x = [runFrams.firstObject CGRectValue].origin.x;
+                CGFloat wid = CGRectGetMaxX([runFrams.lastObject CGRectValue])-x;
+                __block CGFloat hei;
+                [runFrams enumerateObjectsUsingBlock:^(NSValue *value, NSUInteger idx, BOOL * _Nonnull stop) {
+                    CGRect rect = [value CGRectValue];
+                    if (rect.size.height>hei) {
+                        hei=rect.size.height;
+                    }
+                }];
+                CGFloat y =[runFrams.firstObject CGRectValue].origin.y;
+                //得到  Line  所有Run 连起来的Rect
+                CGRect lineRunRect = CGRectMake(x, y, wid, hei);
+//                NSLog(@"%@",NSStringFromCGRect(lineRunRect));
+                [rectArray addObject:[NSValue valueWithCGRect:lineRunRect]];
+            }
+        }
+    }];
+    return rectArray;
+}
+-(CGPathRef)getRoundRect:(CGRect)rect{
+    UIBezierPath *beziPath = [UIBezierPath bezierPath];
+    CGPoint origin = rect.origin;
+    CGSize size = rect.size;
+    CGFloat radius=5;
+    [beziPath moveToPoint:CGPointMake(origin.x+radius,origin.y)];
+    [beziPath addLineToPoint:CGPointMake(origin.x+size.width-radius, origin.y)];
+    [beziPath addArcWithCenter:CGPointMake(origin.x+size.width-radius, origin.y+radius) radius:radius startAngle:-M_PI_2 endAngle:0 clockwise:YES];
+    
+    
+    [beziPath addLineToPoint:CGPointMake(origin.x+size.width, origin.y+size.height-radius)];
+
+    [beziPath addArcWithCenter:CGPointMake(origin.x+size.width-radius, origin.y+size.height-radius) radius:radius startAngle:0 endAngle:M_PI_2 clockwise:YES];
+    
+    [beziPath addLineToPoint:CGPointMake(origin.x+radius, origin.y+size.height)];
+
+    [beziPath addArcWithCenter:CGPointMake(origin.x+radius, origin.y+size.height-radius) radius:radius startAngle:M_PI_2 endAngle:M_PI clockwise:YES];
+    
+    [beziPath addLineToPoint:CGPointMake(origin.x, origin.y+radius)];
+
+    
+    [beziPath addArcWithCenter:CGPointMake(origin.x+radius, origin.y+radius) radius:radius startAngle:M_PI endAngle:M_PI_2*3 clockwise:YES];
+    
+    return beziPath.CGPath;
+}
+
+
 -(void)dealloc{
     objc_removeAssociatedObjects(self);
 }

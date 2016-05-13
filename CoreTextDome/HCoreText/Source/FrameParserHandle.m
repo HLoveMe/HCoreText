@@ -25,7 +25,7 @@
 }
 -(NSArray <NSString *>*)parserKeywordWithPartText:(NSString *)partText type:(SourceType)type{
     if (type==textType) {
-        return @[@"size",@"name",@"color"];
+        return @[@"size",@"name",@"color",@"underLine"];
     }
     return @[@"src",@"width",@"height"];
 }
@@ -40,7 +40,7 @@
     Message *msg ;
     if (type==textType) {
         TextMessage *textMsg = [[TextMessage alloc]init];
-        textMsg.content = partText;
+//        textMsg.content = partText;
         textMsg.type = type;
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
         textMsg.keyValues = [self parserKeyValuesWithKeys:keys content:partText];
@@ -50,7 +50,7 @@
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
         ImageMessage *imgMsg = [self parserWithKeys:keys Content:partText];
         imgMsg.type = type;
-        imgMsg.content = partText;
+//        imgMsg.content = partText;
         msg = imgMsg;
     }
     

@@ -52,7 +52,7 @@ static Message * parserSection(NSString *partString,parserValueCallBack valueBac
     SourceType type = [partString containsString:@"<font"]?textType:imageType;
     if (type== textType) {
         TextMessage *config = [[TextMessage alloc]init];
-        config.content = partString;
+//        config.content = partString;
         config.type = type;
         /**配置的关键字*/
         NSArray *keywords =[[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyword_keyPath_text" ofType:@"plist"]] allKeys];

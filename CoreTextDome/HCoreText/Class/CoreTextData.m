@@ -8,7 +8,8 @@
 
 #import "CoreTextData.h"
 #import "FrameParserConfig.h"
-
+#import "partMessage.h"
+#import "FontConfig.h"
 @interface CoreTextData()
 
 @end
@@ -34,5 +35,6 @@
         _frameRef = NULL;
     }
 }
+
 
 @end

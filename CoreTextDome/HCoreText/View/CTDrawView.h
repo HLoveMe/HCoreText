@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class CoreTextData;
+@class FontConfig;
 @protocol CTViewTouchDelegate<NSObject>
 @optional
 /**
@@ -16,8 +17,11 @@
  *  @param view    当前视图
  *  @param range   点击文本的范文
  *  @param content 点击的文本
+ *  
+
+ *  在手指抬起 讲会恢复
  */
--(void)touchView:(UIView *)view contentRange:(NSRange)range contentString:(NSString *)content attributes:(NSMutableDictionary*)attribute;
+-(UIColor *)touchView:(UIView *)view contentRange:(NSRange)range contentString:(NSString *)content;
 /**
  *  点击事件开启后才会生效 针对图片 通过HImageBox得到对于图片
  *

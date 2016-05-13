@@ -16,9 +16,14 @@
  */
 @interface CoreTextData : NSObject
 /**
+ *
+ */
+@property(nonatomic,strong)FrameParserConfig *parserCfg;
+/**
  *  解析出来的文本
  */
-@property(nonatomic,copy)NSString *contentString;
+@property(nonatomic,copy)NSAttributedString *contentString;
+
 /**
  *  在渲染时 是否自动调节 视图的高度（该值是通过FrameParserConfig获取的）
  */
@@ -35,4 +40,5 @@
  *  本文本的所有Message对象
  */
 @property(nonatomic,strong)NSMutableArray<Message *> *msgArray;
+
 @end

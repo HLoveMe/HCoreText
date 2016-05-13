@@ -17,5 +17,15 @@
 		<string>textColor</string>
 		<string>UIColor</string>
 	</array>
+	<key>underLine</key>
+	<array>
+		<string>underLine</string>
+		<string>NSString</string>
+	</array>
+	<key>underColor</key>
+	<array>
+		<string>underColor</string>
+		<string>UIColor</string>
+	</array>
 </dict>
 </plist>
