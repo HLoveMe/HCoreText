@@ -120,6 +120,14 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 @end
 
 
+@interface TextLinkMessage : TextMessage
+/**
+ *  表示文本之后的真实URL
+ */
+@property(nonatomic,copy)NSString *URLSrc;
+
+@end
+
 
 @interface ImageMessage : Message
 

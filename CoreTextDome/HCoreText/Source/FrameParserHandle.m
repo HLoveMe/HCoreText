@@ -24,10 +24,14 @@
     return strs;
 }
 -(NSArray <NSString *>*)parserKeywordWithPartText:(NSString *)partText type:(SourceType)type{
-    if (type==textType) {
-        return @[@"size",@"name",@"color",@"underLine"];
-    }
-    return @[@"src",@"width",@"height"];
+    //<link url=\"http://www.baidu.com\" name=\"Futura\" size=\"20\" color=\"blue\" >
+    NSMutableArray *keywords = [NSMutableArray array];
+    NSRegularExpression * regular = [NSRegularExpression regularExpressionWithPattern:@"\\b\\w+(?==)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
+    NSArray <NSTextCheckingResult *>*results = [regular matchesInString:partText options:NSMatchingReportProgress range:NSMakeRange(0, partText.length)];
+    [results enumerateObjectsUsingBlock:^(NSTextCheckingResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [keywords addObject:[partText substringWithRange:obj.range]];
+    }];
+    return keywords;
 }
 
 -(Message *)parserMessageWithPartText:(NSString *)partText{
@@ -35,22 +39,31 @@
     if ([self respondsToSelector:@selector(parserTypeWithPart:)]) {
        type = [self parserTypeWithPart:partText];
     }else{
-        type = [partText containsString:@"<font"]?textType:imageType;
+        if ([partText containsString:@"<font"]) {
+            type = TextType;
+        }else if([partText containsString:@"<link"]){
+            type = LinkType;
+        }else{
+            type = ImageType;
+        }
     }
     Message *msg ;
-    if (type==textType) {
+    if (type==TextType) {
         TextMessage *textMsg = [[TextMessage alloc]init];
-//        textMsg.content = partText;
         textMsg.type = type;
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
         textMsg.keyValues = [self parserKeyValuesWithKeys:keys content:partText];
         msg = textMsg;
-    }else{
-        
+    }else if(type == LinkType){
+        TextLinkMessage *link = [[TextLinkMessage alloc]init];
+        link.type= LinkType;
+        NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
+        link.keyValues = [self parserKeyValuesWithKeys:keys content:partText];
+        msg = link;
+    }else if(type==ImageType){
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
         ImageMessage *imgMsg = [self parserWithKeys:keys Content:partText];
         imgMsg.type = type;
-//        imgMsg.content = partText;
         msg = imgMsg;
     }
     
@@ -69,7 +82,7 @@
         keyV.keyword = obj;
         keyV.content = content;
         //3：怎么通过关键字 从文本中解析到对应的值
-        NSString *Pattern = [NSString stringWithFormat:@"(?<=%@=\")\\w+",obj];
+        NSString *Pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",obj];
         NSRegularExpression *expression = [[NSRegularExpression alloc]initWithPattern:Pattern options:0 error:nil];
         keyV.expression=expression;
         //值解析

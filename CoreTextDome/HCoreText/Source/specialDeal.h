@@ -13,8 +13,11 @@
  修改该函数即可:
  *       static partConfig * parserSection(NSString *partString )
  *  格式
- *  @"I<font name=\"Futura\" size=\"20\" color=\"blue\" >Love <font name=\"Futura\" size=\"12\" color=\"red\"><img src=\"\" width=\"\" height=\"\">you<font name=\"Futura\" size=\"25\">"
- *   @“文本<文本配置><图片配置>文本(文本配置)。。。”
+ *  @"I<font name=\"Futura\" size=\"20\" color=\"blue\" >
+    Love <font name=\"Futura\" size=\"12\" color=\"red\"><img src=\"\" width=\"\" height=\"\">you<font name=\"Futura\" size=\"25\">"
+    <image src= , width ,height >
+    @爱上无名氏<link url="http:..." size="",..>
+ *   @“文本<文本配置><图片配置>文本<文本配置>。。。”
  *  @return
  */
 #ifndef specialDeal_h
@@ -39,6 +42,15 @@ static NSMutableArray<NSString *>*  contentSplit(NSString *wholeContent){
     }];
     return stringArray;
 }
+static NSArray<NSString *>* keyWordParser(NSString *partText){
+    NSMutableArray *keywords = [NSMutableArray array];
+    NSRegularExpression * regular = [NSRegularExpression regularExpressionWithPattern:@"\\b\\w+(?==)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
+    NSArray <NSTextCheckingResult *>*results = [regular matchesInString:partText options:NSMatchingReportProgress range:NSMakeRange(0, partText.length)];
+    [results enumerateObjectsUsingBlock:^(NSTextCheckingResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [keywords addObject:[partText substringWithRange:obj.range]];
+    }];
+    return keywords;
+}
 /**
  *  给定某个片段的内容 创建属于该片段的 partConfig对象
  *
@@ -46,16 +58,21 @@ static NSMutableArray<NSString *>*  contentSplit(NSString *wholeContent){
  *
  *  @return
  */
-static Message * parserSection(NSString *partString,parserValueCallBack valueBack){
+static Message * parserSection(NSString *partString,NSArray *keywords,parserValueCallBack valueBack){
     Message *result;
     /**该文本的内容*/
-    SourceType type = [partString containsString:@"<font"]?textType:imageType;
-    if (type== textType) {
+    SourceType type;
+    if ([partString containsString:@"<font"]) {
+        type = TextType;
+    }else if([partString containsString:@"<link"]){
+        type = LinkType;
+    }else{
+        type = ImageType;
+    }
+    if (type== TextType) {
         TextMessage *config = [[TextMessage alloc]init];
-//        config.content = partString;
         config.type = type;
         /**配置的关键字*/
-        NSArray *keywords =[[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyword_keyPath_text" ofType:@"plist"]] allKeys];
         NSMutableArray<keyValue *>* keyVs = [NSMutableArray array];
         [keywords enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             keyValue *oneKV = [[keyValue alloc]init];
@@ -68,11 +85,10 @@ static Message * parserSection(NSString *partString,parserValueCallBack valueBac
         }];
         config.keyValues = keyVs;
         result = config;
-    }else{
-         NSArray<NSString *> *keys = [[NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"keyword_keyPath_image" ofType:@"plist"]] allKeys];
+    }else if (type== ImageType) {
         ImageMessage *imgMsg = [[ImageMessage alloc]init];
         imgMsg.type = type;
-        [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
+        [keywords enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
             NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",key];
             NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
             NSTextCheckingResult *result = [regular firstMatchInString:partString options:0 range:NSMakeRange(0, partString.length)];
@@ -80,6 +96,22 @@ static Message * parserSection(NSString *partString,parserValueCallBack valueBac
             [imgMsg setValue:conRes forKey:key];
         }];
         result = imgMsg;
+    }else if(type == LinkType){
+        TextLinkMessage *config = [[TextLinkMessage alloc]init];
+        config.type = type;
+        /**配置的关键字*/
+        NSMutableArray<keyValue *>* keyVs = [NSMutableArray array];
+        [keywords enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            keyValue *oneKV = [[keyValue alloc]init];
+            oneKV.content = partString;
+            oneKV.keyword = obj;
+            NSString *Pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",obj];
+            oneKV.expression = [[NSRegularExpression alloc]initWithPattern:Pattern options:0 error:nil];
+            oneKV.valueBack = valueBack;
+            [keyVs addObject:oneKV];
+        }];
+        config.keyValues = keyVs;
+        result = config;
     }
     return result;
 }
@@ -91,14 +123,14 @@ static Message * parserSection(NSString *partString,parserValueCallBack valueBac
  *  @return
  */
 static NSString * parserShowContent(SourceType type,NSString *onePart){
-    if (type==textType) {
+    if (type==TextType) {
         //返回对于的文本
         return  [[onePart componentsSeparatedByString:@"<font"] firstObject];
-    }else if(type == imageType){
+    }else if(type == ImageType){
         //返回长度为 1 (空格) 来作为图片的占位符
         return @" ";
     }else{
-        return @"";
+        return  [[onePart componentsSeparatedByString:@"<link"] firstObject];
     }
 }
 /**

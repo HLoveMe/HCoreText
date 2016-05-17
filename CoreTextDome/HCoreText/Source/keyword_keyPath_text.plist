@@ -27,5 +27,10 @@
 		<string>underColor</string>
 		<string>UIColor</string>
 	</array>
+	<key>url</key>
+	<array>
+		<string>URLSrc</string>
+		<string>NSString</string>
+	</array>
 </dict>
 </plist>

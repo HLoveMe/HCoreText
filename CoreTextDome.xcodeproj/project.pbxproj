@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B27450ED1CCF4372009F0F89 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B27450EC1CCF4372009F0F89 /* tempViewController.m */; };
-		B27450EF1CCF63BE009F0F89 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = B27450EE1CCF63BE009F0F89 /* image.png */; };
-		B27450F31CCF65F5009F0F89 /* image2.png in Resources */ = {isa = PBXBuildFile; fileRef = B27450F21CCF65F5009F0F89 /* image2.png */; };
-		B27450F51CCF6740009F0F89 /* image3.png in Resources */ = {isa = PBXBuildFile; fileRef = B27450F41CCF6740009F0F89 /* image3.png */; };
+		DB4A71701CEB2637009C1132 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4A716F1CEB2637009C1132 /* tempViewController.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
 		DBF1A4691CE5E0860084FD17 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A44D1CE5E0860084FD17 /* UIColor+Hex.m */; };
 		DBF1A46A1CE5E0860084FD17 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A44F1CE5E0860084FD17 /* UIView+Extension.m */; };
@@ -52,11 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		B27450EB1CCF4372009F0F89 /* tempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempViewController.h; sourceTree = "<group>"; };
-		B27450EC1CCF4372009F0F89 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
-		B27450EE1CCF63BE009F0F89 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
-		B27450F21CCF65F5009F0F89 /* image2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image2.png; sourceTree = "<group>"; };
-		B27450F41CCF6740009F0F89 /* image3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image3.png; sourceTree = "<group>"; };
+		DB4A716E1CEB2637009C1132 /* tempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempViewController.h; sourceTree = "<group>"; };
+		DB4A716F1CEB2637009C1132 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
 		DBF1A44C1CE5E0860084FD17 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
@@ -237,11 +231,8 @@
 				DBF4CD491CCA05F800E5804E /* AppDelegate.m */,
 				DBF4CD4B1CCA05F800E5804E /* ViewController.h */,
 				DBF4CD4C1CCA05F800E5804E /* ViewController.m */,
-				B27450EB1CCF4372009F0F89 /* tempViewController.h */,
-				B27450EC1CCF4372009F0F89 /* tempViewController.m */,
-				B27450EE1CCF63BE009F0F89 /* image.png */,
-				B27450F21CCF65F5009F0F89 /* image2.png */,
-				B27450F41CCF6740009F0F89 /* image3.png */,
+				DB4A716E1CEB2637009C1132 /* tempViewController.h */,
+				DB4A716F1CEB2637009C1132 /* tempViewController.m */,
 				DBF1A44A1CE5E0860084FD17 /* HCoreText */,
 				DB9EF73B1CD88A7D00BD9579 /* HImage */,
 				DBF4CD4E1CCA05F800E5804E /* Main.storyboard */,
@@ -388,10 +379,7 @@
 				DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */,
 				DBF4CD521CCA05F800E5804E /* Assets.xcassets in Resources */,
 				DBF1A4731CE5E0860084FD17 /* keyword_keyPath_text.plist in Resources */,
-				B27450F51CCF6740009F0F89 /* image3.png in Resources */,
 				DBF4CD501CCA05F800E5804E /* Main.storyboard in Resources */,
-				B27450EF1CCF63BE009F0F89 /* image.png in Resources */,
-				B27450F31CCF65F5009F0F89 /* image2.png in Resources */,
 				DBF1A4721CE5E0860084FD17 /* keyword_keyPath_image.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -427,8 +415,8 @@
 				DBF1A46C1CE5E0860084FD17 /* FontConfig.m in Sources */,
 				DBF1A4701CE5E0860084FD17 /* partMessage.m in Sources */,
 				DBF1A4741CE5E0860084FD17 /* CTDrawView.m in Sources */,
+				DB4A71701CEB2637009C1132 /* tempViewController.m in Sources */,
 				DBF1A46A1CE5E0860084FD17 /* UIView+Extension.m in Sources */,
-				B27450ED1CCF4372009F0F89 /* tempViewController.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
 				DBF1A46E1CE5E0860084FD17 /* FrameParserConfig.m in Sources */,
 				DBF4CD471CCA05F800E5804E /* main.m in Sources */,
@@ -572,6 +560,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yibing Zhang (2BG7BE76P7)";
 				INFOPLIST_FILE = CoreTextDome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -584,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yibing Zhang (2BG7BE76P7)";
 				INFOPLIST_FILE = CoreTextDome/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

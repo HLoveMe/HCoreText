@@ -37,19 +37,25 @@
 /**
  *  提供一个解析实例
  *
- *  @XXOO<font name=\"Futura\" size=\"20\" color=\"blue\" >
- *  <image src=\"%@\" width=\"200\" height=\"120\">
+ *   @XXOO<font name=\"Futura\" size=\"20\" color=\"blue\" >
+ *   <image src=\"%@\" width=\"200\" height=\"120\">
  *   Love <font name=\"Futura\" size=\"12\" color=\"red\">
  *   you <font name=\"Futura\" size=\"16\" color=\"red\">
- *
+ *   @爱上无名氏<link url="",size=...>
  *  Note:具体实现请参照  FrameParserObject
  *  @param content  解析的内容
  *  @param defaultC 默认配置
  *
  *  @return
  */
-+(CoreTextData *)parserContent:(NSString *)content defaultCfg:(FrameParserConfig *)defaultC;
++(CoreTextData *)parserWithPropertyContent:(NSString *)content defaultCfg:(FrameParserConfig *)defaultC;
 @end
+
+
+
+
+
+
 
 @interface FrameParser (CallBack)
 /**
@@ -79,5 +85,5 @@
  *  @param defaultConfig 提供默认的配置参数
  *  @return
  */
-+(CoreTextData *)parserWithPropertyContent:(NSString *)content defaultConfig:(FrameParserConfig *)defaultConfig;
++(CoreTextData *)parserWithPropertyContent2:(NSString *)content defaultCfg:(FrameParserConfig *)defaultConfig;
 @end

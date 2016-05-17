@@ -10,12 +10,14 @@
 @class Message;
 /**
  *  enum 来标记该段内容是形式
- *   textType 文本内容
- *   imageType 图片内容
+ *   TextType 文本内容
+ *   LinkType  
+ *   ImageType 图片内容
  */
 typedef enum{
-    textType = 1,
-    imageType
+    TextType = 1,
+    LinkType,
+    ImageType
 }SourceType;
 /**
  *  用于回调 把整个文本 按照开发者的需求分割为 几个片段（将要显示的内容 和 该内容的配置信息 的结合）
@@ -35,6 +37,14 @@ typedef NSMutableArray<NSString *>* (*parserContentSplitBack)(NSString *wholeCon
  */
 typedef NSString *(*parserShowContentBack)(SourceType type,NSString *partString);
 /**
+ *  得到该部分需要解析的关键字
+ *
+ *  @param keywordsParser
+ *
+ *  @return 该部分需要解析的关键字
+ */
+typedef NSArray<NSString *>*(*parserKeywords)(NSString *partText);
+/**
  *  这个方法是根据片段 partConfig对象
  *  各个配置关键字,关键字对于的值,值对应片段的FrameParserConfig 属性的Class
  *  example 
@@ -52,12 +62,13 @@ typedef id (*parserValueCallBack)(NSString * key,NSString *value,Class clazz);
  *
  *  @return
  */
-typedef Message *(*parserSectionCallBack)(NSString *partString,parserValueCallBack valueBack);
+typedef Message *(*parserSectionCallBack)(NSString *partString,NSArray *keywords,parserValueCallBack valueBack);
 
 typedef struct {
     parserContentSplitBack contentBack;
     parserSectionCallBack sectionBack;
     parserShowContentBack showContentBack;
+    parserKeywords    keywordsBack;
     parserValueCallBack valueBack;
 }parserCallBacks;
 #endif

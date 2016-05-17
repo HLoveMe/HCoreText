@@ -9,7 +9,7 @@
 #import "partMessage.h"
 #import "FontConfig.h"
 #import "FrameParserConfig.h"
-
+#import <objc/runtime.h>
 @implementation keyValue
 -(NSString *)value{
     NSTextCheckingResult *result = [self.expression firstMatchInString:self.content options:0 range:NSMakeRange(0, self.content.length)];
@@ -46,10 +46,9 @@
     }
     return self;
 }
--(NSMutableDictionary *)partAttribute:(FontConfig *)defaultConfig{
-    NSAssert(self.keyValues, @"在解析之后再获取该属性参数");
-    FontConfig *config = [FontConfig fontWithFontConfig:defaultConfig];
+-(FontConfig *)parserKeyValues:(FontConfig *)defaultCfg{
     //解析参数值
+    FontConfig *config = [FontConfig fontWithFontConfig:defaultCfg];
     [self.keyValues enumerateObjectsUsingBlock:^(keyValue * _Nonnull keyValue, NSUInteger idx, BOOL * _Nonnull stop) {
         id value;
         if (keyValue.valueHandle) {
@@ -59,13 +58,53 @@
         }
         [config setValue:value forKeyPath:keyValue.keyPath];
     }];
-    _fontCig = config;
+    return config;
+}
+-(NSMutableDictionary *)partAttribute:(FontConfig *)defaultConfig{
+    NSAssert(self.keyValues, @"在解析之后再获取该属性参数");
+    _fontCig = [self parserKeyValues:defaultConfig];
     NSMutableDictionary *dic = [self.fontCig fonttAttributes];
     dic[(id)kCTParagraphStyleAttributeName]= (id)self.paragraConfig.style;
     return dic;
 }
+@end
 
+@implementation TextLinkMessage
+-(FontConfig *)parserKeyValues:(FontConfig *)defaultCfg{
+    //解析参数值
+    FontConfig *config = [FontConfig fontWithFontConfig:defaultCfg];
+    [self.keyValues enumerateObjectsUsingBlock:^(keyValue * _Nonnull keyValue, NSUInteger idx, BOOL * _Nonnull stop) {
+        id value;
+        if (keyValue.valueHandle) {
+            value = keyValue.valueHandle(keyValue.keyword,keyValue.value,keyValue.clazz);
+        }else{
+            value = keyValue.valueBack(keyValue.keyword,keyValue.value,keyValue.clazz);
+        }
+        if ([self isSelfProperty:keyValue.keyPath]) {
+            [self setValue:keyValue.value forKey:keyValue.keyPath];
+        }else{
+            [config setValue:value forKeyPath:keyValue.keyPath];
+        }
+        
+    }];
+    return config;
+}
 
+-(BOOL)isSelfProperty:(NSString*)proName{
+    static dispatch_once_t onceToken;
+    static  NSString *proNameStr;
+    dispatch_once(&onceToken, ^{
+        NSMutableArray *proNames = [NSMutableArray array];
+        unsigned int  count;
+        objc_property_t *pros = class_copyPropertyList([self class], &count);
+        for (int i=0; i<count; i++) {
+            NSString *name =[NSString stringWithUTF8String:property_getName(pros[i])];
+            [proNames addObject:name];
+        }
+        proNameStr = [proNames componentsJoinedByString:@"|"];
+    });
+    return [proNameStr containsString:proName];
+}
 
 @end
 

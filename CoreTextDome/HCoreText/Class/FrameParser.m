@@ -1,4 +1,4 @@
-//
+
 //  FrameParser2.m
 //  CoreTextDome
 //
@@ -21,7 +21,7 @@
     NSDictionary *dic = [config defaultAttribute];
     NSAttributedString *attString = [[NSAttributedString alloc]initWithString:content attributes:dic];
     TextMessage *textMsg = [[TextMessage alloc]init];
-    textMsg.type = textType;
+    textMsg.type = TextType;
     textMsg.contentRange = NSMakeRange(0, content.length);
     textMsg.attSring = attString;
     CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
@@ -53,11 +53,11 @@
     [parts enumerateObjectsUsingBlock:^(NSString * _Nonnull onePart, NSUInteger idx, BOOL * _Nonnull stop) {
         Message *msg = [delegate parserMessageWithPartText:onePart];
         [msgArray addObject:msg];
-        if (msg.type==textType) {
+        if (msg.type==TextType) {
             TextMessage *textMsg = (TextMessage *)msg;
             NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
-                showContent = [delegate parserShowText:textType text:onePart];
+                showContent = [delegate parserShowText:TextType text:onePart];
             }else{
                showContent= (NSString *)[[onePart componentsSeparatedByString:@"<font"] firstObject];
             }
@@ -66,11 +66,11 @@
             textMsg.attSring=one;
             textMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
-        }else{
+        }else if (msg.type==ImageType){
             ImageMessage *imgMsg = (ImageMessage *)msg;
             NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
-                showContent = [delegate parserShowText:textType text:onePart];
+                showContent = [delegate parserShowText:TextType text:onePart];
             }else{
                 showContent= @" ";
             }
@@ -78,6 +78,19 @@
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
+            [contentAtt appendAttributedString:one];
+        }else {
+            TextLinkMessage *linkMsg = (TextLinkMessage *)msg;
+            NSString *showContent;
+            if([delegate respondsToSelector:@selector(parserShowText:text:)]){
+                showContent = [delegate parserShowText:TextType text:onePart];
+            }else{
+                showContent= (NSString *)[[onePart componentsSeparatedByString:@"<link"] firstObject];
+            }
+            NSDictionary *dic = [linkMsg partAttribute:defaultC.fontCig];
+            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            linkMsg.attSring=one;
+            linkMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
         }
     }];
@@ -101,7 +114,7 @@
     CFRelease(frameRef);
     return data;
 }
-+(CoreTextData *)parserContent:(NSString *)content defaultCfg:(FrameParserConfig *)defaultC{
++(CoreTextData *)parserWithPropertyContent:(NSString *)content defaultCfg:(FrameParserConfig *)defaultC{
     return [self parserContent:content defaultCfg:defaultC parserDelegate:[[FrameParserHandle alloc]init]];
 }
 @end
@@ -115,9 +128,10 @@
     NSMutableAttributedString *contentAtt = [[NSMutableAttributedString alloc]init];
     CGSize size = defaultC.contentSize;
     [allPart enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        Message *pConfig = calls.sectionBack(obj,calls.valueBack);
+        NSArray *keywords = calls.keywordsBack(obj);
+        Message *pConfig = calls.sectionBack(obj,keywords,calls.valueBack);
         pConfig.showBack = calls.showContentBack;
-        if (pConfig.type == textType) {
+        if (pConfig.type == TextType) {
             TextMessage *TConfig = (TextMessage *)pConfig;
             NSString *showContent = calls.showContentBack(pConfig.type,obj);
             FrameParserConfig *config = [FrameParserConfig defaultConfigWithContentSize:size];
@@ -126,13 +140,22 @@
             TConfig.contentRange = NSMakeRange(contentAtt.string.length, showContent.length);
             TConfig.attSring= oneAtt;
             [contentAtt appendAttributedString:oneAtt];
-        }else{
+        }else if(pConfig.type == ImageType){
             ImageMessage *imgMsg = (ImageMessage *)pConfig;
             NSString *showCon = calls.showContentBack(imgMsg.type,obj);
             NSDictionary *dic = [imgMsg partAttribute];
             NSAttributedString *oneAtt = [[NSAttributedString alloc]initWithString:showCon attributes:dic];
             imgMsg.contentRange =NSMakeRange(contentAtt.string.length, showCon.length);
             imgMsg.attSring = oneAtt;
+            [contentAtt appendAttributedString:oneAtt];
+        }else if(pConfig.type == LinkType){
+            TextLinkMessage *link = (TextLinkMessage *)pConfig;
+            NSString *showContent = calls.showContentBack(pConfig.type,obj);
+            FrameParserConfig *config = [FrameParserConfig defaultConfigWithContentSize:size];
+            NSDictionary *dic = [link partAttribute:config.fontCig];
+            NSAttributedString *oneAtt = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            link.contentRange = NSMakeRange(contentAtt.string.length, showContent.length);
+            link.attSring= oneAtt;
             [contentAtt appendAttributedString:oneAtt];
         }
         [msgArr addObject:pConfig];
@@ -154,11 +177,12 @@
     CFRelease(frameRef);
     return data;
 }
-+(CoreTextData *)parserWithPropertyContent:(NSString *)content  defaultConfig:(FrameParserConfig *)defaultConfig{
++(CoreTextData *)parserWithPropertyContent2:(NSString *)content defaultCfg:(FrameParserConfig *)defaultConfig{
     parserCallBacks callBacks;
     callBacks.contentBack = contentSplit;
     callBacks.sectionBack = parserSection;
     callBacks.showContentBack = parserShowContent;
+    callBacks.keywordsBack = keyWordParser;
     callBacks.valueBack = getRealValue;
     return [self parserContent:content defaultConfig:defaultConfig  callBack:callBacks];
 }

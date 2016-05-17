@@ -62,10 +62,10 @@
         CGPoint origins[count];
         CTFrameGetLineOrigins(obj.frameRef, CFRangeMake(0, 0), origins);
         for (Message * _Nonnull msg in obj.msgArray) {
-            if (msg.type == textType){
+            if (msg.type == TextType){
                 NSString *showStr = msg.attSring.string;
                 location += showStr.length;
-            } else if (msg.type == imageType) {
+            } else if (msg.type == ImageType) {
                 ImageMessage *imgMsg = (ImageMessage *)msg;
                 for (long i=0; i<count; i++) { //遍历行
                     CTLineRef oneLine= CFArrayGetValueAtIndex(lineRef, i);
@@ -159,24 +159,29 @@
     }];
 }
 -(void)transferDelegate:(Message *)msg{
-    if (msg.type == textType) {
-        if ([self.delegate respondsToSelector:@selector(touchView:contentRange:contentString:)]) {
-            UIColor *cfg = [self.delegate touchView:self contentRange:msg.contentRange contentString:msg.attSring.string];
+    if (msg.type == TextType) {
+        if ([self.delegate respondsToSelector:@selector(touchView:contentString:)]) {
+            [self.delegate touchView:self contentString:msg.attSring.string];
+        }
+        
+    }else if(msg.type == ImageType) {
+        if( [self.delegate respondsToSelector:@selector(touchView:imageName:)]){
+            [self.delegate touchView:self imageName:[(ImageMessage*)msg src]];
+        }
+    }else if (msg.type==LinkType){
+        if ([self.delegate respondsToSelector:@selector(touchView:contentString:URLString:)]) {
+            TextLinkMessage *link = (TextLinkMessage *)msg;
+            UIColor *cfg = [self.delegate touchView:self contentString:link.attSring.string URLString:link.URLSrc];
             if (cfg) {
                 hightColor = cfg;
-               hightRectArray = [self getTouchFrameCurrentMsg:(TextMessage *)msg];
+                hightRectArray = [self getTouchFrameCurrentMsg:(TextMessage *)msg];
                 [self setNeedsDisplay];
             }
         }
         
-    }else {
-        if( [self.delegate respondsToSelector:@selector(touchView:contentRange:imageName:)]){
-            [self.delegate touchView:self contentRange:msg.contentRange imageName:[(ImageMessage*)msg src]];
-        }
     }
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{
-    NSLog(@"touchesEnded");
     hightRectArray=nil;
     hightColor = nil;
     [self setNeedsDisplay];
