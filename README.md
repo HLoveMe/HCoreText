@@ -1,12 +1,39 @@
 利用CoreText对C函数进行封装，达到更简单的调用
-   目前只支持
+   支持
    
             AAAA <link url="" ...>                   url size name color underLine UnderColor 
             
             BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
             CCCC <image src="" ...>                 src width height
-   格式的解析文本          
+   格式的解析文本   
+   
+   新增：
+         @[
+            @{
+               @"content":@"@爱上无名氏",
+               @"type":@"link",
+               @"url":@"http://www.baidu.com",
+               @"size":@"18",
+               @"color":@"red"
+            },
+            @{
+               @"content":@" ",
+               @"type":@"image",
+               @"src":@"http://imgsrc.baidu.com/forum/pic/item/cdbf6c81800a19d8d8a3f94a33fa828ba71e46d8.jpg",
+               @"width":@"200",
+               @"height":@"120"
+            },
+            @{
+               @"content":@"I love you 无名氏个大傻逼",
+               @"type":@"text",
+               @"color":@"blue",
+               @"size":@"18",
+               @"name":@"Futura"
+            }
+         ]
+      格式的文本解析支持   
+   
 使用：
    
    创建FrameParserConfig类的对象（该类是对整体解析进行配置）
@@ -23,15 +50,9 @@
                  <image src="" withd="" height="">you<font name=\"\" size=\"25\">
                  @爱上无名氏<link src="" size="">
                格式文本的解析
-            
-       3:另一种解决方案（和上面(1,2)的对应 只是实现原理不一样）    
-         +(CoreTextData *)parserContent:(NSString *)content defaultConfig:(FrameParserConfig *)defaultC     callBack:(parserCallBacks)calls  
-         +(CoreTextData *)parserWithPropertyContent2:(NSString *)content defaultCfg:(FrameParserConfig *)defaultConfig  
-            提供：I<font name=\"XX\" size=\"20\" color=\"blue\"> 
-                 Love<font name=\"XX\" size=\"12\" color=\"red\">
-                 <image src="" withd="" height="">you<font name=\"\" size=\"25\">
-                 @爱上无名氏<link src="" size="">
-               格式文本的解析
+               
+      3：+(CoreTextData *)parserWithSource:(NSArray<NSDictionary<NSString * ,NSString *>*> *)content     defaultCfg:(FrameParserConfig *)defaultC;   
+       
           
       解析得到解析之后的CoreTextData对象
    
