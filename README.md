@@ -1,14 +1,14 @@
-利用CoreText对C函数进行封装，达到更简单的调用
-   支持
+利用CoreText对C函数进行封装，达到更简单的调用  支持格式
    
             AAAA <link url="" ...>                   url size name color underLine UnderColor 
             
             BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
             CCCC <image src="" ...>                 src width height
-   格式的解析文本   
    
-   新增：
+   
+   新增：格式的文本解析支持   
+   
          @[
          
             @{
@@ -54,7 +54,7 @@
             }
             
          ]
-      格式的文本解析支持   
+      
    
 使用：
    
