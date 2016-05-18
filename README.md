@@ -1,11 +1,11 @@
 利用CoreText对C函数进行封装，达到更简单的调用
    目前只支持
    
-            AAAA <link url="" ...>
+            AAAA <link url="" ...>                   url size name color underLine UnderColor 
             
-            BBB <font  size=“”...>
+            BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
-            CCCC <image src="" ...>
+            CCCC <image src="" ...>                 src width height
    格式的解析文本          
 使用：
    
@@ -43,9 +43,12 @@
       
    Note:   (A:如果使用默认解析方式，你不需要关注内部实现
        B:开发者自己实现
+         * 实现FrameParserDelegate必要的方法 或者parserCallBacks里面的函数
+       
          paragraphConfig 段落配置 提供默认
-         FontConfig 字体配置
+         FontConfig 字体配置 有默认
          Message 是利用解析出来的参数 和解析的文本等 创建出来的对象 ，其包含每一小块的全部信息
-         （使用其子类TextMessage，ImageMessage）
+         （使用其子类TextMessage,TextLinkMesssage,ImageMessage）
+            
       )
       
