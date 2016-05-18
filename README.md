@@ -1,8 +1,8 @@
 利用CoreText对C函数进行封装，达到更简单的调用
    目前只支持
-            #AAAA<link url="" ...>
-            #BBB<font size="" ...>
-            #CCCC<image src="" ...>
+            #AAAA<link  ...>
+            #BBB<font  ...>
+            #CCCC<image  ...>
    格式的解析文本          
 使用：
    
