@@ -9,10 +9,6 @@
  *  对于特殊的文本解析 给出一个解析实例
  *  如果你所需要解析的文本和该格式一致(或者按照该格式创建你的文本)那么你就可以直接使用
  *  这些C++函数来作为你的解析器参数 。或者重写struct parserCallBacks对应的函数
- *  note:如果你使用了这些函数作为你的解析函数 那么你需要具体需求改变某些参数
- 修改该函数即可:
- *       static partConfig * parserSection(NSString *partString )
- *  格式
  *  @"I<font name=\"Futura\" size=\"20\" color=\"blue\" >
     Love <font name=\"Futura\" size=\"12\" color=\"red\"><img src=\"\" width=\"\" height=\"\">you<font name=\"Futura\" size=\"25\">"
     <image src= , width ,height >

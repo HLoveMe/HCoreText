@@ -9,18 +9,19 @@
 /* Begin PBXBuildFile section */
 		DB4A71701CEB2637009C1132 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB4A716F1CEB2637009C1132 /* tempViewController.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
-		DBF1A4691CE5E0860084FD17 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A44D1CE5E0860084FD17 /* UIColor+Hex.m */; };
-		DBF1A46A1CE5E0860084FD17 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A44F1CE5E0860084FD17 /* UIView+Extension.m */; };
-		DBF1A46B1CE5E0860084FD17 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4521CE5E0860084FD17 /* CoreTextData.m */; };
-		DBF1A46C1CE5E0860084FD17 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4541CE5E0860084FD17 /* FontConfig.m */; };
-		DBF1A46D1CE5E0860084FD17 /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4561CE5E0860084FD17 /* FrameParser.m */; };
-		DBF1A46E1CE5E0860084FD17 /* FrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4581CE5E0860084FD17 /* FrameParserConfig.m */; };
-		DBF1A46F1CE5E0860084FD17 /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A45B1CE5E0860084FD17 /* paragraphConfig.m */; };
-		DBF1A4701CE5E0860084FD17 /* partMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A45D1CE5E0860084FD17 /* partMessage.m */; };
-		DBF1A4711CE5E0860084FD17 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4611CE5E0860084FD17 /* FrameParserHandle.m */; };
-		DBF1A4721CE5E0860084FD17 /* keyword_keyPath_image.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF1A4621CE5E0860084FD17 /* keyword_keyPath_image.plist */; };
-		DBF1A4731CE5E0860084FD17 /* keyword_keyPath_text.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF1A4631CE5E0860084FD17 /* keyword_keyPath_text.plist */; };
-		DBF1A4741CE5E0860084FD17 /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF1A4681CE5E0860084FD17 /* CTDrawView.m */; };
+		DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */; };
+		DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */; };
+		DBD35A011CEBFECF0057DAA5 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E61CEBFECF0057DAA5 /* FontConfig.m */; };
+		DBD35A021CEBFECF0057DAA5 /* FrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */; };
+		DBD35A031CEBFECF0057DAA5 /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */; };
+		DBD35A041CEBFECF0057DAA5 /* partMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EC1CEBFECF0057DAA5 /* partMessage.m */; };
+		DBD35A051CEBFECF0057DAA5 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */; };
+		DBD35A061CEBFECF0057DAA5 /* FrameParser+callBack.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359F01CEBFECF0057DAA5 /* FrameParser+callBack.m */; };
+		DBD35A071CEBFECF0057DAA5 /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359F21CEBFECF0057DAA5 /* FrameParser.m */; };
+		DBD35A081CEBFECF0057DAA5 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */; };
+		DBD35A091CEBFECF0057DAA5 /* keyword_keyPath_image.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */; };
+		DBD35A0A1CEBFECF0057DAA5 /* keyword_keyPath_text.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */; };
+		DBD35A0B1CEBFECF0057DAA5 /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */; };
 		DBF4CD471CCA05F800E5804E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD461CCA05F800E5804E /* main.m */; };
 		DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD491CCA05F800E5804E /* AppDelegate.m */; };
 		DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD4C1CCA05F800E5804E /* ViewController.m */; };
@@ -53,32 +54,34 @@
 		DB4A716F1CEB2637009C1132 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
-		DBF1A44C1CE5E0860084FD17 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
-		DBF1A44D1CE5E0860084FD17 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		DBF1A44E1CE5E0860084FD17 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		DBF1A44F1CE5E0860084FD17 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		DBF1A4511CE5E0860084FD17 /* CoreTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
-		DBF1A4521CE5E0860084FD17 /* CoreTextData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextData.m; sourceTree = "<group>"; };
-		DBF1A4531CE5E0860084FD17 /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
-		DBF1A4541CE5E0860084FD17 /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
-		DBF1A4551CE5E0860084FD17 /* FrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParser.h; sourceTree = "<group>"; };
-		DBF1A4561CE5E0860084FD17 /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
-		DBF1A4571CE5E0860084FD17 /* FrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserConfig.h; sourceTree = "<group>"; };
-		DBF1A4581CE5E0860084FD17 /* FrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserConfig.m; sourceTree = "<group>"; };
-		DBF1A4591CE5E0860084FD17 /* FrameParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserDelegate.h; sourceTree = "<group>"; };
-		DBF1A45A1CE5E0860084FD17 /* paragraphConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paragraphConfig.h; sourceTree = "<group>"; };
-		DBF1A45B1CE5E0860084FD17 /* paragraphConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = paragraphConfig.m; sourceTree = "<group>"; };
-		DBF1A45C1CE5E0860084FD17 /* partMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = partMessage.h; sourceTree = "<group>"; };
-		DBF1A45D1CE5E0860084FD17 /* partMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = partMessage.m; sourceTree = "<group>"; };
-		DBF1A45E1CE5E0860084FD17 /* HCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCoreText.h; sourceTree = "<group>"; };
-		DBF1A4601CE5E0860084FD17 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
-		DBF1A4611CE5E0860084FD17 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
-		DBF1A4621CE5E0860084FD17 /* keyword_keyPath_image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_image.plist; sourceTree = "<group>"; };
-		DBF1A4631CE5E0860084FD17 /* keyword_keyPath_text.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_text.plist; sourceTree = "<group>"; };
-		DBF1A4641CE5E0860084FD17 /* specialDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specialDeal.h; sourceTree = "<group>"; };
-		DBF1A4651CE5E0860084FD17 /* ValueParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueParser.h; sourceTree = "<group>"; };
-		DBF1A4671CE5E0860084FD17 /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
-		DBF1A4681CE5E0860084FD17 /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
+		DBD359DF1CEBFECF0057DAA5 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		DBD359E11CEBFECF0057DAA5 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		DBD359E51CEBFECF0057DAA5 /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
+		DBD359E61CEBFECF0057DAA5 /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
+		DBD359E71CEBFECF0057DAA5 /* FrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserConfig.h; sourceTree = "<group>"; };
+		DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserConfig.m; sourceTree = "<group>"; };
+		DBD359E91CEBFECF0057DAA5 /* paragraphConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paragraphConfig.h; sourceTree = "<group>"; };
+		DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = paragraphConfig.m; sourceTree = "<group>"; };
+		DBD359EB1CEBFECF0057DAA5 /* partMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = partMessage.h; sourceTree = "<group>"; };
+		DBD359EC1CEBFECF0057DAA5 /* partMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = partMessage.m; sourceTree = "<group>"; };
+		DBD359ED1CEBFECF0057DAA5 /* CoreTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
+		DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextData.m; sourceTree = "<group>"; };
+		DBD359EF1CEBFECF0057DAA5 /* FrameParser+callBack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrameParser+callBack.h"; sourceTree = "<group>"; };
+		DBD359F01CEBFECF0057DAA5 /* FrameParser+callBack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrameParser+callBack.m"; sourceTree = "<group>"; };
+		DBD359F11CEBFECF0057DAA5 /* FrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParser.h; sourceTree = "<group>"; };
+		DBD359F21CEBFECF0057DAA5 /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
+		DBD359F31CEBFECF0057DAA5 /* FrameParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserDelegate.h; sourceTree = "<group>"; };
+		DBD359F41CEBFECF0057DAA5 /* HCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCoreText.h; sourceTree = "<group>"; };
+		DBD359F61CEBFECF0057DAA5 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
+		DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
+		DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_image.plist; sourceTree = "<group>"; };
+		DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_text.plist; sourceTree = "<group>"; };
+		DBD359FA1CEBFECF0057DAA5 /* specialDeal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = specialDeal.h; sourceTree = "<group>"; };
+		DBD359FB1CEBFECF0057DAA5 /* ValueParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueParser.h; sourceTree = "<group>"; };
+		DBD359FD1CEBFECF0057DAA5 /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
+		DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
 		DBF4CD421CCA05F800E5804E /* CoreTextDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF4CD461CCA05F800E5804E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DBF4CD481CCA05F800E5804E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -139,67 +142,77 @@
 			path = Class;
 			sourceTree = "<group>";
 		};
-		DBF1A44A1CE5E0860084FD17 /* HCoreText */ = {
+		DBD359DD1CEBFECF0057DAA5 /* HCoreText */ = {
 			isa = PBXGroup;
 			children = (
-				DBF1A44B1CE5E0860084FD17 /* Category */,
-				DBF1A4501CE5E0860084FD17 /* Class */,
-				DBF1A45E1CE5E0860084FD17 /* HCoreText.h */,
-				DBF1A45F1CE5E0860084FD17 /* Source */,
-				DBF1A4661CE5E0860084FD17 /* View */,
+				DBD359DE1CEBFECF0057DAA5 /* Category */,
+				DBD359E31CEBFECF0057DAA5 /* Class */,
+				DBD359F41CEBFECF0057DAA5 /* HCoreText.h */,
+				DBD359F51CEBFECF0057DAA5 /* Source */,
+				DBD359FC1CEBFECF0057DAA5 /* View */,
 			);
 			path = HCoreText;
 			sourceTree = "<group>";
 		};
-		DBF1A44B1CE5E0860084FD17 /* Category */ = {
+		DBD359DE1CEBFECF0057DAA5 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				DBF1A44C1CE5E0860084FD17 /* UIColor+Hex.h */,
-				DBF1A44D1CE5E0860084FD17 /* UIColor+Hex.m */,
-				DBF1A44E1CE5E0860084FD17 /* UIView+Extension.h */,
-				DBF1A44F1CE5E0860084FD17 /* UIView+Extension.m */,
+				DBD359DF1CEBFECF0057DAA5 /* UIColor+Hex.h */,
+				DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */,
+				DBD359E11CEBFECF0057DAA5 /* UIView+Extension.h */,
+				DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
 		};
-		DBF1A4501CE5E0860084FD17 /* Class */ = {
+		DBD359E31CEBFECF0057DAA5 /* Class */ = {
 			isa = PBXGroup;
 			children = (
-				DBF1A4511CE5E0860084FD17 /* CoreTextData.h */,
-				DBF1A4521CE5E0860084FD17 /* CoreTextData.m */,
-				DBF1A4531CE5E0860084FD17 /* FontConfig.h */,
-				DBF1A4541CE5E0860084FD17 /* FontConfig.m */,
-				DBF1A4551CE5E0860084FD17 /* FrameParser.h */,
-				DBF1A4561CE5E0860084FD17 /* FrameParser.m */,
-				DBF1A4571CE5E0860084FD17 /* FrameParserConfig.h */,
-				DBF1A4581CE5E0860084FD17 /* FrameParserConfig.m */,
-				DBF1A4591CE5E0860084FD17 /* FrameParserDelegate.h */,
-				DBF1A45A1CE5E0860084FD17 /* paragraphConfig.h */,
-				DBF1A45B1CE5E0860084FD17 /* paragraphConfig.m */,
-				DBF1A45C1CE5E0860084FD17 /* partMessage.h */,
-				DBF1A45D1CE5E0860084FD17 /* partMessage.m */,
+				DBD359E41CEBFECF0057DAA5 /* config */,
+				DBD359ED1CEBFECF0057DAA5 /* CoreTextData.h */,
+				DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */,
+				DBD359EF1CEBFECF0057DAA5 /* FrameParser+callBack.h */,
+				DBD359F01CEBFECF0057DAA5 /* FrameParser+callBack.m */,
+				DBD359F11CEBFECF0057DAA5 /* FrameParser.h */,
+				DBD359F21CEBFECF0057DAA5 /* FrameParser.m */,
+				DBD359F31CEBFECF0057DAA5 /* FrameParserDelegate.h */,
 			);
 			path = Class;
 			sourceTree = "<group>";
 		};
-		DBF1A45F1CE5E0860084FD17 /* Source */ = {
+		DBD359E41CEBFECF0057DAA5 /* config */ = {
 			isa = PBXGroup;
 			children = (
-				DBF1A4601CE5E0860084FD17 /* FrameParserHandle.h */,
-				DBF1A4611CE5E0860084FD17 /* FrameParserHandle.m */,
-				DBF1A4621CE5E0860084FD17 /* keyword_keyPath_image.plist */,
-				DBF1A4631CE5E0860084FD17 /* keyword_keyPath_text.plist */,
-				DBF1A4641CE5E0860084FD17 /* specialDeal.h */,
-				DBF1A4651CE5E0860084FD17 /* ValueParser.h */,
+				DBD359E51CEBFECF0057DAA5 /* FontConfig.h */,
+				DBD359E61CEBFECF0057DAA5 /* FontConfig.m */,
+				DBD359E71CEBFECF0057DAA5 /* FrameParserConfig.h */,
+				DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */,
+				DBD359E91CEBFECF0057DAA5 /* paragraphConfig.h */,
+				DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */,
+				DBD359EB1CEBFECF0057DAA5 /* partMessage.h */,
+				DBD359EC1CEBFECF0057DAA5 /* partMessage.m */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		DBD359F51CEBFECF0057DAA5 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DBD359F61CEBFECF0057DAA5 /* FrameParserHandle.h */,
+				DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */,
+				DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */,
+				DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */,
+				DBD359FA1CEBFECF0057DAA5 /* specialDeal.h */,
+				DBD359FB1CEBFECF0057DAA5 /* ValueParser.h */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		DBF1A4661CE5E0860084FD17 /* View */ = {
+		DBD359FC1CEBFECF0057DAA5 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DBF1A4671CE5E0860084FD17 /* CTDrawView.h */,
-				DBF1A4681CE5E0860084FD17 /* CTDrawView.m */,
+				DBD359FD1CEBFECF0057DAA5 /* CTDrawView.h */,
+				DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -233,7 +246,7 @@
 				DBF4CD4C1CCA05F800E5804E /* ViewController.m */,
 				DB4A716E1CEB2637009C1132 /* tempViewController.h */,
 				DB4A716F1CEB2637009C1132 /* tempViewController.m */,
-				DBF1A44A1CE5E0860084FD17 /* HCoreText */,
+				DBD359DD1CEBFECF0057DAA5 /* HCoreText */,
 				DB9EF73B1CD88A7D00BD9579 /* HImage */,
 				DBF4CD4E1CCA05F800E5804E /* Main.storyboard */,
 				DBF4CD511CCA05F800E5804E /* Assets.xcassets */,
@@ -376,11 +389,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBD35A0A1CEBFECF0057DAA5 /* keyword_keyPath_text.plist in Resources */,
 				DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */,
+				DBD35A091CEBFECF0057DAA5 /* keyword_keyPath_image.plist in Resources */,
 				DBF4CD521CCA05F800E5804E /* Assets.xcassets in Resources */,
-				DBF1A4731CE5E0860084FD17 /* keyword_keyPath_text.plist in Resources */,
 				DBF4CD501CCA05F800E5804E /* Main.storyboard in Resources */,
-				DBF1A4721CE5E0860084FD17 /* keyword_keyPath_image.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,20 +418,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBF1A46F1CE5E0860084FD17 /* paragraphConfig.m in Sources */,
-				DBF1A46D1CE5E0860084FD17 /* FrameParser.m in Sources */,
+				DBD35A031CEBFECF0057DAA5 /* paragraphConfig.m in Sources */,
 				DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */,
-				DBF1A46B1CE5E0860084FD17 /* CoreTextData.m in Sources */,
-				DBF1A4711CE5E0860084FD17 /* FrameParserHandle.m in Sources */,
-				DBF1A4691CE5E0860084FD17 /* UIColor+Hex.m in Sources */,
+				DBD35A071CEBFECF0057DAA5 /* FrameParser.m in Sources */,
+				DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */,
 				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
-				DBF1A46C1CE5E0860084FD17 /* FontConfig.m in Sources */,
-				DBF1A4701CE5E0860084FD17 /* partMessage.m in Sources */,
-				DBF1A4741CE5E0860084FD17 /* CTDrawView.m in Sources */,
+				DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */,
+				DBD35A051CEBFECF0057DAA5 /* CoreTextData.m in Sources */,
+				DBD35A0B1CEBFECF0057DAA5 /* CTDrawView.m in Sources */,
+				DBD35A011CEBFECF0057DAA5 /* FontConfig.m in Sources */,
 				DB4A71701CEB2637009C1132 /* tempViewController.m in Sources */,
-				DBF1A46A1CE5E0860084FD17 /* UIView+Extension.m in Sources */,
+				DBD35A081CEBFECF0057DAA5 /* FrameParserHandle.m in Sources */,
+				DBD35A061CEBFECF0057DAA5 /* FrameParser+callBack.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
-				DBF1A46E1CE5E0860084FD17 /* FrameParserConfig.m in Sources */,
+				DBD35A021CEBFECF0057DAA5 /* FrameParserConfig.m in Sources */,
+				DBD35A041CEBFECF0057DAA5 /* partMessage.m in Sources */,
 				DBF4CD471CCA05F800E5804E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

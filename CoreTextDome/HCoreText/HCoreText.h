@@ -8,12 +8,13 @@
 
 #ifndef HCoreText_h
 #define HCoreText_h
-#import <UIKit/UIKit.h>
-#import <CoreText/CoreText.h>
-#import "FrameParserConfig.h"
-#import "paragraphConfig.h"
-#import "FrameParser.h"
-#import "CoreTextData.h"
-#import "CTDrawView.h"
-#import "partMessage.h"
+    #import <UIKit/UIKit.h>
+    #import <CoreText/CoreText.h>
+    #import "FrameParserConfig.h"
+    #import "paragraphConfig.h"
+    #import "FrameParser.h"
+    #import "FrameParser+callBack.h"
+    #import "CoreTextData.h"
+    #import "CTDrawView.h"
+    #import "partMessage.h"
 #endif
