@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "ValueParser.h"
 #import "partMessage.h"
 #import "FrameParserDelegate.h"
 @class FrameParserConfig;
@@ -37,10 +36,10 @@
 /**
  *  提供一个解析实例
  *
- *   @XXOO<font name=\"Futura\" size=\"20\" color=\"blue\" >
+ *   @XXOO<text name=\"Futura\" size=\"20\" color=\"blue\" >
  *   <image src=\"%@\" width=\"200\" height=\"120\">
- *   Love <font name=\"Futura\" size=\"12\" color=\"red\">
- *   you <font name=\"Futura\" size=\"16\" color=\"red\">
+ *   Love <text name=\"Futura\" size=\"12\" color=\"red\">
+ *   you <text name=\"Futura\" size=\"16\" color=\"red\">
  *   @爱上无名氏<link url="",size=...>
  *  Note:具体实现请参照  FrameParserObject
  *  @param content  解析的内容

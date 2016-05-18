@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 @interface HImageBox : NSObject
 /**
- *  删除过时文件  1周 内部自定会调用
+ *  删除过时文件  1周 内部自动会调用
  */
 +(void)removeTimeOutFile;
 /**

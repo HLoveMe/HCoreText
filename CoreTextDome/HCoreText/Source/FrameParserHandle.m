@@ -9,7 +9,36 @@
 #import "FrameParserHandle.h"
 #import "partMessage.h"
 #import "UIColor+Hex.h"
+@interface FrameParserHandle()
+@property(nonatomic,strong)NSMutableArray *textkeywords;
+@property(nonatomic,strong)NSMutableArray *linkkeywords;
+@property(nonatomic,strong)NSMutableArray *imagekeywords;
+@end
 @implementation FrameParserHandle
+-(NSMutableArray *)textkeywords{
+    if (nil==_textkeywords) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_text.plist" ofType:nil];
+        NSArray *textkeys = [[NSDictionary dictionaryWithContentsOfFile:path] allKeys];
+        _textkeywords=textkeys.mutableCopy;
+    }
+    return _textkeywords;
+}
+-(NSMutableArray *)linkkeywords{
+    if (nil==_linkkeywords) {
+        _linkkeywords=[NSMutableArray arrayWithArray:self.textkeywords];
+        [_linkkeywords addObject:@"URLSrc"];
+    }
+    return _linkkeywords;
+}
+-(NSMutableArray *)imagekeywords{
+    if (nil==_imagekeywords) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_image.plist" ofType:nil];
+        NSArray *textkeys = [[NSDictionary dictionaryWithContentsOfFile:path] allKeys];
+        _imagekeywords=textkeys.mutableCopy;
+    }
+    return _imagekeywords;
+}
+
 -(NSMutableArray<NSString *>*)parserWithContent:(NSString *)conent{
     NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:@"(.*?)(<[^>]+>|\\Z)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
     NSArray<NSTextCheckingResult *> *result =  [regular matchesInString:conent options:NSMatchingReportProgress range:NSMakeRange(0, conent.length)];
@@ -29,7 +58,20 @@
     NSRegularExpression * regular = [NSRegularExpression regularExpressionWithPattern:@"\\b\\w+(?==)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
     NSArray <NSTextCheckingResult *>*results = [regular matchesInString:partText options:NSMatchingReportProgress range:NSMakeRange(0, partText.length)];
     [results enumerateObjectsUsingBlock:^(NSTextCheckingResult * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [keywords addObject:[partText substringWithRange:obj.range]];
+        NSString *keyword = [partText substringWithRange:obj.range];
+        if (type == TextType) {
+            if ([self.textkeywords containsObject:keyword]) {
+                [keywords addObject:keyword];
+            }
+        }else if (type==LinkType){
+            if ([self.linkkeywords containsObject:keyword]) {
+                [keywords addObject:keyword];
+            }
+        }else {
+            if ([self.imagekeywords containsObject:keyword]) {
+                [keywords addObject:keyword];
+            }
+        }
     }];
     return keywords;
 }
@@ -39,12 +81,14 @@
     if ([self respondsToSelector:@selector(parserTypeWithPart:)]) {
        type = [self parserTypeWithPart:partText];
     }else{
-        if ([partText containsString:@"<font"]) {
-            type = TextType;
+        if ([partText containsString:@"<image"]) {
+            type = ImageType;
         }else if([partText containsString:@"<link"]){
             type = LinkType;
+        }else if([partText containsString:@"<text"]){
+            type = TextType;
         }else{
-            type = ImageType;
+            NSAssert(NO, @"image link text 必须是其中一个");
         }
     }
     Message *msg ;

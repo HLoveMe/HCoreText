@@ -13,8 +13,10 @@
     #import "FrameParserConfig.h"
     #import "paragraphConfig.h"
     #import "FrameParser.h"
-    #import "FrameParser+callBack.h"
+    #import "FrameParser+dict.h"
     #import "CoreTextData.h"
     #import "CTDrawView.h"
     #import "partMessage.h"
+
+    #import "HImageBox.h"
 #endif

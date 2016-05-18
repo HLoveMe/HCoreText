@@ -22,12 +22,17 @@
     NSMutableArray *hightRectArray;
 }
 -(instancetype)init{
-    if (self = [super init]) {
+    if ([super init]) {
         self.beginTouchEvent = 1;
     }
     return self;
 }
-
+-(instancetype)initWithFrame:(CGRect)frame{
+    if ([super initWithFrame:frame]) {
+        self.beginTouchEvent = 1;
+    }
+    return self;
+}
 -(void)drawWithCoreTextData:(CoreTextData *)data{
     self.frame  = CGRectMake(self.x, self.y, self.width,data.isAutoAdjustHeight?data.realContentHeight:self.height);
     [self setNeedsLayout];
@@ -45,8 +50,7 @@
         [hightColor set];
         [hightRectArray enumerateObjectsUsingBlock:^(NSValue *rectValue, NSUInteger idx, BOOL * _Nonnull stop) {
             CGRect rect = [rectValue CGRectValue];
-//            CGMutablePathRef pathRef = CGPathCreateMutable();
-//            CGPathAddRect(pathRef, NULL, rect);
+            
             CGPathRef pathRef = [self getRoundRect:rect];
             CGContextAddPath(ref, pathRef);
             CGContextFillPath(ref);
@@ -62,7 +66,7 @@
         CGPoint origins[count];
         CTFrameGetLineOrigins(obj.frameRef, CFRangeMake(0, 0), origins);
         for (Message * _Nonnull msg in obj.msgArray) {
-            if (msg.type == TextType){
+            if (msg.type == TextType||msg.type==LinkType){
                 NSString *showStr = msg.attSring.string;
                 location += showStr.length;
             } else if (msg.type == ImageType) {
@@ -89,8 +93,6 @@
                             CGFloat lineY = origins[i].y;
                             
                             CGRect imgRect = CGRectMake(lineXOffset+runXOffset, lineY, wid, ascent);
-                            //                            UIImage *img =  [UIImage imageNamed:imgMsg.src];
-                            //                            CGContextDrawImage(ref, imgRect,img.CGImage);
                             [HImageBox getImageWithSource:imgMsg.src option:^(UIImage *img,BOOL isFirst) {
                                 if (isFirst) {
                                     [self setNeedsDisplay];
@@ -105,11 +107,7 @@
             
         }
     }
-    
-    
-    
 }
-
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     id coreD = objc_getAssociatedObject(self, "coreDatas");
     if (!coreD) {return;}
@@ -185,6 +183,7 @@
     hightRectArray=nil;
     hightColor = nil;
     [self setNeedsDisplay];
+
 }
 /**
  *  得到所有应该高亮的rect 数组
@@ -211,6 +210,7 @@
                 CFRange runRange = CTRunGetStringRange(oneRun);
                 long msgEnd = msg.contentRange.location+msg.contentRange.length;
                 long runEnd = runRange.location+runRange.length;
+                
                 if (runRange.location>=msg.contentRange.location&&msgEnd>=runEnd) {
                     const CGPoint *position = CTRunGetPositionsPtr(oneRun);
                     CGFloat ascent;
@@ -238,7 +238,8 @@
                 }];
                 CGFloat y =[runFrams.firstObject CGRectValue].origin.y;
                 //得到  Line  所有Run 连起来的Rect
-                CGRect lineRunRect = CGRectMake(x, y, wid, hei);
+                CGFloat temp = msg.fontCig.fontSize * 0.1>2?msg.fontCig.fontSize * 0.1:2;
+                CGRect lineRunRect = CGRectMake(x, y, wid-temp, hei);
 //                NSLog(@"%@",NSStringFromCGRect(lineRunRect));
                 [rectArray addObject:[NSValue valueWithCGRect:lineRunRect]];
             }

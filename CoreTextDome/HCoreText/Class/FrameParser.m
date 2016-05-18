@@ -57,7 +57,7 @@
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
                 showContent = [delegate parserShowText:TextType text:onePart];
             }else{
-               showContent= (NSString *)[[onePart componentsSeparatedByString:@"<font"] firstObject];
+               showContent= (NSString *)[[onePart componentsSeparatedByString:@"<text"] firstObject];
             }
             NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
@@ -85,11 +85,14 @@
             }else{
                 showContent= (NSString *)[[onePart componentsSeparatedByString:@"<link"] firstObject];
             }
+            
+            
             NSDictionary *dic = [linkMsg partAttribute:defaultC.fontCig];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             linkMsg.attSring=one;
             linkMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
+            
         }
     }];
     CGSize size  = defaultC.contentSize;

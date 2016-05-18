@@ -12,8 +12,13 @@
 #import <objc/runtime.h>
 @implementation keyValue
 -(NSString *)value{
-    NSTextCheckingResult *result = [self.expression firstMatchInString:self.content options:0 range:NSMakeRange(0, self.content.length)];
-    return [self.content substringWithRange:result.range];
+    if (_value){
+        return _value;
+    }else{
+        NSTextCheckingResult *result = [self.expression firstMatchInString:self.content options:0 range:NSMakeRange(0, self.content.length)];
+        _value= [self.content substringWithRange:result.range];
+        return _value;
+    }
 }
 -(void)setKeyword:(NSString *)keyword{
     _keyword = [keyword copy];
@@ -53,8 +58,6 @@
         id value;
         if (keyValue.valueHandle) {
             value = keyValue.valueHandle(keyValue.keyword,keyValue.value,keyValue.clazz);
-        }else{
-            value = keyValue.valueBack(keyValue.keyword,keyValue.value,keyValue.clazz);
         }
         [config setValue:value forKeyPath:keyValue.keyPath];
     }];
@@ -77,8 +80,6 @@
         id value;
         if (keyValue.valueHandle) {
             value = keyValue.valueHandle(keyValue.keyword,keyValue.value,keyValue.clazz);
-        }else{
-            value = keyValue.valueBack(keyValue.keyword,keyValue.value,keyValue.clazz);
         }
         if ([self isSelfProperty:keyValue.keyPath]) {
             [self setValue:keyValue.value forKey:keyValue.keyPath];
