@@ -33,16 +33,19 @@
                  @爱上无名氏<link src="" size="">
                格式文本的解析
           
-   解析得到解析之后的CoreTextData对象
+      解析得到解析之后的CoreTextData对象
    
-   使用对CTDrawView @Selector(drawWithCoreTextData:)进行绘制 
-      用于对渲染内容的展示
+      使用对CTDrawView @Selector(drawWithCoreTextData:)进行绘制 
+         用于对渲染内容的展示
       
-      支持点击内容回调（具体请看CTDrawView.h 文件）
-      
+         支持点击内容回调（具体请看CTDrawView.h 文件）
+   
+   
+   HImageBox 是针对该解析提供的简单的图片缓存实现 
+   
       
    Note:   (A:如果使用默认解析方式，你不需要关注内部实现
-       B:开发者自己实现
+         B:开发者自己实现
          * 实现FrameParserDelegate必要的方法 或者parserCallBacks里面的函数
        
          paragraphConfig 段落配置 提供默认
