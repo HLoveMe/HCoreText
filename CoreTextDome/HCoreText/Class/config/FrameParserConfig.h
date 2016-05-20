@@ -11,7 +11,7 @@
 #import "FontConfig.h"
 @class paragraphConfig;
 /**
- *  整体文本设置 在关键字解析失败会使用该对象提供的默认值
+ *  整体文本配置 在关键字解析失败会使用该对象提供的默认值
  */
 @interface FrameParserConfig : NSObject
 /**
@@ -27,10 +27,15 @@
  */
 @property(nonatomic,assign)BOOL autoAdjustHeight;
 /**
- *  文本所占用的size(用于显示的视图的Size)  default CGSizeZero
+ *  用于显示文本的视图的Size  default CGSizeZero
  *  Note:  
  */
 @property(nonatomic,assign)CGSize contentSize;
+/**
+ *  用于解析emoji表情的匹配规则 default (:[a-z0-9-+_]+:)
+  见 NSString+HEmoji.h
+ */
+@property(nonatomic,copy)NSString *pattern;
 /**
  *  提供该类所有属性 所构成的文字配置信息
  */

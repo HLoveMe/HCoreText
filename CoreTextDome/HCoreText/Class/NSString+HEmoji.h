@@ -14,11 +14,27 @@
  *  有些情况情况 [emoji]赞[/emoji] 对应 \U0001F44D
  *  或者其他
  *     >替换emoji.plist
- *     >修改 NSString+HEmoji.m的 21行 正则表达式
- *  或者你重写该NSString+HEmoji.m实现
+ *     > 修改FrameParserConfig匹配规则
  */
 @interface NSString (HEmoji)
+/**
+ *  替换Emoji
+ *
+ *  @return
+ */
 - (NSString *)emojizedString;
+/**
+ *  替换Emoji
+ *
+ *  @param text
+ *
+ *  @return
+ */
 + (NSString *)emojizedStringWithString:(NSString *)text;
+/**
+ *  得到所有emoji  emoji.plist
+ *
+ *  @return
+ */
 + (NSDictionary *)emojiAliases;
 @end

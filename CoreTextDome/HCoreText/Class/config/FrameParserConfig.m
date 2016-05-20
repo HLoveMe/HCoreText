@@ -13,6 +13,21 @@
 @property(nonatomic,strong)paragraphConfig *parCig;
 @end
 @implementation FrameParserConfig
+- (instancetype)init{
+    if (self=[super init]) {
+        self.autoAdjustHeight = NO;
+        self.parCig = [[paragraphConfig alloc]init];
+        self.fontCig = [[FontConfig alloc]init];
+        self.pattern = @"(:[a-z0-9-+_]+:)";
+    }
+    return self;
+}
+-(void)setPattern:(NSString *)pattern{
+    _pattern =[pattern copy];
+    NSUserDefaults * defalut = [NSUserDefaults standardUserDefaults];
+    [defalut setObject:pattern forKey:@"H_pattern"];
+    [defalut synchronize];
+}
 -(NSDictionary *)defaultAttribute{
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     dic[(id)kCTFontAttributeName] = (__bridge id _Nullable)((__bridge CTFontRef)self.fontCig.font);
@@ -23,9 +38,6 @@
 +(instancetype)defaultConfigWithContentSize:(CGSize)size{
     FrameParserConfig *config = [[FrameParserConfig alloc]init];
     config.contentSize = size;
-    config.autoAdjustHeight = NO;
-    config.parCig = [[paragraphConfig alloc]init];
-    config.fontCig = [[FontConfig alloc]init];
     return config;
 }
 -(instancetype)initParperConfigWithContentSize:(CGSize)size paragraph:(paragraphConfig *)cfg{

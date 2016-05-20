@@ -18,7 +18,9 @@ static NSArray<NSTextCheckingResult *> *result = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         //匹配emoji表情字符串
-        regex = [[NSRegularExpression alloc] initWithPattern:@"(:[a-z0-9-+_]+:)" options:NSRegularExpressionCaseInsensitive error:NULL];
+        NSUserDefaults * defalut = [NSUserDefaults standardUserDefaults];
+        NSString *pattern = [defalut valueForKey:@"H_pattern"];
+        regex = [[NSRegularExpression alloc] initWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:NULL];
     });
     result = [regex matchesInString:content options:NSMatchingReportProgress range:NSMakeRange(0, content.length)];
     return result.count>=1;
