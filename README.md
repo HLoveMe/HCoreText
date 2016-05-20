@@ -60,6 +60,13 @@
             }
             
          ]
+   
+      text:content type size color underLine underColor name  所有关键字 前两者是必须的      
+       
+      link:content type size url color underLine underColor name  所有关键字 前两者是必须的
+      
+      image : content type src width height 所有关键字 前两者是必须的
+      
    新增对emoji表情的支持：
       由于不同需求Emoji显示方式不一样
       
