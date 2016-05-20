@@ -1,10 +1,16 @@
 利用CoreText对C函数进行封装，达到更简单的调用  支持格式
    
-            AAAA <link url="" ...>                   url size name color underLine UnderColor 
+            AAAA <link url="" ...>                   url size name color underLine UnderColor
             
             BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
             CCCC <image src="" ...>                 src width height
+      
+      size name color underLine UnderColor 针对Fontconfig 属性
+      
+      url 针对TextLinkMessage URLSrc
+      
+      src width height 针对ImageMessage 属性
    
    
    新增：格式的文本解析支持   
@@ -54,6 +60,14 @@
             }
             
          ]
+   新增对emoji表情的支持：
+      由于不同需求Emoji显示方式不一样
+         本例 ：               :+1:  -----> 赞(\U0001F44D)
+         
+         可能你的实例需要       [emoji]赞[/emoji]  - >赞(\U0001F44D)
+         
+      配置 FrameParserConfig  并替换emoji.plist 
+         
 Note:两种解析方式 支持的关键字是一致的
    
 使用：
