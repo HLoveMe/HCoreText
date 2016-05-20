@@ -1,16 +1,16 @@
 利用CoreText对C函数进行封装，达到更简单的调用  支持格式
    
-            AAAA <link url="" ...>                   url size name color underLine UnderColor
+            AAAA <link url="" ...>                   url size name color underLine underColor
             
             BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
             CCCC <image src="" ...>                 src width height
       
-      size name color underLine UnderColor 针对Fontconfig 属性
+      size(字体大小) name（字体name） color(字体颜色) underLine(下划线样式) underColor(下划线颜色)    针对Fontconfig 属性
       
-      url 针对TextLinkMessage URLSrc
+      url(点击跳转url)          针对TextLinkMessage URLSrc
       
-      src width height 针对ImageMessage 属性
+      src width height          针对ImageMessage 属性
    
    
    新增：格式的文本解析支持   
