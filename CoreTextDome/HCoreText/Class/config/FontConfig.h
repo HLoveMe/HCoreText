@@ -11,34 +11,35 @@
 #import <CoreText/CoreText.h>
 @interface FontConfig : NSObject
 /**
- *  文字大小 default 12.0f
+ *  文字大小 default 12.0f 关键字 size
  */
 @property(nonatomic,assign)CGFloat fontSize;
 /**
- *  系统名字 default:  Helvetica
+ *  系统名字 default:  Helvetica 关键字 :name
  */
 @property(nonatomic,copy)NSString *fontName;
 /**
  *  默认字体
- *  default 系统默认字体
+ *  default 系统默认字体   
  */
-@property(nonatomic,strong)UIFont *font;
+@property(nonatomic,strong,readonly)UIFont *font;
 /**
- *  文本颜色 blackColor
+ *  文本颜色 blackColor  关键字:color
  */
 @property(nonatomic,strong)UIColor *textColor;
 /**
+ *  下划线   关键字 underLine
  *  下划线:None(0X00) Single(0X01) Thick(0X02) Double(0X09) 指定 underLineStyle
  */
 //Solid(0X0000) Dot(0x0100) Dash(0X200) DashDot(0X300) DashDotDot(0x0400)
 @property(nonatomic,copy)NSString *underLine;
 @property(nonatomic,assign,readonly)int underLineStyle;
 /**
- *  下划线颜色
+ *  下划线颜色  关键字 underColor
  */
 @property(nonatomic,strong)UIColor *underColor;
 /**
- *  背景颜色 default:白色
+ *  背景颜色 default:白色 
  */
 @property(nonatomic,strong)UIColor *backColor;
 

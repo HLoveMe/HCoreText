@@ -7,24 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DB5734141CEEA91400A8762C /* NSString+HEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5734131CEEA91400A8762C /* NSString+HEmoji.m */; };
+		DB5AED2A1CEEE96000A24DD8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */; };
+		DB5AED2B1CEEE96000A24DD8 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED0A1CEEE96000A24DD8 /* UIView+Extension.m */; };
+		DB5AED2C1CEEE96000A24DD8 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED0E1CEEE96000A24DD8 /* FontConfig.m */; };
+		DB5AED2D1CEEE96000A24DD8 /* FrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED101CEEE96000A24DD8 /* FrameParserConfig.m */; };
+		DB5AED2E1CEEE96000A24DD8 /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED121CEEE96000A24DD8 /* paragraphConfig.m */; };
+		DB5AED2F1CEEE96000A24DD8 /* partMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED141CEEE96000A24DD8 /* partMessage.m */; };
+		DB5AED301CEEE96000A24DD8 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED161CEEE96000A24DD8 /* CoreTextData.m */; };
+		DB5AED311CEEE96000A24DD8 /* FrameParser+dict.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED181CEEE96000A24DD8 /* FrameParser+dict.m */; };
+		DB5AED321CEEE96000A24DD8 /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED1A1CEEE96000A24DD8 /* FrameParser.m */; };
+		DB5AED331CEEE96000A24DD8 /* NSString+HEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED1D1CEEE96000A24DD8 /* NSString+HEmoji.m */; };
+		DB5AED341CEEE96000A24DD8 /* emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED211CEEE96000A24DD8 /* emoji.plist */; };
+		DB5AED351CEEE96000A24DD8 /* emojiConnection.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */; };
+		DB5AED361CEEE96000A24DD8 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */; };
+		DB5AED371CEEE96000A24DD8 /* keyword_keyPath_image.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */; };
+		DB5AED381CEEE96000A24DD8 /* keyword_keyPath_text.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED261CEEE96000A24DD8 /* keyword_keyPath_text.plist */; };
+		DB5AED391CEEE96000A24DD8 /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED291CEEE96000A24DD8 /* CTDrawView.m */; };
+		DB5AED3B1CEEE97000A24DD8 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
-		DBBED71B1CEEB19C00B98E6C /* emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBBED71A1CEEB19C00B98E6C /* emoji.plist */; };
-		DBBED71D1CEEB7BE00B98E6C /* emojiConnection.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */; };
-		DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */; };
-		DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */; };
-		DBD35A011CEBFECF0057DAA5 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E61CEBFECF0057DAA5 /* FontConfig.m */; };
-		DBD35A021CEBFECF0057DAA5 /* FrameParserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */; };
-		DBD35A031CEBFECF0057DAA5 /* paragraphConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */; };
-		DBD35A041CEBFECF0057DAA5 /* partMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EC1CEBFECF0057DAA5 /* partMessage.m */; };
-		DBD35A051CEBFECF0057DAA5 /* CoreTextData.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */; };
-		DBD35A071CEBFECF0057DAA5 /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359F21CEBFECF0057DAA5 /* FrameParser.m */; };
-		DBD35A081CEBFECF0057DAA5 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */; };
-		DBD35A091CEBFECF0057DAA5 /* keyword_keyPath_image.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */; };
-		DBD35A0A1CEBFECF0057DAA5 /* keyword_keyPath_text.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */; };
-		DBD35A0B1CEBFECF0057DAA5 /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */; };
-		DBD35A0E1CEC021F0057DAA5 /* FrameParser+dict.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD35A0D1CEC021F0057DAA5 /* FrameParser+dict.m */; };
-		DBD35A111CEC5C250057DAA5 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD35A101CEC5C250057DAA5 /* tempViewController.m */; };
 		DBF4CD471CCA05F800E5804E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD461CCA05F800E5804E /* main.m */; };
 		DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD491CCA05F800E5804E /* AppDelegate.m */; };
 		DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD4C1CCA05F800E5804E /* ViewController.m */; };
@@ -54,40 +54,40 @@
 
 /* Begin PBXFileReference section */
 		DB4A716E1CEB2637009C1132 /* tempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempViewController.h; sourceTree = "<group>"; };
-		DB5734121CEEA91400A8762C /* NSString+HEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HEmoji.h"; sourceTree = "<group>"; };
-		DB5734131CEEA91400A8762C /* NSString+HEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HEmoji.m"; sourceTree = "<group>"; };
+		DB5AED071CEEE96000A24DD8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
+		DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
+		DB5AED091CEEE96000A24DD8 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		DB5AED0A1CEEE96000A24DD8 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		DB5AED0D1CEEE96000A24DD8 /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
+		DB5AED0E1CEEE96000A24DD8 /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
+		DB5AED0F1CEEE96000A24DD8 /* FrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserConfig.h; sourceTree = "<group>"; };
+		DB5AED101CEEE96000A24DD8 /* FrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserConfig.m; sourceTree = "<group>"; };
+		DB5AED111CEEE96000A24DD8 /* paragraphConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paragraphConfig.h; sourceTree = "<group>"; };
+		DB5AED121CEEE96000A24DD8 /* paragraphConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = paragraphConfig.m; sourceTree = "<group>"; };
+		DB5AED131CEEE96000A24DD8 /* partMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = partMessage.h; sourceTree = "<group>"; };
+		DB5AED141CEEE96000A24DD8 /* partMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = partMessage.m; sourceTree = "<group>"; };
+		DB5AED151CEEE96000A24DD8 /* CoreTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
+		DB5AED161CEEE96000A24DD8 /* CoreTextData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextData.m; sourceTree = "<group>"; };
+		DB5AED171CEEE96000A24DD8 /* FrameParser+dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrameParser+dict.h"; sourceTree = "<group>"; };
+		DB5AED181CEEE96000A24DD8 /* FrameParser+dict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrameParser+dict.m"; sourceTree = "<group>"; };
+		DB5AED191CEEE96000A24DD8 /* FrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParser.h; sourceTree = "<group>"; };
+		DB5AED1A1CEEE96000A24DD8 /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
+		DB5AED1B1CEEE96000A24DD8 /* FrameParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserDelegate.h; sourceTree = "<group>"; };
+		DB5AED1C1CEEE96000A24DD8 /* NSString+HEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HEmoji.h"; sourceTree = "<group>"; };
+		DB5AED1D1CEEE96000A24DD8 /* NSString+HEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HEmoji.m"; sourceTree = "<group>"; };
+		DB5AED1E1CEEE96000A24DD8 /* ParserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserType.h; sourceTree = "<group>"; };
+		DB5AED1F1CEEE96000A24DD8 /* HCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCoreText.h; sourceTree = "<group>"; };
+		DB5AED211CEEE96000A24DD8 /* emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji.plist; sourceTree = "<group>"; };
+		DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = emojiConnection.plist; sourceTree = "<group>"; };
+		DB5AED231CEEE96000A24DD8 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
+		DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
+		DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_image.plist; sourceTree = "<group>"; };
+		DB5AED261CEEE96000A24DD8 /* keyword_keyPath_text.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_text.plist; sourceTree = "<group>"; };
+		DB5AED281CEEE96000A24DD8 /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
+		DB5AED291CEEE96000A24DD8 /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
+		DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
-		DBBED71A1CEEB19C00B98E6C /* emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji.plist; sourceTree = "<group>"; };
-		DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = emojiConnection.plist; sourceTree = "<group>"; };
-		DBD359DF1CEBFECF0057DAA5 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
-		DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
-		DBD359E11CEBFECF0057DAA5 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
-		DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
-		DBD359E51CEBFECF0057DAA5 /* FontConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontConfig.h; sourceTree = "<group>"; };
-		DBD359E61CEBFECF0057DAA5 /* FontConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontConfig.m; sourceTree = "<group>"; };
-		DBD359E71CEBFECF0057DAA5 /* FrameParserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserConfig.h; sourceTree = "<group>"; };
-		DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserConfig.m; sourceTree = "<group>"; };
-		DBD359E91CEBFECF0057DAA5 /* paragraphConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = paragraphConfig.h; sourceTree = "<group>"; };
-		DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = paragraphConfig.m; sourceTree = "<group>"; };
-		DBD359EB1CEBFECF0057DAA5 /* partMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = partMessage.h; sourceTree = "<group>"; };
-		DBD359EC1CEBFECF0057DAA5 /* partMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = partMessage.m; sourceTree = "<group>"; };
-		DBD359ED1CEBFECF0057DAA5 /* CoreTextData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTextData.h; sourceTree = "<group>"; };
-		DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTextData.m; sourceTree = "<group>"; };
-		DBD359F11CEBFECF0057DAA5 /* FrameParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParser.h; sourceTree = "<group>"; };
-		DBD359F21CEBFECF0057DAA5 /* FrameParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParser.m; sourceTree = "<group>"; };
-		DBD359F31CEBFECF0057DAA5 /* FrameParserDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserDelegate.h; sourceTree = "<group>"; };
-		DBD359F41CEBFECF0057DAA5 /* HCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCoreText.h; sourceTree = "<group>"; };
-		DBD359F61CEBFECF0057DAA5 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
-		DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
-		DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_image.plist; sourceTree = "<group>"; };
-		DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_text.plist; sourceTree = "<group>"; };
-		DBD359FD1CEBFECF0057DAA5 /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
-		DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
-		DBD35A0C1CEC021F0057DAA5 /* FrameParser+dict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FrameParser+dict.h"; sourceTree = "<group>"; };
-		DBD35A0D1CEC021F0057DAA5 /* FrameParser+dict.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FrameParser+dict.m"; sourceTree = "<group>"; };
-		DBD35A0F1CEC04200057DAA5 /* ParserType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParserType.h; sourceTree = "<group>"; };
-		DBD35A101CEC5C250057DAA5 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
 		DBF4CD421CCA05F800E5804E /* CoreTextDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF4CD461CCA05F800E5804E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DBF4CD481CCA05F800E5804E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,6 +131,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DB5AED051CEEE96000A24DD8 /* HCoreText */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED061CEEE96000A24DD8 /* Category */,
+				DB5AED0B1CEEE96000A24DD8 /* Class */,
+				DB5AED1F1CEEE96000A24DD8 /* HCoreText.h */,
+				DB5AED201CEEE96000A24DD8 /* Source */,
+				DB5AED271CEEE96000A24DD8 /* View */,
+			);
+			path = HCoreText;
+			sourceTree = "<group>";
+		};
+		DB5AED061CEEE96000A24DD8 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED071CEEE96000A24DD8 /* UIColor+Hex.h */,
+				DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */,
+				DB5AED091CEEE96000A24DD8 /* UIView+Extension.h */,
+				DB5AED0A1CEEE96000A24DD8 /* UIView+Extension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		DB5AED0B1CEEE96000A24DD8 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED0C1CEEE96000A24DD8 /* config */,
+				DB5AED151CEEE96000A24DD8 /* CoreTextData.h */,
+				DB5AED161CEEE96000A24DD8 /* CoreTextData.m */,
+				DB5AED171CEEE96000A24DD8 /* FrameParser+dict.h */,
+				DB5AED181CEEE96000A24DD8 /* FrameParser+dict.m */,
+				DB5AED191CEEE96000A24DD8 /* FrameParser.h */,
+				DB5AED1A1CEEE96000A24DD8 /* FrameParser.m */,
+				DB5AED1B1CEEE96000A24DD8 /* FrameParserDelegate.h */,
+				DB5AED1C1CEEE96000A24DD8 /* NSString+HEmoji.h */,
+				DB5AED1D1CEEE96000A24DD8 /* NSString+HEmoji.m */,
+				DB5AED1E1CEEE96000A24DD8 /* ParserType.h */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		DB5AED0C1CEEE96000A24DD8 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED0D1CEEE96000A24DD8 /* FontConfig.h */,
+				DB5AED0E1CEEE96000A24DD8 /* FontConfig.m */,
+				DB5AED0F1CEEE96000A24DD8 /* FrameParserConfig.h */,
+				DB5AED101CEEE96000A24DD8 /* FrameParserConfig.m */,
+				DB5AED111CEEE96000A24DD8 /* paragraphConfig.h */,
+				DB5AED121CEEE96000A24DD8 /* paragraphConfig.m */,
+				DB5AED131CEEE96000A24DD8 /* partMessage.h */,
+				DB5AED141CEEE96000A24DD8 /* partMessage.m */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		DB5AED201CEEE96000A24DD8 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED211CEEE96000A24DD8 /* emoji.plist */,
+				DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */,
+				DB5AED231CEEE96000A24DD8 /* FrameParserHandle.h */,
+				DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */,
+				DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */,
+				DB5AED261CEEE96000A24DD8 /* keyword_keyPath_text.plist */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		DB5AED271CEEE96000A24DD8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DB5AED281CEEE96000A24DD8 /* CTDrawView.h */,
+				DB5AED291CEEE96000A24DD8 /* CTDrawView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		DB9EF73B1CD88A7D00BD9579 /* HImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,84 +224,6 @@
 				DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */,
 			);
 			path = Class;
-			sourceTree = "<group>";
-		};
-		DBD359DD1CEBFECF0057DAA5 /* HCoreText */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359F41CEBFECF0057DAA5 /* HCoreText.h */,
-				DBD359DE1CEBFECF0057DAA5 /* Category */,
-				DBD359E31CEBFECF0057DAA5 /* Class */,
-				DBD359F51CEBFECF0057DAA5 /* Source */,
-				DBD359FC1CEBFECF0057DAA5 /* View */,
-			);
-			path = HCoreText;
-			sourceTree = "<group>";
-		};
-		DBD359DE1CEBFECF0057DAA5 /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359DF1CEBFECF0057DAA5 /* UIColor+Hex.h */,
-				DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */,
-				DBD359E11CEBFECF0057DAA5 /* UIView+Extension.h */,
-				DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */,
-			);
-			path = Category;
-			sourceTree = "<group>";
-		};
-		DBD359E31CEBFECF0057DAA5 /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359E41CEBFECF0057DAA5 /* config */,
-				DBD359ED1CEBFECF0057DAA5 /* CoreTextData.h */,
-				DBD359EE1CEBFECF0057DAA5 /* CoreTextData.m */,
-				DBD35A0C1CEC021F0057DAA5 /* FrameParser+dict.h */,
-				DBD35A0D1CEC021F0057DAA5 /* FrameParser+dict.m */,
-				DBD359F11CEBFECF0057DAA5 /* FrameParser.h */,
-				DBD359F21CEBFECF0057DAA5 /* FrameParser.m */,
-				DBD359F31CEBFECF0057DAA5 /* FrameParserDelegate.h */,
-				DBD35A0F1CEC04200057DAA5 /* ParserType.h */,
-				DB5734121CEEA91400A8762C /* NSString+HEmoji.h */,
-				DB5734131CEEA91400A8762C /* NSString+HEmoji.m */,
-			);
-			path = Class;
-			sourceTree = "<group>";
-		};
-		DBD359E41CEBFECF0057DAA5 /* config */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359E51CEBFECF0057DAA5 /* FontConfig.h */,
-				DBD359E61CEBFECF0057DAA5 /* FontConfig.m */,
-				DBD359E71CEBFECF0057DAA5 /* FrameParserConfig.h */,
-				DBD359E81CEBFECF0057DAA5 /* FrameParserConfig.m */,
-				DBD359E91CEBFECF0057DAA5 /* paragraphConfig.h */,
-				DBD359EA1CEBFECF0057DAA5 /* paragraphConfig.m */,
-				DBD359EB1CEBFECF0057DAA5 /* partMessage.h */,
-				DBD359EC1CEBFECF0057DAA5 /* partMessage.m */,
-			);
-			path = config;
-			sourceTree = "<group>";
-		};
-		DBD359F51CEBFECF0057DAA5 /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359F61CEBFECF0057DAA5 /* FrameParserHandle.h */,
-				DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */,
-				DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */,
-				DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */,
-				DBBED71A1CEEB19C00B98E6C /* emoji.plist */,
-				DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */,
-			);
-			path = Source;
-			sourceTree = "<group>";
-		};
-		DBD359FC1CEBFECF0057DAA5 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				DBD359FD1CEBFECF0057DAA5 /* CTDrawView.h */,
-				DBD359FE1CEBFECF0057DAA5 /* CTDrawView.m */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		DBF4CD391CCA05F800E5804E = {
@@ -254,8 +254,8 @@
 				DBF4CD4B1CCA05F800E5804E /* ViewController.h */,
 				DBF4CD4C1CCA05F800E5804E /* ViewController.m */,
 				DB4A716E1CEB2637009C1132 /* tempViewController.h */,
-				DBD35A101CEC5C250057DAA5 /* tempViewController.m */,
-				DBD359DD1CEBFECF0057DAA5 /* HCoreText */,
+				DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */,
+				DB5AED051CEEE96000A24DD8 /* HCoreText */,
 				DB9EF73B1CD88A7D00BD9579 /* HImage */,
 				DBF4CD4E1CCA05F800E5804E /* Main.storyboard */,
 				DBF4CD511CCA05F800E5804E /* Assets.xcassets */,
@@ -398,13 +398,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBBED71D1CEEB7BE00B98E6C /* emojiConnection.plist in Resources */,
-				DBBED71B1CEEB19C00B98E6C /* emoji.plist in Resources */,
-				DBD35A0A1CEBFECF0057DAA5 /* keyword_keyPath_text.plist in Resources */,
 				DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */,
-				DBD35A091CEBFECF0057DAA5 /* keyword_keyPath_image.plist in Resources */,
+				DB5AED371CEEE96000A24DD8 /* keyword_keyPath_image.plist in Resources */,
+				DB5AED381CEEE96000A24DD8 /* keyword_keyPath_text.plist in Resources */,
+				DB5AED341CEEE96000A24DD8 /* emoji.plist in Resources */,
 				DBF4CD521CCA05F800E5804E /* Assets.xcassets in Resources */,
 				DBF4CD501CCA05F800E5804E /* Main.storyboard in Resources */,
+				DB5AED351CEEE96000A24DD8 /* emojiConnection.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,22 +429,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBD35A031CEBFECF0057DAA5 /* paragraphConfig.m in Sources */,
+				DB5AED331CEEE96000A24DD8 /* NSString+HEmoji.m in Sources */,
+				DB5AED2E1CEEE96000A24DD8 /* paragraphConfig.m in Sources */,
+				DB5AED361CEEE96000A24DD8 /* FrameParserHandle.m in Sources */,
 				DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */,
-				DBD35A071CEBFECF0057DAA5 /* FrameParser.m in Sources */,
-				DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */,
-				DBD35A111CEC5C250057DAA5 /* tempViewController.m in Sources */,
-				DBD35A0E1CEC021F0057DAA5 /* FrameParser+dict.m in Sources */,
-				DB5734141CEEA91400A8762C /* NSString+HEmoji.m in Sources */,
+				DB5AED321CEEE96000A24DD8 /* FrameParser.m in Sources */,
+				DB5AED311CEEE96000A24DD8 /* FrameParser+dict.m in Sources */,
+				DB5AED2A1CEEE96000A24DD8 /* UIColor+Hex.m in Sources */,
+				DB5AED2B1CEEE96000A24DD8 /* UIView+Extension.m in Sources */,
+				DB5AED301CEEE96000A24DD8 /* CoreTextData.m in Sources */,
+				DB5AED391CEEE96000A24DD8 /* CTDrawView.m in Sources */,
+				DB5AED2C1CEEE96000A24DD8 /* FontConfig.m in Sources */,
 				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
-				DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */,
-				DBD35A051CEBFECF0057DAA5 /* CoreTextData.m in Sources */,
-				DBD35A0B1CEBFECF0057DAA5 /* CTDrawView.m in Sources */,
-				DBD35A011CEBFECF0057DAA5 /* FontConfig.m in Sources */,
-				DBD35A081CEBFECF0057DAA5 /* FrameParserHandle.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
-				DBD35A021CEBFECF0057DAA5 /* FrameParserConfig.m in Sources */,
-				DBD35A041CEBFECF0057DAA5 /* partMessage.m in Sources */,
+				DB5AED2D1CEEE96000A24DD8 /* FrameParserConfig.m in Sources */,
+				DB5AED2F1CEEE96000A24DD8 /* partMessage.m in Sources */,
+				DB5AED3B1CEEE97000A24DD8 /* tempViewController.m in Sources */,
 				DBF4CD471CCA05F800E5804E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

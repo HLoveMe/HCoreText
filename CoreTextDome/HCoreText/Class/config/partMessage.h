@@ -111,7 +111,7 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 
 @interface TextLinkMessage : TextMessage
 /**
- *  表示文本之后的真实URL
+ *  表示文本之后的真实URL 关键字:url
  */
 @property(nonatomic,copy)NSString *URLSrc;
 

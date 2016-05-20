@@ -43,9 +43,6 @@
     CoreTextData *coreD = [FrameParser parserWithSource:[self getContent] defaultCfg:config2];
     [view2 drawWithCoreTextData:coreD];
     [self.view addSubview:view2];
-    
-
-    NSLog(@"%@    %@",@"\uE32E",@"\u2728");
 }
 
 #pragma -mark CTViewTouchDelegate
@@ -86,10 +83,12 @@
                                 @"url":@"http://www.baidu.com",
                                 @"size":@"18",
                                 @"color":@"red",
-                                @"underLine":@"Single"
+                                @"underLine":@"Single",
+                                @"underColor":@"black",
+                                @"name":@"Futura"
                                 },
                             @{
-                                @"content":@" ",
+                                @"content":@"",
                                 @"type":@"image",
                                 @"src":@"http://imgsrc.baidu.com/forum/pic/item/cdbf6c81800a19d8d8a3f94a33fa828ba71e46d8.jpg",
                                 @"width":@"200",
