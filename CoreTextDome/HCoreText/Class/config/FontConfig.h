@@ -28,7 +28,7 @@
  */
 @property(nonatomic,strong)UIColor *textColor;
 /**
- *  下划线:None(0X00) Single(0X01) Thick(0X02) Double(0X09)
+ *  下划线:None(0X00) Single(0X01) Thick(0X02) Double(0X09) 指定 underLineStyle
  */
 //Solid(0X0000) Dot(0x0100) Dash(0X200) DashDot(0X300) DashDotDot(0x0400)
 @property(nonatomic,copy)NSString *underLine;

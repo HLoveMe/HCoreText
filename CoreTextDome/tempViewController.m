@@ -8,6 +8,7 @@
 
 #import "tempViewController.h"
 #import "HCoreText.h"
+#import <objc/runtime.h>
 
 @interface tempViewController()<CTViewTouchDelegate>
 @end
@@ -43,6 +44,8 @@
     [view2 drawWithCoreTextData:coreD];
     [self.view addSubview:view2];
     
+
+    NSLog(@"%@    %@",@"\uE32E",@"\u2728");
 }
 
 #pragma -mark CTViewTouchDelegate
@@ -78,11 +81,12 @@
 
     NSArray *contentArr = @[
                             @{
-                                @"content":@"@爱上无名氏",
+                                @"content":@"@爱上无名氏 :x::x::o::o:",
                                 @"type":@"link",
                                 @"url":@"http://www.baidu.com",
                                 @"size":@"18",
-                                @"color":@"red"
+                                @"color":@"red",
+                                @"underLine":@"Single"
                                 },
                             @{
                                 @"content":@" ",
@@ -92,7 +96,7 @@
                                 @"height":@"120"
                                 },
                             @{
-                                @"content":@"I love you 无名氏个大傻逼",
+                                @"content":@":+1: I love you 无名氏个大傻逼",
                                 @"type":@"text",
                                 @"color":@"blue",
                                 @"size":@"18",

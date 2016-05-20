@@ -18,7 +18,7 @@
  */
 +(void)removeAllFile;
 /**
- *  获取图片
+ *  获取图片  本地有该图片就是同步执行 需要网络请求 Block在得到图片后 main线程执行
  *
  *  @param src   图片名或者图片网址
  *  @param block   得到图片主线程回调 

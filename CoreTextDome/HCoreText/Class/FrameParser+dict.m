@@ -14,6 +14,7 @@
 #import "paragraphConfig.h"
 #import "ParserType.h"
 #import "ParserType.h"
+#import "NSString+HEmoji.h"
 @implementation FrameParser (dict)
 static NSMutableArray *textkeywords;
 static NSMutableArray *linkkeywords;
@@ -118,6 +119,7 @@ static NSMutableArray *imagekeywords;
         SourceType type = [self gettype:oneDic[@"type"]];
         Message *msg;
         NSString *showContent = oneDic[@"content"];
+        showContent = [showContent emojizedString];
         if (type==TextType) {
             TextMessage *textMsg =[[TextMessage alloc]init];
             textMsg.keyValues = [self parserKeyValuesWithDic:oneDic type:type];

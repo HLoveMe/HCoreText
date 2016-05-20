@@ -13,10 +13,12 @@
 #import "UIColor+Hex.h"
 #import "paragraphConfig.h"
 #import "FrameParserHandle.h"
+#import "NSString+HEmoji.h"
 #import <objc/runtime.h>
 @implementation FrameParser
 +(CoreTextData *)parserContent:(NSString *)content withConfig:(FrameParserConfig *)config{
     NSDictionary *dic = [config defaultAttribute];
+    content = [content emojizedString];
     NSAttributedString *attString = [[NSAttributedString alloc]initWithString:content attributes:dic];
     TextMessage *textMsg = [[TextMessage alloc]init];
     textMsg.type = TextType;
@@ -59,6 +61,7 @@
             }else{
                showContent= (NSString *)[[onePart componentsSeparatedByString:@"<text"] firstObject];
             }
+            showContent = [showContent emojizedString];
             NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             textMsg.attSring=one;
@@ -72,6 +75,7 @@
             }else{
                 showContent= @" ";
             }
+            showContent = [showContent emojizedString];
             NSDictionary *dic = [imgMsg partAttribute];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
@@ -85,8 +89,7 @@
             }else{
                 showContent= (NSString *)[[onePart componentsSeparatedByString:@"<link"] firstObject];
             }
-            
-            
+            showContent = [showContent emojizedString];
             NSDictionary *dic = [linkMsg partAttribute:defaultC.fontCig];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             linkMsg.attSring=one;

@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB5734141CEEA91400A8762C /* NSString+HEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5734131CEEA91400A8762C /* NSString+HEmoji.m */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
+		DBBED71B1CEEB19C00B98E6C /* emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBBED71A1CEEB19C00B98E6C /* emoji.plist */; };
+		DBBED71D1CEEB7BE00B98E6C /* emojiConnection.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */; };
 		DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */; };
 		DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E21CEBFECF0057DAA5 /* UIView+Extension.m */; };
 		DBD35A011CEBFECF0057DAA5 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DBD359E61CEBFECF0057DAA5 /* FontConfig.m */; };
@@ -51,8 +54,12 @@
 
 /* Begin PBXFileReference section */
 		DB4A716E1CEB2637009C1132 /* tempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempViewController.h; sourceTree = "<group>"; };
+		DB5734121CEEA91400A8762C /* NSString+HEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HEmoji.h"; sourceTree = "<group>"; };
+		DB5734131CEEA91400A8762C /* NSString+HEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HEmoji.m"; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
+		DBBED71A1CEEB19C00B98E6C /* emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji.plist; sourceTree = "<group>"; };
+		DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = emojiConnection.plist; sourceTree = "<group>"; };
 		DBD359DF1CEBFECF0057DAA5 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		DBD359E01CEBFECF0057DAA5 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		DBD359E11CEBFECF0057DAA5 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
@@ -176,6 +183,8 @@
 				DBD359F21CEBFECF0057DAA5 /* FrameParser.m */,
 				DBD359F31CEBFECF0057DAA5 /* FrameParserDelegate.h */,
 				DBD35A0F1CEC04200057DAA5 /* ParserType.h */,
+				DB5734121CEEA91400A8762C /* NSString+HEmoji.h */,
+				DB5734131CEEA91400A8762C /* NSString+HEmoji.m */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -202,6 +211,8 @@
 				DBD359F71CEBFECF0057DAA5 /* FrameParserHandle.m */,
 				DBD359F81CEBFECF0057DAA5 /* keyword_keyPath_image.plist */,
 				DBD359F91CEBFECF0057DAA5 /* keyword_keyPath_text.plist */,
+				DBBED71A1CEEB19C00B98E6C /* emoji.plist */,
+				DBBED71C1CEEB7BE00B98E6C /* emojiConnection.plist */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -387,6 +398,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBBED71D1CEEB7BE00B98E6C /* emojiConnection.plist in Resources */,
+				DBBED71B1CEEB19C00B98E6C /* emoji.plist in Resources */,
 				DBD35A0A1CEBFECF0057DAA5 /* keyword_keyPath_text.plist in Resources */,
 				DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */,
 				DBD35A091CEBFECF0057DAA5 /* keyword_keyPath_image.plist in Resources */,
@@ -422,6 +435,7 @@
 				DBD359FF1CEBFECF0057DAA5 /* UIColor+Hex.m in Sources */,
 				DBD35A111CEC5C250057DAA5 /* tempViewController.m in Sources */,
 				DBD35A0E1CEC021F0057DAA5 /* FrameParser+dict.m in Sources */,
+				DB5734141CEEA91400A8762C /* NSString+HEmoji.m in Sources */,
 				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
 				DBD35A001CEBFECF0057DAA5 /* UIView+Extension.m in Sources */,
 				DBD35A051CEBFECF0057DAA5 /* CoreTextData.m in Sources */,

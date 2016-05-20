@@ -16,11 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    tempViewController *temp =[[tempViewController alloc]init];
-    [self.navigationController pushViewController:temp animated:YES];
+    
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    
+    tempViewController *temp =[[tempViewController alloc]init];
+    [self.navigationController pushViewController:temp animated:YES];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

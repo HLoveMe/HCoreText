@@ -272,8 +272,6 @@
     
     return beziPath.CGPath;
 }
-
-
 -(void)dealloc{
     objc_removeAssociatedObjects(self);
 }
