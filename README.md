@@ -1,18 +1,23 @@
+优化事件回调 并支持视频播放
+
 利用CoreText对C函数进行封装，达到更简单的调用  支持格式
    
             AAAA <link url="" ...>                   url size name color underLine underColor
             
             BBB <font  size=""...> 所有支持的关键字 size name color underLine UnderColor 
             
-            CCCC <image src="" ...>                 src width height
+             <image src="" ...>                 src width height isReturn isCenter
+            
+             <video src="" ...>                 src width height isReturn isCenter
       
-      size(字体大小) name（字体name） color(字体颜色) underLine(下划线样式) underColor(下划线颜色)    针对Fontconfig 属性
+      size(字体大小) name（字体name） color(字体颜色red-->redColor 或者十六进制颜色) underLine(下划线样式)       underColor(下划线颜色)    针对Fontconfig 属性
       
       url(点击跳转url)          针对TextLinkMessage URLSrc
       
       src width height          针对ImageMessage 属性
    
-   
+      isReturn isCenter        针对图片和视频  isReturn表示是否换行显示  isCenter是否显示在行center
+      
    新增：格式的文本解析支持   
    
          @[
@@ -58,6 +63,19 @@
                @"name":@"Futura"
                
             }
+            ,
+            
+         @{
+       
+               @"type":@"video",
+            
+               @"src":@"",
+            
+               @"width":@"260",
+            
+               @"height":@"120"
+            
+             }
             
          ]
    
@@ -67,7 +85,7 @@
       
       image : content type src width height 所有关键字 前两者是必须的
       
-   新增对emoji表情的支持：
+   emoji表情的支持：
       由于不同需求Emoji显示方式不一样
       
          本例 ：               :+1:  -----> 赞(\U0001F44D)
@@ -75,6 +93,15 @@
          可能你的实例需要       [emoji]赞[/emoji]  - >赞(\U0001F44D)
          
       配置 FrameParserConfig  并替换emoji.plist 
+      
+   视频支持:
+   
+         本例提供的播放器组件只是Dome使用  建议替换为您功能更加齐全的播放器。(在每个video 所在的地方都会加载你的播放器，您必须要控制内存使用，比如说使用单利). 如果您已经处理好所有播放事件 并不需要本框架做任何处理,您的播放器只需要实现CustomPlayerDelegate协议 request 方法。  
+         
+   CTDrawView--代理-->CTViewTouchDelegate:
+   
+      该框架为CTDrawView 提供默认的代理CTDrawManager（在事件发生后 发出通知）
+   
          
 Note:两种解析方式 支持的关键字是一致的
    
@@ -116,7 +143,7 @@ Note:两种解析方式 支持的关键字是一致的
          >paragraphConfig 段落配置 提供默认
          >FontConfig 字体配置 有默认
          >Message 是利用解析出来的参数 和解析的文本等 创建出来的对象 ，其包含每一小块的全部信息
-          （使用其子类TextMessage,TextLinkMesssage,ImageMessage）
+          （使用其子类TextMessage,TextLinkMesssage,ImageMessage，VideoMessage）
             
       )
       
