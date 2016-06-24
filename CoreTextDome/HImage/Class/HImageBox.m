@@ -7,6 +7,7 @@
 //
 
 #import "HImageBox.h"
+#import <AVFoundation/AVFoundation.h>
 #import <objc/runtime.h>
 #define HCacheImagePath [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"imageCache"]
 @implementation HImageBox
@@ -65,6 +66,7 @@
         }
     }else{
         dic = [NSMutableDictionary dictionary];
+        objc_setAssociatedObject(app, "imageDataTask", dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionCfg];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -81,12 +83,36 @@
         if (dic.count==0) {
             objc_removeAssociatedObjects(app);
         }else{
-        objc_setAssociatedObject(app, "imageDataTask", dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+            objc_setAssociatedObject(app, "imageDataTask", dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
     }];
     [dataTask resume];
     dic[imagePath] = dataTask;
-    objc_setAssociatedObject(app, "imageDataTask", dic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
 }
-
++(void)getFrameImageWithURL:(NSURL *)url atTime:(double)time option:(void(^)(UIImage *img))option{
+    __block UIImage *img;
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
+            AVAssetImageGenerator *assetImageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+            assetImageGenerator.appliesPreferredTrackTransform = YES;
+            assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+            
+            CGImageRef thumbnailImageRef = NULL;
+            CFTimeInterval thumbnailImageTime = time;
+            NSError *thumbnailImageGenerationError = nil;
+            thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60) actualTime:NULL error:&thumbnailImageGenerationError];
+            
+            img = thumbnailImageRef ? [[UIImage alloc] initWithCGImage:thumbnailImageRef] : nil;
+            if (thumbnailImageRef) {
+                CFRelease(thumbnailImageRef);
+            }
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                option(img);
+            });
+        });
+        
+    }
+}
 @end

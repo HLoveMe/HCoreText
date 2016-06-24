@@ -9,10 +9,12 @@
 #import "FrameParserHandle.h"
 #import "partMessage.h"
 #import "UIColor+Hex.h"
+#import "FrameParserConfig.h"
 @interface FrameParserHandle()
 @property(nonatomic,strong)NSMutableArray *textkeywords;
 @property(nonatomic,strong)NSMutableArray *linkkeywords;
 @property(nonatomic,strong)NSMutableArray *imagekeywords;
+@property(nonatomic,strong)NSMutableArray *videokeywords;
 @end
 @implementation FrameParserHandle
 -(NSMutableArray *)textkeywords{
@@ -38,6 +40,14 @@
     }
     return _imagekeywords;
 }
+-(NSMutableArray *)videokeywords{
+    if (nil==_videokeywords) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_video.plist" ofType:nil];
+        NSArray *textkeys = [[NSDictionary dictionaryWithContentsOfFile:path] allKeys];
+        _videokeywords=textkeys.mutableCopy;
+    }
+    return _videokeywords;
+}
 
 -(NSMutableArray<NSString *>*)parserWithContent:(NSString *)conent{
     NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:@"(.*?)(<[^>]+>|\\Z)" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:nil];
@@ -48,7 +58,7 @@
         if (con.length>=1) {
             [strs addObject:con];
         }
-       
+        
     }];
     return strs;
 }
@@ -67,8 +77,12 @@
             if ([self.linkkeywords containsObject:keyword]) {
                 [keywords addObject:keyword];
             }
-        }else {
+        }else if (type==ImageType){
             if ([self.imagekeywords containsObject:keyword]) {
+                [keywords addObject:keyword];
+            }
+        }else if (type==VideoType){
+            if ([self.videokeywords containsObject:keyword]) {
                 [keywords addObject:keyword];
             }
         }
@@ -76,10 +90,10 @@
     return keywords;
 }
 
--(Message *)parserMessageWithPartText:(NSString *)partText{
+-(Message *)parserMessageWithPartText:(NSString *)partText withDefault:(FrameParserConfig*)config{
     SourceType type;
     if ([self respondsToSelector:@selector(parserTypeWithPart:)]) {
-       type = [self parserTypeWithPart:partText];
+        type = [self parserTypeWithPart:partText];
     }else{
         if ([partText containsString:@"<image"]) {
             type = ImageType;
@@ -87,8 +101,10 @@
             type = LinkType;
         }else if([partText containsString:@"<text"]){
             type = TextType;
+        }else if ([partText containsString:@"<video"]){
+            type = VideoType;
         }else{
-            NSAssert(NO, @"image link text 必须是其中一个");
+            NSAssert(NO, @"image link text  video 必须是其中一个");
         }
     }
     Message *msg ;
@@ -104,13 +120,12 @@
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
         link.keyValues = [self parserKeyValuesWithKeys:keys content:partText];
         msg = link;
-    }else if(type==ImageType){
+    }else if(type==ImageType|type==VideoType){
         NSArray<NSString *>* keys =[self parserKeywordWithPartText:partText type:type];
-        ImageMessage *imgMsg = [self parserWithKeys:keys Content:partText];
+        ImageMessage *imgMsg = [self parserWithKeys:keys Content:partText type:type default:config];
         imgMsg.type = type;
         msg = imgMsg;
     }
-    
     return msg;
 }
 
@@ -128,7 +143,10 @@
         //3：怎么通过关键字 从文本中解析到对应的值
         NSString *Pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",obj];
         NSRegularExpression *expression = [[NSRegularExpression alloc]initWithPattern:Pattern options:0 error:nil];
-        keyV.expression=expression;
+        NSString *pattern=[NSString stringWithFormat:@"(?<=%@=)(\\w+)",obj];
+        NSRegularExpression *expression2 = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
+        
+        keyV.expression=@[expression,expression2];
         //值解析
         keyV.valueHandle = ^id(NSString *key, NSString *value, __unsafe_unretained Class clazz) {
             id realValue ;
@@ -159,13 +177,54 @@
     }];
     return keyValues;
 }
--(ImageMessage *)parserWithKeys:(NSArray *)keys Content:(NSString *)content {
-    //image<image src=\"sss\" width=\"\" height=\"\">
-    ImageMessage *imgMsg = [[ImageMessage alloc]init];
+-(ImageMessage *)parserWithKeys:(NSArray *)keys Content:(NSString *)content type:(SourceType)type default:(FrameParserConfig *)cfg{
+    //<image src=\"sss\" width=\"\" height=\"\">
+    //<video src=\"sss\" width=\"\" height=\"\">
+    void (^Block)(ImageMessage *img)=^(ImageMessage *img){
+        if (![keys containsObject:@"isReturn"]) {
+            switch (cfg.imageShowType) {
+                case originality:
+                    break;
+                case defaultReturn:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    break;
+                case returnCenter:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    [img setValue:@(1) forKey:@"isCenter"];
+                    break;
+            }
+        }
+        if (![keys containsObject:@"isCenter"]) {
+            switch (cfg.imageShowType) {
+                case originality:
+                    break;
+                case defaultReturn:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    break;
+                case returnCenter:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    [img setValue:@(1) forKey:@"isCenter"];
+                    break;
+            }
+        }
+        
+    };
+    ImageMessage *imgMsg;
+    if (type==ImageType) {
+        imgMsg = [[ImageMessage alloc]init];
+    }else{
+        imgMsg = [[VideoMessage alloc]init];
+    }
+    Block(imgMsg);
     [keys enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL * _Nonnull stop) {
         NSString *pattern = [NSString stringWithFormat:@"(?<=%@=\")(\\w+|\\.|\\:|\\/)+",key];
         NSRegularExpression *regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
         NSTextCheckingResult *result = [regular firstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
+        if (!result) {
+            pattern=[NSString stringWithFormat:@"(?<=%@=)(\\w+)",key];
+            regular = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
+            result=[regular firstMatchInString:content options:0 range:NSMakeRange(0, content.length)];
+        }
         NSString *conRes = [content substringWithRange:result.range];
         [imgMsg setValue:conRes forKey:key];
     }];

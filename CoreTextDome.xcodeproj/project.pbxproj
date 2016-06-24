@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB0259211D19264200F6785B /* CTDrawManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DB0259201D19264200F6785B /* CTDrawManager.m */; };
+		DB0259231D192A4F00F6785B /* ManagerDefault.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB0259221D192A4F00F6785B /* ManagerDefault.plist */; };
 		DB5AED2A1CEEE96000A24DD8 /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */; };
 		DB5AED2B1CEEE96000A24DD8 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED0A1CEEE96000A24DD8 /* UIView+Extension.m */; };
 		DB5AED2C1CEEE96000A24DD8 /* FontConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED0E1CEEE96000A24DD8 /* FontConfig.m */; };
@@ -18,13 +20,22 @@
 		DB5AED321CEEE96000A24DD8 /* FrameParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED1A1CEEE96000A24DD8 /* FrameParser.m */; };
 		DB5AED331CEEE96000A24DD8 /* NSString+HEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED1D1CEEE96000A24DD8 /* NSString+HEmoji.m */; };
 		DB5AED341CEEE96000A24DD8 /* emoji.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED211CEEE96000A24DD8 /* emoji.plist */; };
-		DB5AED351CEEE96000A24DD8 /* emojiConnection.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */; };
 		DB5AED361CEEE96000A24DD8 /* FrameParserHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */; };
 		DB5AED371CEEE96000A24DD8 /* keyword_keyPath_image.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */; };
 		DB5AED381CEEE96000A24DD8 /* keyword_keyPath_text.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB5AED261CEEE96000A24DD8 /* keyword_keyPath_text.plist */; };
 		DB5AED391CEEE96000A24DD8 /* CTDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED291CEEE96000A24DD8 /* CTDrawView.m */; };
 		DB5AED3B1CEEE97000A24DD8 /* tempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */; };
+		DB8CEDCE1D17F265009D1464 /* keyword_keyPath_video.plist in Resources */ = {isa = PBXBuildFile; fileRef = DB8CEDCD1D17F265009D1464 /* keyword_keyPath_video.plist */; };
 		DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */ = {isa = PBXBuildFile; fileRef = DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */; };
+		DBAF65FA1D19B59A00E145DD /* UIView+Display.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF65F91D19B59A00E145DD /* UIView+Display.m */; };
+		DBAF66241D1A840300E145DD /* sourceImages.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DBAF66231D1A840300E145DD /* sourceImages.bundle */; };
+		DBAF92001D1C5279004EBE47 /* HPlayToolView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91F51D1C5279004EBE47 /* HPlayToolView.m */; };
+		DBAF92011D1C5279004EBE47 /* HProgressSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91F71D1C5279004EBE47 /* HProgressSlider.m */; };
+		DBAF92021D1C5279004EBE47 /* HVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91F91D1C5279004EBE47 /* HVideoPlayer.m */; };
+		DBAF92031D1C5279004EBE47 /* HVideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91FB1D1C5279004EBE47 /* HVideoPlayView.m */; };
+		DBAF92041D1C5279004EBE47 /* LLARingSpinnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91FD1D1C5279004EBE47 /* LLARingSpinnerView.m */; };
+		DBAF92051D1C5279004EBE47 /* ProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAF91FF1D1C5279004EBE47 /* ProgressView.m */; };
+		DBEBEB311D1CC59200D9FA77 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = DBEBEB301D1CC59200D9FA77 /* video.mp4 */; };
 		DBF4CD471CCA05F800E5804E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD461CCA05F800E5804E /* main.m */; };
 		DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD491CCA05F800E5804E /* AppDelegate.m */; };
 		DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBF4CD4C1CCA05F800E5804E /* ViewController.m */; };
@@ -53,6 +64,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB02591F1D19264200F6785B /* CTDrawManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawManager.h; sourceTree = "<group>"; };
+		DB0259201D19264200F6785B /* CTDrawManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawManager.m; sourceTree = "<group>"; };
+		DB0259221D192A4F00F6785B /* ManagerDefault.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ManagerDefault.plist; sourceTree = "<group>"; };
 		DB4A716E1CEB2637009C1132 /* tempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tempViewController.h; sourceTree = "<group>"; };
 		DB5AED071CEEE96000A24DD8 /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
@@ -78,7 +92,6 @@
 		DB5AED1E1CEEE96000A24DD8 /* ParserType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParserType.h; sourceTree = "<group>"; };
 		DB5AED1F1CEEE96000A24DD8 /* HCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCoreText.h; sourceTree = "<group>"; };
 		DB5AED211CEEE96000A24DD8 /* emoji.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = emoji.plist; sourceTree = "<group>"; };
-		DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = emojiConnection.plist; sourceTree = "<group>"; };
 		DB5AED231CEEE96000A24DD8 /* FrameParserHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameParserHandle.h; sourceTree = "<group>"; };
 		DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FrameParserHandle.m; sourceTree = "<group>"; };
 		DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_image.plist; sourceTree = "<group>"; };
@@ -86,8 +99,26 @@
 		DB5AED281CEEE96000A24DD8 /* CTDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDrawView.h; sourceTree = "<group>"; };
 		DB5AED291CEEE96000A24DD8 /* CTDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDrawView.m; sourceTree = "<group>"; };
 		DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tempViewController.m; sourceTree = "<group>"; };
+		DB8CEDCD1D17F265009D1464 /* keyword_keyPath_video.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keyword_keyPath_video.plist; sourceTree = "<group>"; };
 		DB9EF73D1CD88A9E00BD9579 /* HImageBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HImageBox.h; sourceTree = "<group>"; };
 		DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HImageBox.m; sourceTree = "<group>"; };
+		DBAF65F81D19B59A00E145DD /* UIView+Display.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Display.h"; sourceTree = "<group>"; };
+		DBAF65F91D19B59A00E145DD /* UIView+Display.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Display.m"; sourceTree = "<group>"; };
+		DBAF66231D1A840300E145DD /* sourceImages.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = sourceImages.bundle; sourceTree = "<group>"; };
+		DBAF91F41D1C5279004EBE47 /* HPlayToolView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPlayToolView.h; sourceTree = "<group>"; };
+		DBAF91F51D1C5279004EBE47 /* HPlayToolView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPlayToolView.m; sourceTree = "<group>"; };
+		DBAF91F61D1C5279004EBE47 /* HProgressSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HProgressSlider.h; sourceTree = "<group>"; };
+		DBAF91F71D1C5279004EBE47 /* HProgressSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HProgressSlider.m; sourceTree = "<group>"; };
+		DBAF91F81D1C5279004EBE47 /* HVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVideoPlayer.h; sourceTree = "<group>"; };
+		DBAF91F91D1C5279004EBE47 /* HVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVideoPlayer.m; sourceTree = "<group>"; };
+		DBAF91FA1D1C5279004EBE47 /* HVideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HVideoPlayView.h; sourceTree = "<group>"; };
+		DBAF91FB1D1C5279004EBE47 /* HVideoPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HVideoPlayView.m; sourceTree = "<group>"; };
+		DBAF91FC1D1C5279004EBE47 /* LLARingSpinnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLARingSpinnerView.h; sourceTree = "<group>"; };
+		DBAF91FD1D1C5279004EBE47 /* LLARingSpinnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLARingSpinnerView.m; sourceTree = "<group>"; };
+		DBAF91FE1D1C5279004EBE47 /* ProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressView.h; sourceTree = "<group>"; };
+		DBAF91FF1D1C5279004EBE47 /* ProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressView.m; sourceTree = "<group>"; };
+		DBAF92061D1C5481004EBE47 /* CustomPlayerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomPlayerDelegate.h; sourceTree = "<group>"; };
+		DBEBEB301D1CC59200D9FA77 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		DBF4CD421CCA05F800E5804E /* CoreTextDome.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreTextDome.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF4CD461CCA05F800E5804E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DBF4CD481CCA05F800E5804E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -150,6 +181,8 @@
 				DB5AED081CEEE96000A24DD8 /* UIColor+Hex.m */,
 				DB5AED091CEEE96000A24DD8 /* UIView+Extension.h */,
 				DB5AED0A1CEEE96000A24DD8 /* UIView+Extension.m */,
+				DBAF65F81D19B59A00E145DD /* UIView+Display.h */,
+				DBAF65F91D19B59A00E145DD /* UIView+Display.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -190,12 +223,16 @@
 		DB5AED201CEEE96000A24DD8 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				DBAF66231D1A840300E145DD /* sourceImages.bundle */,
 				DB5AED211CEEE96000A24DD8 /* emoji.plist */,
-				DB5AED221CEEE96000A24DD8 /* emojiConnection.plist */,
 				DB5AED231CEEE96000A24DD8 /* FrameParserHandle.h */,
 				DB5AED241CEEE96000A24DD8 /* FrameParserHandle.m */,
+				DB02591F1D19264200F6785B /* CTDrawManager.h */,
+				DB0259201D19264200F6785B /* CTDrawManager.m */,
+				DB0259221D192A4F00F6785B /* ManagerDefault.plist */,
 				DB5AED251CEEE96000A24DD8 /* keyword_keyPath_image.plist */,
 				DB5AED261CEEE96000A24DD8 /* keyword_keyPath_text.plist */,
+				DB8CEDCD1D17F265009D1464 /* keyword_keyPath_video.plist */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -203,6 +240,7 @@
 		DB5AED271CEEE96000A24DD8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DBAF91F31D1C5279004EBE47 /* Video */,
 				DB5AED281CEEE96000A24DD8 /* CTDrawView.h */,
 				DB5AED291CEEE96000A24DD8 /* CTDrawView.m */,
 			);
@@ -224,6 +262,26 @@
 				DB9EF73E1CD88A9E00BD9579 /* HImageBox.m */,
 			);
 			path = Class;
+			sourceTree = "<group>";
+		};
+		DBAF91F31D1C5279004EBE47 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				DBAF91F41D1C5279004EBE47 /* HPlayToolView.h */,
+				DBAF91F51D1C5279004EBE47 /* HPlayToolView.m */,
+				DBAF91F61D1C5279004EBE47 /* HProgressSlider.h */,
+				DBAF91F71D1C5279004EBE47 /* HProgressSlider.m */,
+				DBAF91F81D1C5279004EBE47 /* HVideoPlayer.h */,
+				DBAF91F91D1C5279004EBE47 /* HVideoPlayer.m */,
+				DBAF91FA1D1C5279004EBE47 /* HVideoPlayView.h */,
+				DBAF91FB1D1C5279004EBE47 /* HVideoPlayView.m */,
+				DBAF91FC1D1C5279004EBE47 /* LLARingSpinnerView.h */,
+				DBAF91FD1D1C5279004EBE47 /* LLARingSpinnerView.m */,
+				DBAF91FE1D1C5279004EBE47 /* ProgressView.h */,
+				DBAF91FF1D1C5279004EBE47 /* ProgressView.m */,
+				DBAF92061D1C5481004EBE47 /* CustomPlayerDelegate.h */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		DBF4CD391CCA05F800E5804E = {
@@ -255,6 +313,7 @@
 				DBF4CD4C1CCA05F800E5804E /* ViewController.m */,
 				DB4A716E1CEB2637009C1132 /* tempViewController.h */,
 				DB5AED3A1CEEE97000A24DD8 /* tempViewController.m */,
+				DBEBEB301D1CC59200D9FA77 /* video.mp4 */,
 				DB5AED051CEEE96000A24DD8 /* HCoreText */,
 				DB9EF73B1CD88A7D00BD9579 /* HImage */,
 				DBF4CD4E1CCA05F800E5804E /* Main.storyboard */,
@@ -399,12 +458,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBF4CD551CCA05F800E5804E /* LaunchScreen.storyboard in Resources */,
+				DBEBEB311D1CC59200D9FA77 /* video.mp4 in Resources */,
 				DB5AED371CEEE96000A24DD8 /* keyword_keyPath_image.plist in Resources */,
 				DB5AED381CEEE96000A24DD8 /* keyword_keyPath_text.plist in Resources */,
 				DB5AED341CEEE96000A24DD8 /* emoji.plist in Resources */,
+				DBAF66241D1A840300E145DD /* sourceImages.bundle in Resources */,
 				DBF4CD521CCA05F800E5804E /* Assets.xcassets in Resources */,
+				DB8CEDCE1D17F265009D1464 /* keyword_keyPath_video.plist in Resources */,
 				DBF4CD501CCA05F800E5804E /* Main.storyboard in Resources */,
-				DB5AED351CEEE96000A24DD8 /* emojiConnection.plist in Resources */,
+				DB0259231D192A4F00F6785B /* ManagerDefault.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,21 +491,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBAF92001D1C5279004EBE47 /* HPlayToolView.m in Sources */,
 				DB5AED331CEEE96000A24DD8 /* NSString+HEmoji.m in Sources */,
 				DB5AED2E1CEEE96000A24DD8 /* paragraphConfig.m in Sources */,
+				DBAF92031D1C5279004EBE47 /* HVideoPlayView.m in Sources */,
 				DB5AED361CEEE96000A24DD8 /* FrameParserHandle.m in Sources */,
+				DBAF92051D1C5279004EBE47 /* ProgressView.m in Sources */,
+				DBAF92021D1C5279004EBE47 /* HVideoPlayer.m in Sources */,
+				DB0259211D19264200F6785B /* CTDrawManager.m in Sources */,
 				DBF4CD4D1CCA05F800E5804E /* ViewController.m in Sources */,
 				DB5AED321CEEE96000A24DD8 /* FrameParser.m in Sources */,
 				DB5AED311CEEE96000A24DD8 /* FrameParser+dict.m in Sources */,
 				DB5AED2A1CEEE96000A24DD8 /* UIColor+Hex.m in Sources */,
 				DB5AED2B1CEEE96000A24DD8 /* UIView+Extension.m in Sources */,
 				DB5AED301CEEE96000A24DD8 /* CoreTextData.m in Sources */,
+				DBAF65FA1D19B59A00E145DD /* UIView+Display.m in Sources */,
+				DBAF92041D1C5279004EBE47 /* LLARingSpinnerView.m in Sources */,
 				DB5AED391CEEE96000A24DD8 /* CTDrawView.m in Sources */,
 				DB5AED2C1CEEE96000A24DD8 /* FontConfig.m in Sources */,
 				DB9EF73F1CD88A9E00BD9579 /* HImageBox.m in Sources */,
 				DBF4CD4A1CCA05F800E5804E /* AppDelegate.m in Sources */,
 				DB5AED2D1CEEE96000A24DD8 /* FrameParserConfig.m in Sources */,
 				DB5AED2F1CEEE96000A24DD8 /* partMessage.m in Sources */,
+				DBAF92011D1C5279004EBE47 /* HProgressSlider.m in Sources */,
 				DB5AED3B1CEEE97000A24DD8 /* tempViewController.m in Sources */,
 				DBF4CD471CCA05F800E5804E /* main.m in Sources */,
 			);

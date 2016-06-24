@@ -15,8 +15,13 @@
     if (_value){
         return _value;
     }else{
-        NSTextCheckingResult *result = [self.expression firstMatchInString:self.content options:0 range:NSMakeRange(0, self.content.length)];
-        _value= [self.content substringWithRange:result.range];
+        [self.expression enumerateObjectsUsingBlock:^(NSRegularExpression * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSTextCheckingResult *result = [obj firstMatchInString:self.content options:0 range:NSMakeRange(0, self.content.length)];
+            if (result) {
+               _value = [self.content substringWithRange:result.range];
+                *stop=YES;
+            }
+        }];
         return _value;
     }
 }
@@ -110,6 +115,13 @@
 @end
 
 @implementation ImageMessage
+-(instancetype)init{
+    if (self=[super init]) {
+        self.isReturn=NO;
+        self.isCenter=NO;
+    }
+    return self;
+}
 void dealloc (void * refCon ){
     CFRelease(refCon);
 }
@@ -129,7 +141,7 @@ CGFloat getWidth(void * refCon ){
 }
 
 -(NSMutableDictionary *)partAttribute{
-    if (self.src==nil||self.src.length==0) { NSAssert(false, @"图片源解析错误");}
+    if (self.src==nil||self.src.length==0) { NSAssert(false, @"源解析错误");}
     CTRunDelegateCallbacks callBack;
     callBack.version = kCTRunDelegateVersion1;
     callBack.dealloc = dealloc;
@@ -142,5 +154,9 @@ CGFloat getWidth(void * refCon ){
     
     return dic;
 }
+@end
+
+@implementation VideoMessage
+
 
 @end

@@ -25,4 +25,12 @@
  *  img  得到的图片 可能为nil isFirst获取网络图片回调会出现绘制不正确 尝试刷新重新绘制
  */
 +(void)getImageWithSource:(NSString *)src option:(void(^)(UIImage *img,BOOL isFirst))block;
+/**
+ *  得到指定视频源的帧
+ *
+ *  @param url
+ *  @param time 第几帧
+ *  @param option 回调 
+ */
++(void)getFrameImageWithURL:(NSURL *)url atTime:(double)time option:(void(^)(UIImage *img))option;
 @end

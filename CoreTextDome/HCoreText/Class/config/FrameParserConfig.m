@@ -19,6 +19,9 @@
         self.parCig = [[paragraphConfig alloc]init];
         self.fontCig = [[FontConfig alloc]init];
         self.pattern = @"(:[a-z0-9-+_]+:)";
+        self.imageShowType=defaultReturn;
+        self.videoShowType=returnCenter;
+        self.videoClazz=NSClassFromString(@"HVideoPlayView");
     }
     return self;
 }

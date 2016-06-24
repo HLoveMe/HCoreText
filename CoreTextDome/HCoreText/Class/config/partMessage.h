@@ -12,6 +12,7 @@
 #import "ParserType.h"
 @class FontConfig;
 @class FrameParserConfig;
+
 /**
  *  这个方法是根据片段 partConfig对象
  *  各个配置关键字,关键字对于的值,值对应片段的FrameParserConfig 属性的Class
@@ -54,12 +55,13 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 /**
  *  解析的正则表达式对象 通过该对象解析得到 关键字的值 
  */
-@property(nonatomic,strong)NSRegularExpression *expression;
+@property(nonatomic,strong)NSArray<NSRegularExpression*> *expression;
 @end
 
 
 //*************************************************************************************
 @interface Message:NSObject
+
 /**
  *  该段内容的形式  text image  
  *  Note:在从创建时赋值
@@ -79,7 +81,6 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  *  Note:解析之后就会有值
  */
 @property(nonatomic,strong)NSAttributedString *attSring;
-
 @end
 
 /**
@@ -119,22 +120,34 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 
 
 @interface ImageMessage : Message
-
 /**
- *  图片宽 
+ *  当前图片是否换行显示
+ */
+@property(nonatomic,assign)BOOL isReturn;
+/**
+ *  当前图片是否居中显示
+ */
+@property(nonatomic,assign)BOOL isCenter;
+/**
+ *  宽
  * Note:在从创建时赋值
  */
 @property(nonatomic,assign)CGFloat width;
 /**
- *  图片高
+ *  高
  * Note:在从创建时赋值
  */
 @property(nonatomic,assign)CGFloat height;
 /**
- *  图片源 
+ *  源
  * Note:在从创建时赋值
  */
 @property(nonatomic,copy)NSString *src;
+/**
+ *  在UIView中显示的位置坐标
+ *  在绘画完成后自动赋值
+ */
+@property(nonatomic,assign)CGRect rect;
 /**
  *
  *
@@ -143,3 +156,10 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 -(NSMutableDictionary *)partAttribute;
 @end
 
+
+@interface VideoMessage : ImageMessage
+/**
+ *  标示是否已经渲染 ，刷新将不会再次渲染
+ */
+@property(nonatomic,assign)BOOL hasShow;
+@end

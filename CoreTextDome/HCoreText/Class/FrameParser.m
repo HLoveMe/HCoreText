@@ -51,15 +51,14 @@
     NSMutableAttributedString *contentAtt = [[NSMutableAttributedString alloc]init];
     NSMutableArray *msgArray = [NSMutableArray array];
     [parts enumerateObjectsUsingBlock:^(NSString * _Nonnull onePart, NSUInteger idx, BOOL * _Nonnull stop) {
-        Message *msg = [delegate parserMessageWithPartText:onePart];
-        [msgArray addObject:msg];
+        Message *msg = [delegate parserMessageWithPartText:onePart withDefault:defaultC];
         if (msg.type==TextType) {
             TextMessage *textMsg = (TextMessage *)msg;
             NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
                 showContent = [delegate parserShowText:TextType text:onePart];
             }else{
-               showContent= (NSString *)[[onePart componentsSeparatedByString:@"<text"] firstObject];
+                showContent= (NSString *)[[onePart componentsSeparatedByString:@"<text"] firstObject];
             }
             showContent = [showContent emojizedString];
             NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
@@ -67,21 +66,42 @@
             textMsg.attSring=one;
             textMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
-        }else if (msg.type==ImageType){
+            [msgArray addObject:msg];
+        }else if (msg.type==ImageType|msg.type==VideoType){
             ImageMessage *imgMsg = (ImageMessage *)msg;
-            NSString *showContent;
-            if([delegate respondsToSelector:@selector(parserShowText:text:)]){
-                showContent = [delegate parserShowText:TextType text:onePart];
-            }else{
-                showContent= @" ";
+            NSString *showContent=@" ";
+            void(^Block)(void)  = ^{
+                Message *last = [msgArray lastObject];
+                if ([last.attSring.string isEqualToString:@"\n"]) {
+                    return ;
+                }
+                TextMessage *message = [[TextMessage alloc]init];
+                message.type=TextType;
+                message.contentRange=NSMakeRange(contentAtt.length,1);
+                NSAttributedString *att =[[NSAttributedString alloc]initWithString:@"\n" attributes:nil];
+                message.attSring=att;
+                [contentAtt appendAttributedString:att];
+                [msgArray addObject:message];
+            };
+            if ([onePart hasPrefix:@"\n"]) {
+                Block();
+            }else if(msg.type==ImageType&&imgMsg.isReturn&&msgArray.count>=1) {
+                Block();
+            }else if (msg.type==VideoType&&imgMsg.isReturn&&msgArray.count>=1){
+                Block();
             }
-            showContent = [showContent emojizedString];
             NSDictionary *dic = [imgMsg partAttribute];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
-        }else {
+            [msgArray addObject:msg];
+            
+            
+            if(imgMsg.isCenter) {
+                Block();
+            }
+        }else if(msg.type==LinkType){
             TextLinkMessage *linkMsg = (TextLinkMessage *)msg;
             NSString *showContent;
             if([delegate respondsToSelector:@selector(parserShowText:text:)]){
@@ -95,7 +115,7 @@
             linkMsg.attSring=one;
             linkMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
-            
+            [msgArray addObject:msg];
         }
     }];
     CGSize size  = defaultC.contentSize;

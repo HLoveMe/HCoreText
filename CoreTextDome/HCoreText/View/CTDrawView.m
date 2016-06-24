@@ -13,23 +13,40 @@
 #import "CoreTextData.h"
 #import "UIView+Extension.h"
 #import "FontConfig.h"
+#import "HVideoPlayView.h"
+#import "CTDrawManager.h"
+#import "FrameParserConfig.h"
+
 @interface CTDrawView()
 @property(nonatomic,strong)Message *tempMsg;
 @property(nonatomic,strong)FontConfig *tempFont;
+@property(nonatomic,strong)CTDrawManager *target;
 @end
 @implementation CTDrawView{
     UIColor *hightColor;
     NSMutableArray *hightRectArray;
+    NSMutableDictionary *videoViews;
+}
+-(void)initSource{
+    self.beginTouchEvent = 1;
+    videoViews=[NSMutableDictionary dictionary];
+    _target=[[CTDrawManager alloc]init];
+}
+-(id<CTViewTouchDelegate>)delegate{
+    if (_delegate==nil) {
+        return (id<CTViewTouchDelegate>)_target;
+    }
+    return _delegate;
 }
 -(instancetype)init{
     if ([super init]) {
-        self.beginTouchEvent = 1;
+        [self initSource];
     }
     return self;
 }
 -(instancetype)initWithFrame:(CGRect)frame{
     if ([super initWithFrame:frame]) {
-        self.beginTouchEvent = 1;
+        [self initSource];
     }
     return self;
 }
@@ -42,9 +59,11 @@
 
 -(void)drawRect:(CGRect)rect{
     CGContextRef ref=UIGraphicsGetCurrentContext();
+    CGContextSaveGState(ref);
     CGContextSetTextMatrix(ref, CGAffineTransformIdentity);
     CGContextTranslateCTM(ref, 0, self.bounds.size.height);
     CGContextScaleCTM(ref, 1, -1);
+    
     NSArray<CoreTextData *> *datas = objc_getAssociatedObject(self, "coreDatas");
     if (hightColor&&hightRectArray) {
         [hightColor set];
@@ -66,10 +85,8 @@
         CGPoint origins[count];
         CTFrameGetLineOrigins(obj.frameRef, CFRangeMake(0, 0), origins);
         for (Message * _Nonnull msg in obj.msgArray) {
-            if (msg.type == TextType||msg.type==LinkType){
-                NSString *showStr = msg.attSring.string;
-                location += showStr.length;
-            } else if (msg.type == ImageType) {
+            NSString *showStr = msg.attSring.string;
+            if(msg.type == ImageType|msg.type==VideoType) {
                 ImageMessage *imgMsg = (ImageMessage *)msg;
                 for (long i=0; i<count; i++) { //遍历行
                     CTLineRef oneLine= CFArrayGetValueAtIndex(lineRef, i);
@@ -86,27 +103,55 @@
                             CGFloat wid = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil);
                             //run相对于line的x偏移量
                             CGFloat runXOffset = CTLineGetOffsetForStringIndex(oneLine, range.location, nil);
-                            //                            CTRunGetPositionsPtr(<#CTRunRef  _Nonnull run#>)
+                            //                            CTRunGetPositionsPtr(CTRunRef  _Nonnull run)
                             //line 的起点位置  x
                             CGFloat lineXOffset = origins[i].x;
                             // line y
                             CGFloat lineY = origins[i].y;
                             
                             CGRect imgRect = CGRectMake(lineXOffset+runXOffset, lineY, wid, ascent);
-                            [HImageBox getImageWithSource:imgMsg.src option:^(UIImage *img,BOOL isFirst) {
-                                if (isFirst) {
-                                    [self setNeedsDisplay];
-                                }else{
-                                    CGContextDrawImage(ref, imgRect,img.CGImage);
+                            if (imgMsg.isCenter) {
+                                CGFloat x =(self.frame.size.width-wid)/2;
+                                imgRect=CGRectMake(x, lineY, wid, ascent);
+                            }
+                            imgMsg.rect=imgRect;
+                            //图片
+                            if([msg isMemberOfClass:[ImageMessage class]]){
+                                [HImageBox getImageWithSource:imgMsg.src option:^(UIImage *img,BOOL isFirst) {
+                                    if (isFirst) {
+                                        [self setNeedsDisplay];
+                                    }else{
+                                        CGContextDrawImage(ref, imgRect,img.CGImage);
+                                    }
+                                }];
+                            }else{
+                                //视频
+                                VideoMessage *video =(VideoMessage *)msg;
+                                if (video.hasShow) {
+                                    return;
                                 }
-                            }];
+                                CGFloat Y = self.frame.size.height-ascent-lineY;
+                                CGRect rect = CGRectMake(imgRect.origin.x, Y, wid, ascent);
+                                /**
+                                 *  <#Description#>
+                                 */
+                                id<CustomPlayerDelegate> videoPlayer = [[obj.parserCfg.videoClazz  alloc]init];
+                                UIView *view =[videoPlayer playView];
+                                view.frame=rect;
+                                [videoPlayer switchUseURL:[NSURL URLWithString:video.src]];
+                                [self addSubview:view];
+                                videoViews[video.src]=videoPlayer;
+                                video.hasShow=YES;
+                            }
                         }
                     }
                 }
+                
             }
-            
+            location += showStr.length;
         }
     }
+    CGContextRestoreGState(ref);
 }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     id coreD = objc_getAssociatedObject(self, "coreDatas");
@@ -126,23 +171,42 @@
             CFArrayRef runs = CTLineGetGlyphRuns(line);
             CGFloat hei = points[i].y;
             BOOL flag=0;
+           
             if (hei<touchPoint.y) {
                 for (int j=0; j<CFArrayGetCount(runs); j++) {
+                    //判断是否为图片/视频
+                    CFRange range = CTRunGetStringRange(CFArrayGetValueAtIndex(runs, j));
+                    NSString *string = [data.contentString.string substringWithRange:NSMakeRange(range.location, range.length)];
+                    if ([string isEqualToString:@" "]) {
+                        for (int k=0; k<data.msgArray.count; k++) {
+                            Message * _Nonnull msg=data.msgArray[k];
+                            if ([msg isKindOfClass:[ImageMessage class]]) {
+                                if (CGRectContainsPoint([(ImageMessage*)msg rect], touchPoint)) {
+                                    [self transferDelegate:msg];
+                                    return ;
+                                }
+                            }
+                        }
+                    }
                     CTRunRef run = CFArrayGetValueAtIndex(runs, j);
                     const CGPoint *point = CTRunGetPositionsPtr(run);
                     CGFloat ascent;
                     CGFloat width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, nil, nil);
+                    
                     CGRect rect = CGRectMake(point->x, point->y+hei, width, ascent);
                     if( CGRectContainsPoint(rect, touchPoint)){
                         CFRange runRange = CTRunGetStringRange(run);
                         [data.msgArray enumerateObjectsUsingBlock:^(Message * _Nonnull msg, NSUInteger idx, BOOL * _Nonnull stop2) {
-                            long msgEnd = msg.contentRange.location+msg.contentRange.length;
-                            long runEnd = runRange.location+runRange.length;
-                            if (msg.contentRange.location<=runRange.location&&msgEnd>=runEnd) {
-                                if (self.delegate) {
-                                    [self transferDelegate:msg];
+                            if (![msg isKindOfClass:[ImageMessage class]]) {
+                                long msgEnd = msg.contentRange.location+msg.contentRange.length;
+                                long runEnd = runRange.location+runRange.length;
+                                if (msg.contentRange.location<=runRange.location&&msgEnd>=runEnd) {
+                                    if (self.delegate) {
+                                        [self transferDelegate:msg];
+                                        return ;
+                                    }
+                                    *stop2 = YES;
                                 }
-                                *stop2 = YES;
                             }
                         }];
                         flag=1;
@@ -176,14 +240,19 @@
                 [self setNeedsDisplay];
             }
         }
-        
+    }else if (msg.type==VideoType){
+        VideoMessage *video=(VideoMessage *)msg;
+        id<CustomPlayerDelegate> videoPlayer = videoViews[video.src];
+        if ([self.delegate respondsToSelector:@selector(touchView:player:videoSource:)]){
+            [self.delegate touchView:self player:videoPlayer videoSource:video.src];
+        }
     }
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{
     hightRectArray=nil;
     hightColor = nil;
     [self setNeedsDisplay];
-
+    
 }
 /**
  *  得到所有应该高亮的rect 数组
@@ -240,7 +309,7 @@
                 //得到  Line  所有Run 连起来的Rect
                 CGFloat temp = msg.fontCig.fontSize * 0.1>2?msg.fontCig.fontSize * 0.1:2;
                 CGRect lineRunRect = CGRectMake(x, y, wid-temp, hei);
-//                NSLog(@"%@",NSStringFromCGRect(lineRunRect));
+                //                NSLog(@"%@",NSStringFromCGRect(lineRunRect));
                 [rectArray addObject:[NSValue valueWithCGRect:lineRunRect]];
             }
         }
@@ -258,15 +327,15 @@
     
     
     [beziPath addLineToPoint:CGPointMake(origin.x+size.width, origin.y+size.height-radius)];
-
+    
     [beziPath addArcWithCenter:CGPointMake(origin.x+size.width-radius, origin.y+size.height-radius) radius:radius startAngle:0 endAngle:M_PI_2 clockwise:YES];
     
     [beziPath addLineToPoint:CGPointMake(origin.x+radius, origin.y+size.height)];
-
+    
     [beziPath addArcWithCenter:CGPointMake(origin.x+radius, origin.y+size.height-radius) radius:radius startAngle:M_PI_2 endAngle:M_PI clockwise:YES];
     
     [beziPath addLineToPoint:CGPointMake(origin.x, origin.y+radius)];
-
+    
     
     [beziPath addArcWithCenter:CGPointMake(origin.x+radius, origin.y+radius) radius:radius startAngle:M_PI endAngle:M_PI_2*3 clockwise:YES];
     

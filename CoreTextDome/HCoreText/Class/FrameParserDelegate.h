@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 @class  Message;
+@class FrameParserConfig;
 #import "ParserType.h"
 @protocol FrameParserDelegate<NSObject>
 @required
@@ -37,12 +38,20 @@
  *
  *  @return Message 的子类
  */
--(Message *)parserMessageWithPartText:(NSString *)partText;
+-(Message *)parserMessageWithPartText:(NSString *)partText withDefault:(FrameParserConfig*)config;
+
+
+
+
+
+
+
+
 
 @optional
 /**
  *  通过文本内容得到该部分是文字 还是图片
- *  Note：如果没有实现 判断的准则就是是否包含"<text" "<link" "<image" 字段 包含<text则是Text  ...
+ *  Note：如果没有实现 判断的准则就是是否包含"<text" "<link" "<image" "<video" 字段 包含<text则是Text  ...
           如果你的文本解析出现混乱 或者判断条件不是该字段 请实现该方法
  *  @param partText 部分文本
  *
@@ -51,7 +60,7 @@
 -(SourceType)parserTypeWithPart:(NSString *)partText;
 /**
  *  得到部分文本的具体显示内容
- *  Note:如果没有实现 默认得到"<text" "<link" "<image" 前面的文本。如果是图片会返回长度为1 的占位文本
+ *  Note:如果没有实现 默认得到"<text" "<link" "<image" "<video" 前面的文本。如果是图片会返回长度为1 的占位文本
  *       如果你的文本解析出现混乱 或者判断条件不是该字段 请实现该方法
  *
  *  @param type    文本类型

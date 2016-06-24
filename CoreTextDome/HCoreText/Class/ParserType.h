@@ -17,7 +17,8 @@
 typedef enum{
     TextType = 1,
     LinkType,
-    ImageType
+    ImageType,
+    VideoType
 }SourceType;
 
 #endif

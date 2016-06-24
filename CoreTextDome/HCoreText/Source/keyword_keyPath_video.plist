@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>src</key>
+	<array>
+		<string>src</string>
+		<string>NSString</string>
+	</array>
+	<key>width</key>
+	<array>
+		<string>width</string>
+		<string>NSNumber</string>
+	</array>
+	<key>height</key>
+	<array>
+		<string>height</string>
+		<string>NSNumber</string>
+	</array>
+	<key>isReturn</key>
+	<array>
+		<string>isReturn</string>
+		<string>NSNumber</string>
+	</array>
+	<key>isCenter</key>
+	<array>
+		<string>isCenter</string>
+		<string>NSNumber</string>
+	</array>
+</dict>
+</plist>

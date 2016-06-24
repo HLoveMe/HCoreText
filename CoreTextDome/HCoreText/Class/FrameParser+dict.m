@@ -19,7 +19,8 @@
 static NSMutableArray *textkeywords;
 static NSMutableArray *linkkeywords;
 static NSMutableArray *imagekeywords;
-+(void)load{
+static NSMutableArray *videokeywords;
++(void)loadData{
     NSString *path = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_text.plist" ofType:nil];
     NSArray *textkeys = [[NSDictionary dictionaryWithContentsOfFile:path] allKeys];
     textkeywords=textkeys.mutableCopy;
@@ -30,6 +31,10 @@ static NSMutableArray *imagekeywords;
     NSString *path2 = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_image.plist" ofType:nil];
     NSArray *textkeys2 = [[NSDictionary dictionaryWithContentsOfFile:path2] allKeys];
     imagekeywords=textkeys2.mutableCopy;
+    
+    NSString *path3 = [[NSBundle mainBundle] pathForResource:@"keyword_keyPath_video.plist" ofType:nil];
+    NSArray *textkeys3 = [[NSDictionary dictionaryWithContentsOfFile:path3] allKeys];
+    videokeywords=textkeys3.mutableCopy;
 }
 +(SourceType)gettype:(NSString *)typeStr{
     if ([[typeStr lowercaseString] isEqualToString:@"text"]) {
@@ -38,6 +43,8 @@ static NSMutableArray *imagekeywords;
         return ImageType;
     }else if([[typeStr lowercaseString] isEqualToString:@"link"]){
         return LinkType;
+    }else if([[typeStr lowercaseString] isEqualToString:@"video"]){
+        return VideoType;
     }else{
         NSAssert(false, @"type 关键字错误");
         return 1;
@@ -100,11 +107,48 @@ static NSMutableArray *imagekeywords;
     }];
     return keyValues;
 }
-+(ImageMessage *)parserWithDic:(NSDictionary *)contentDic{
++(ImageMessage *)parserWithDic:(NSDictionary *)contentDic type:(SourceType)type defaultCfg:(FrameParserConfig *)cfg{
     NSMutableDictionary *dic = contentDic.mutableCopy;
     [dic removeObjectForKey:@"content"];
     [dic removeObjectForKey:@"type"];
-    ImageMessage *imgMsg = [[ImageMessage alloc]init];
+    NSArray *keys=dic.allKeys;
+    void (^Block)(ImageMessage *img)=^(ImageMessage *img){
+        if (![keys containsObject:@"isReturn"]) {
+            switch (cfg.imageShowType) {
+                case originality:
+                    break;
+                case defaultReturn:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    break;
+                case returnCenter:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    [img setValue:@(1) forKey:@"isCenter"];
+                    break;
+            }
+        }
+        if (![keys containsObject:@"isCenter"]) {
+            switch (cfg.imageShowType) {
+                case originality:
+                    break;
+                case defaultReturn:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    break;
+                case returnCenter:
+                    [img setValue:@(1) forKey:@"isReturn"];
+                    [img setValue:@(1) forKey:@"isCenter"];
+                    break;
+            }
+        }
+        
+    };
+    
+    ImageMessage *imgMsg;
+    if (type==ImageType) {
+        imgMsg = [[ImageMessage alloc]init];
+    }else{
+        imgMsg = [[VideoMessage alloc]init];
+    }
+    Block(imgMsg);
     [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([imagekeywords containsObject:key])
         [imgMsg setValue:obj forKey:key];
@@ -112,12 +156,12 @@ static NSMutableArray *imagekeywords;
     return imgMsg;
 }
 +(CoreTextData *)parserWithSource:(NSArray<NSDictionary<NSString * ,NSString *>*> *)content defaultCfg:(FrameParserConfig *)defaultC{
+    [self loadData];
     CoreTextData *data = [[CoreTextData alloc]init];
     NSMutableAttributedString *contAtt = [[NSMutableAttributedString alloc]init];
     NSMutableArray<Message *> *msgArray = [NSMutableArray array];
     [content enumerateObjectsUsingBlock:^(NSDictionary<NSString *,NSString *> * _Nonnull oneDic, NSUInteger idx, BOOL * _Nonnull stop) {
         SourceType type = [self gettype:oneDic[@"type"]];
-        Message *msg;
         NSString *showContent = oneDic[@"content"];
         showContent = [showContent emojizedString];
         if (type==TextType) {
@@ -129,7 +173,7 @@ static NSMutableArray *imagekeywords;
             textMsg.attSring= attStr;
             textMsg.contentRange = NSMakeRange(contAtt.length, showContent.length);
             [contAtt appendAttributedString:attStr];
-            msg=textMsg;
+            [msgArray addObject:textMsg];
         }else if(type == LinkType){
             TextLinkMessage *link = [[TextLinkMessage alloc]init];
             link.type= LinkType;
@@ -139,22 +183,47 @@ static NSMutableArray *imagekeywords;
             link.attSring=one;
             link.contentRange = NSMakeRange(contAtt.length, one.length);
             [contAtt appendAttributedString:one];
-            msg = link;
-        }else{
-            ImageMessage *imgMsg = [self parserWithDic:oneDic];
+            [msgArray addObject:link];
+        }else if(type==ImageType|type==VideoType){
+            ImageMessage *imgMsg = [self parserWithDic:oneDic type:type defaultCfg:defaultC];
             imgMsg.type = type;
-            NSDictionary *dic = [imgMsg partAttribute];
-            if (!showContent||showContent.length==0) {
-                showContent=@" ";
+            showContent=@" ";
+            void(^Block)(void)  = ^{
+                Message *last = [msgArray lastObject];
+                if ([last.attSring.string isEqualToString:@"\n"]) {
+                    return ;
+                }
+                TextMessage *message = [[TextMessage alloc]init];
+                message.type=TextType;
+                message.contentRange=NSMakeRange(contAtt.length,1);
+                NSAttributedString *att =[[NSAttributedString alloc]initWithString:@"\n" attributes:nil];
+                message.attSring=att;
+                [contAtt appendAttributedString:att];
+                [msgArray addObject:message];
+            };
+            if ([showContent hasPrefix:@"\n"]) {
+                Block();
+            }else if(imgMsg.type==ImageType&&imgMsg.isReturn&&msgArray.count>=1) {
+                Block();
+            }else if (imgMsg.type==VideoType&&imgMsg.isReturn&&msgArray.count>=1){
+                Block();
             }
+            
+            
+            NSDictionary *dic = [imgMsg partAttribute];
             NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contAtt.length, one.length);
             [contAtt appendAttributedString:one];
-            msg = imgMsg;
+            [msgArray addObject:imgMsg];
+            
+            
+            if(imgMsg.isCenter) {
+                Block();
+            }
         }
         
-        [msgArray addObject:msg];
+        
         
     }];
     CGSize size  = defaultC.contentSize;

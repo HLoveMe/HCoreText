@@ -17,5 +17,15 @@
 		<string>height</string>
 		<string>NSNumber</string>
 	</array>
+	<key>isReturn</key>
+	<array>
+		<string>isReturn</string>
+		<string>NSNumber</string>
+	</array>
+    <key>isCenter</key>
+    <array>
+        <string>isCenter</string>
+        <string>NSNumber</string>
+    </array>
 </dict>
 </plist>

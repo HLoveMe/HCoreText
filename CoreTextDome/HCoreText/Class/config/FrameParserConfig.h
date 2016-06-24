@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "FontConfig.h"
+
+typedef enum{
+    originality,   //原始格式 根据文字内容显示
+    defaultReturn, // 内容会换行再显示 如果\n 开头 将没有作用
+    returnCenter   //换行 再居中显示  如果\n 开头 将没有作用
+}lineFeedType;
 @class paragraphConfig;
 /**
  *  整体文本配置 在关键字解析失败会使用该对象提供的默认值
@@ -37,9 +43,29 @@
  */
 @property(nonatomic,copy)NSString *pattern;
 /**
- *  提供该类所有属性 所构成的文字配置信息
+ *  提供默认的文字配置信息
  */
 @property(nonatomic,strong,readonly)NSDictionary *defaultAttribute;
+/**
+ *  整体设置  图片显示的方法 如果在图片配置参数设置 isReturn isCenter 就会以配置为准
+ *  default : defaultReturn
+ */
+@property(nonatomic,assign)lineFeedType imageShowType;
+
+/**
+ *  整体设置  图片显示的方法 如果在视频配置参数设置 isReturn isCenter 就会以配置为准
+ *  default : returnCenter
+ */
+@property(nonatomic,assign)lineFeedType videoShowType;
+/**
+ *  视频播放器   default:HVideoPlayView（该播放器功能不全,尽量替换为您自己的播放器控件）
+ *  这个播放器   实现CustomPlayerDelegate协议
+ *  你必须有完整的实现功能 （播放,暂停,显示进度等等）
+ *
+ *  Note:如果您的播放器视图 能处理点击事件  那么我们不会做任何处理
+ *  如果事件是我们帮您处理 这里我们只是简单的调用CustomPlayerDelegate协议的方法
+ */
+@property(nonatomic,strong)Class videoClazz;
 /**
  *  得到该对象的副本
  *

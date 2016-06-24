@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 @class CoreTextData;
 @class FontConfig;
+#import "CustomPlayerDelegate.h"
 @protocol CTViewTouchDelegate<NSObject>
 @optional
 /**
@@ -36,6 +37,15 @@
  *  @param source 图片名 或者网址
  */
 -(void)touchView:(UIView *)view  imageName:(NSString *)source;
+/**
+ *  视频点击事件
+ *
+ *  @param view
+ *  @param play
+ *  @param source   
+ *  该事件可能不会被调用   当你所提供的播放视图 接收到点击事件并处理      而不是被CTDrawView接受
+ */
+-(void)touchView:(UIView *)view player:(id<CustomPlayerDelegate>)play videoSource:(NSString *)source;
 @end
 
 @interface CTDrawView : UIView
@@ -45,7 +55,10 @@
  */
 @property(nonatomic,assign)BOOL beginTouchEvent;
 /**
- *  点击事件代理
+ *   视频点击事件代理  默认为CTDrawManager
+ *   如果你不想处理事件的回调，不要给delegate赋值
+ *   设置delegate之后  您要处理相应回调
+ *   我们实现了默认的处理 CTDrawManager  并发出相关通知
  */
 @property(nonatomic,weak)id<CTViewTouchDelegate> delegate;
 /**
