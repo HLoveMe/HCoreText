@@ -207,10 +207,7 @@
     [self.HPlayer replaceCurrentItemWithPlayerItem:nil];
     self._isPlayed=NO;
 }
-- (void)didMoveToSuperview{
-    [super didMoveToSuperview];
-    NSLog(@"%@",self.superview);
-}
+
 -(void)removeFromSuperview{
     [super removeFromSuperview];
     [self clearData];

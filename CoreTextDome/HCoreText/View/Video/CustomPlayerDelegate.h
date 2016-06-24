@@ -10,20 +10,25 @@
 #define VideoPlayerDelegate_h
 #import <UIKit/UIKit.h>
 @protocol CustomPlayerDelegate<NSObject>
+@optional
 //是否已经开始播放
 @property(nonatomic,assign,readonly)BOOL isPlayed;
 //是否正在播放
 @property(nonatomic,assign,readonly)BOOL isPlaying;
-//得到播放视图
--(UIView *)playView;
-//切换视频源
--(void)switchUseURL:(NSURL *)url;
+
 //重头开始播放
 -(void)play;
 /**暂停*/
 -(void)pause;
 /**恢复*/
 -(void)resume;
+
+
+@required
+//得到播放视图
+-(UIView *)playView;
+//切换视频源
+-(void)switchUseURL:(NSURL *)url;
 
 @end
 
