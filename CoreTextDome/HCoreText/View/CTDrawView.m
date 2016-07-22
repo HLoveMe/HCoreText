@@ -14,13 +14,13 @@
 #import "UIView+Extension.h"
 #import "FontConfig.h"
 #import "HVideoPlayView.h"
-#import "CTDrawManager.h"
+
 #import "FrameParserConfig.h"
 
 @interface CTDrawView()
 @property(nonatomic,strong)Message *tempMsg;
 @property(nonatomic,strong)FontConfig *tempFont;
-@property(nonatomic,strong)CTDrawManager *target;
+
 @end
 @implementation CTDrawView{
     UIColor *hightColor;
@@ -30,14 +30,9 @@
 -(void)initSource{
     self.beginTouchEvent = 1;
     videoViews=[NSMutableDictionary dictionary];
-    _target=[[CTDrawManager alloc]init];
+    
 }
--(id<CTViewTouchDelegate>)delegate{
-    if (_delegate==nil) {
-        return (id<CTViewTouchDelegate>)_target;
-    }
-    return _delegate;
-}
+
 -(instancetype)init{
     if ([super init]) {
         [self initSource];
@@ -135,12 +130,19 @@
                                 /**
                                  *  <#Description#>
                                  */
-                                id<CustomPlayerDelegate> videoPlayer = [[obj.parserCfg.videoClazz  alloc]init];
-                                UIView *view =[videoPlayer playView];
-                                view.frame=rect;
-                                [videoPlayer switchUseURL:[NSURL URLWithString:video.src]];
-                                [self addSubview:view];
-                                videoViews[video.src]=videoPlayer;
+                                id videoView;
+                                if ([self.delegate respondsToSelector:@selector(drawViewWillShowVideo:)]) {
+                                    videoView = [self.delegate drawViewWillShowVideo:video.src];
+                                }else{
+                                    videoView=[[HVideoPlayView alloc]init];
+                                    [videoView switchUseURL:[NSURL URLWithString:video.src]];
+                                }
+                                if ([videoView isKindOfClass:[UIViewController class]]) {
+                                    videoView =((UIViewController *)videoView).view;
+                                }
+                                [videoView setValue:[NSValue valueWithCGRect:rect] forKey:@"frame"];
+                                [self addSubview:videoView];
+                                videoViews[video.src]=videoView;
                                 video.hasShow=YES;
                             }
                         }
@@ -153,6 +155,8 @@
     }
     CGContextRestoreGState(ref);
 }
+
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     id coreD = objc_getAssociatedObject(self, "coreDatas");
     if (!coreD) {return;}
@@ -242,10 +246,10 @@
         }
     }else if (msg.type==VideoType){
         VideoMessage *video=(VideoMessage *)msg;
-        id<CustomPlayerDelegate> videoPlayer = videoViews[video.src];
-        if ([self.delegate respondsToSelector:@selector(touchView:player:videoSource:)]){
-            [self.delegate touchView:self player:videoPlayer videoSource:video.src];
+        if([self.delegate respondsToSelector:@selector(touchView:videoSource:)]){
+            [self.delegate touchView:self videoSource:video.src];
         }
+       
     }
 }
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event{

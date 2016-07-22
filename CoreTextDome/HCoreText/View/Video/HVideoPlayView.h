@@ -7,7 +7,6 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "CustomPlayerDelegate.h"
 @class HVideoPlayView;;
 @protocol HVideoPlayerDelegate <NSObject>
 @optional
@@ -36,7 +35,7 @@
 @end
 
 
-@interface HVideoPlayView : UIButton<CustomPlayerDelegate>
+@interface HVideoPlayView : UIButton
 @property(nonatomic,weak)id<HVideoPlayerDelegate> delegate;
 /**
  *  缓冲结束

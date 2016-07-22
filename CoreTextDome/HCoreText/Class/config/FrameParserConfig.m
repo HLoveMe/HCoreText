@@ -21,7 +21,7 @@
         self.pattern = @"(:[a-z0-9-+_]+:)";
         self.imageShowType=defaultReturn;
         self.videoShowType=returnCenter;
-        self.videoClazz=NSClassFromString(@"HVideoPlayView");
+//        self.videoClazz=NSClassFromString(@"HVideoPlayView");
     }
     return self;
 }

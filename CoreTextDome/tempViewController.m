@@ -111,7 +111,7 @@
                             @{
                                 @"content":@"    ",
                                 @"type":@"video",
-                                @"src":[NSURL URLWithString:@"http://183.57.28.252/video.icoolxue.com/107728439?e=1466706291&token=66qv3jBbt6n2ODZRTS5YTnuhc3t18SyuClnpmz4C:Bdhy7n6aL_t5Izlm1CN74SJqV-E=&wsiphost=local"].absoluteString,
+                                @"src":@"http://183.57.28.250/video.icoolxue.com/107757714?e=1469188742&token=66qv3jBbt6n2ODZRTS5YTnuhc3t18SyuClnpmz4C:0hVwucZa11Qv-KqIoFSBYBmnW_4=&wsiphost=local",
                                 @"width":@"260",
                                 @"height":@"120"
                                 }

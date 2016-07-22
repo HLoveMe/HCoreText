@@ -57,15 +57,14 @@ typedef enum{
  *  default : returnCenter
  */
 @property(nonatomic,assign)lineFeedType videoShowType;
-/**
- *  视频播放器   default:HVideoPlayView（该播放器功能不全,尽量替换为您自己的播放器控件）
- *  这个播放器   实现CustomPlayerDelegate协议
- *  你必须有完整的实现功能 （播放,暂停,显示进度等等）
- *
- *  Note:如果您的播放器视图 能处理点击事件  那么我们不会做任何处理
- *  如果事件是我们帮您处理 这里我们只是简单的调用CustomPlayerDelegate协议的方法
- */
-@property(nonatomic,strong)Class videoClazz;
+///**
+// *  视频播放器   default:HVideoPlayView（该播放器功能不全,尽量替换为您自己的播放器控件）
+// *  这个播放器   实现CustomPlayerDelegate协议
+// *  你必须有完整的实现功能
+// *  Note:如果您的播放器视图 能处理点击事件  那么我们不会做任何处理
+// */
+//@property(nonatomic,strong)Class videoClazz;
+
 /**
  *  得到该对象的副本
  *

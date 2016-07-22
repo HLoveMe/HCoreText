@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 @class CoreTextData;
 @class FontConfig;
-#import "CustomPlayerDelegate.h"
 @protocol CTViewTouchDelegate<NSObject>
 @optional
 /**
@@ -45,7 +44,17 @@
  *  @param source   
  *  该事件可能不会被调用   当你所提供的播放视图 接收到点击事件并处理      而不是被CTDrawView接受
  */
--(void)touchView:(UIView *)view player:(id<CustomPlayerDelegate>)play videoSource:(NSString *)source;
+-(void)touchView:(UIView *)view  videoSource:(NSString *)source;
+/**
+ *  当你需要进行视频播放时 你实现这个方法 返回你的播放器
+ *  如果你没有实现将使用默认播放器 该播放器只是提供播放功能
+ *  @param source 视频源
+ *  1：返回值:只能是三种情况: CALayer 子类  UIView子类   UIViewController子类
+        并且播放功能(暂停 继续 进度显示 等等) and  触摸事件必须你自己处理
+ *  2：如果类型会报错
+ *  @return
+ */
+-(id)drawViewWillShowVideo:(NSString *)source;
 @end
 
 @interface CTDrawView : UIView

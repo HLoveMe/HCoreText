@@ -7,17 +7,15 @@
 
 #import "HVideoPlayView.h"
 #import "UIView+Display.h"
-#import "HPlayToolView.h"
 #import "HImageBox.h"
 #import "HVideoPlayer.h"
-@interface HVideoPlayView()<HPlayViewDelegate>{
+@interface HVideoPlayView(){
     BOOL isRegistered;
 }
 @property(nonatomic,strong)AVPlayerLayer *HPlayerLayer;
 @property(nonatomic,strong)NSURL *url;
 @property(nonatomic,weak)AVPlayer *HPlayer;
 @property(nonatomic,assign)double currentVeidoDuration;
-@property(nonatomic,strong)HPlayToolView *toolView;
 
 @property(nonatomic,assign)BOOL _isPlayed;
 @property(nonatomic,assign)double _cacheProgress;
@@ -31,20 +29,13 @@
     _HPlayerLayer = [HVideoPlayer sharedPlayer];
     _HPlayerLayer.frame=self.bounds;
     _HPlayer=_HPlayerLayer.player;
-    self.toolView.player=_HPlayer;
+    
     return _HPlayerLayer;
 }
--(HPlayToolView *)toolView{
-    if (_toolView==nil) {
-        _toolView=[[HPlayToolView alloc]initWithFrame:self.bounds];
-        _toolView.delegate=self;
-    }
-    return _toolView;
-}
+
 -(void)setUrl:(NSURL *)url{
     _url=url;
     [self HPlayerLayer];
-    [self addSubview:self.toolView];
     [HImageBox getFrameImageWithURL:url atTime:1 option:^(UIImage *img) {
         [self setBackgroundImage:img forState:UIControlStateNormal];
     }];
@@ -95,8 +86,7 @@
         [[NSNotificationCenter defaultCenter] removeObserver:temp.observer];
         
         //playView 恢复初始状态
-        [temp.observer.toolView initStatus];
-    }
+            }
     temp.isRegistered=NO;
 //    temp->isPlayed=NO;
 }
@@ -106,7 +96,7 @@
     if ([self.delegate respondsToSelector:@selector(videoPlayerDidFinish:)]) {
         [self.delegate videoPlayerDidFinish:self];
     }
-    [self.toolView showFinishPlay];
+    
 }
 
 
@@ -136,7 +126,7 @@
         if([self.delegate respondsToSelector:@selector(videoPlayerDidError:)]){
             [self.delegate videoPlayerDidError:playerItem.error];
         }
-        [self.toolView showError];
+        
     }
 }
 -(BOOL)isPlaying{
@@ -203,7 +193,7 @@
     [self removeObserverFromItem:self.HPlayer.currentItem];
     [self pause];
     [self seekToTime:0];
-    [self.toolView initStatus];
+    
     [self.HPlayer replaceCurrentItemWithPlayerItem:nil];
     self._isPlayed=NO;
 }
@@ -211,11 +201,11 @@
 -(void)removeFromSuperview{
     [super removeFromSuperview];
     [self clearData];
-    [self.toolView initStatus];
+    
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    [self.toolView setFrame:self.bounds];
+    
 }
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     BOOL flag = [super pointInside:point withEvent:event];
@@ -233,28 +223,18 @@
 -(UIView *)playView{
     return self;
 }
-
-
-@end
-
-@implementation HVideoPlayView (delegate)
-
--(BOOL)toolView:(HPlayToolView *)view play:(BOOL)flag{
-    if (flag) {
-        self._isPlayed?[self resume]:[self play];
-    }else{
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    if (self.isPlaying) {
         [self pause];
+    }else{
+        if ([self isPlayed]) {
+            [self resume];
+        }else{
+            [self play];
+        }
     }
-    return YES;
 }
 
--(void)toolView:(HPlayToolView *)view changeProgress:(double)time{
-    [self seekToTime:time * _currentVeidoDuration];
-}
-
--(void)toolViewToScreen:(HPlayToolView *)view{
-    NSLog(@"全屏");
-}
 @end
 
 

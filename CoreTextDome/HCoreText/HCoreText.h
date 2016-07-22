@@ -17,7 +17,6 @@
     #import "CoreTextData.h"
     #import "CTDrawView.h"
     #import "partMessage.h"
-    #import "CTDrawManager.h"
 
     #import "HImageBox.h"
 #endif
