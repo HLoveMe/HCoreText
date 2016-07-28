@@ -10,33 +10,26 @@
 #import <objc/runtime.h>
 #import <AVFoundation/AVFoundation.h>
 @interface AppDelegate ()
-
+@property(nonatomic,assign)BOOL a;
 @end
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+    _a=YES;
+    [self setValue:@"yes" forKey:@"a"];
+    
+    if (_a) {
+        
+        
+        int b=0;
+    }else{
+    
+        int b=0;
+    }
     return YES;
 }
-+ (UIImage*) thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
-    
-    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
-    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
-    assetImageGenerator.appliesPreferredTrackTransform = YES;
-    assetImageGenerator.apertureMode =AVAssetImageGeneratorApertureModeEncodedPixels;
-    
-    CGImageRef thumbnailImageRef = NULL;
-    CFTimeInterval thumbnailImageTime = time;
-    NSError *thumbnailImageGenerationError = nil;
-    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
-    
-    if(!thumbnailImageRef)
-        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
-    
-    UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage:thumbnailImageRef]: nil;
-    return thumbnailImage;
-}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

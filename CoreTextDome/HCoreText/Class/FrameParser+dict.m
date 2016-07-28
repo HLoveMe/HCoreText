@@ -114,7 +114,7 @@ static NSMutableArray *videokeywords;
     NSArray *keys=dic.allKeys;
     void (^Block)(ImageMessage *img)=^(ImageMessage *img){
         if (![keys containsObject:@"isReturn"]) {
-            switch (cfg.imageShowType) {
+            switch (type==ImageType?cfg.imageShowType:cfg.videoShowType) {
                 case originality:
                     break;
                 case defaultReturn:
@@ -126,8 +126,9 @@ static NSMutableArray *videokeywords;
                     break;
             }
         }
+
         if (![keys containsObject:@"isCenter"]) {
-            switch (cfg.imageShowType) {
+            switch (type==ImageType?cfg.imageShowType:cfg.videoShowType) {
                 case originality:
                     break;
                 case defaultReturn:
@@ -138,6 +139,11 @@ static NSMutableArray *videokeywords;
                     [img setValue:@(1) forKey:@"isCenter"];
                     break;
             }
+        }
+        if(![keys containsObject:@"isSingleLine"]){
+            [img setValue:@(1) forKey:@"isReturn"];
+            [img setValue:@(1) forKey:@"isCenter"];
+            [img setValue:@(cfg.integrate) forKey:@"isSingleLine"];
         }
         
     };
@@ -151,7 +157,7 @@ static NSMutableArray *videokeywords;
     Block(imgMsg);
     [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         if ([imagekeywords containsObject:key])
-        [imgMsg setValue:obj forKey:key];
+            [imgMsg setValue:obj forKey:key];
     }];
     return imgMsg;
 }
@@ -160,26 +166,38 @@ static NSMutableArray *videokeywords;
     CoreTextData *data = [[CoreTextData alloc]init];
     NSMutableAttributedString *contAtt = [[NSMutableAttributedString alloc]init];
     NSMutableArray<Message *> *msgArray = [NSMutableArray array];
+    void(^dealEmoji)(NSMutableAttributedString *string,NSMutableArray *ranges)=^(NSMutableAttributedString *string,NSMutableArray<NSValue *>*ranges){
+        if (!defaultC.integrate) {
+            [ranges enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSRange range=[obj rangeValue];
+                [string setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:defaultC.emojiZise]} range:range];
+            }];
+        }
+    };
+    
     [content enumerateObjectsUsingBlock:^(NSDictionary<NSString *,NSString *> * _Nonnull oneDic, NSUInteger idx, BOOL * _Nonnull stop) {
         SourceType type = [self gettype:oneDic[@"type"]];
         NSString *showContent = oneDic[@"content"];
-        showContent = [showContent emojizedString];
         if (type==TextType) {
             TextMessage *textMsg =[[TextMessage alloc]init];
+            showContent = [showContent emojizedStringWithCurrent:textMsg];
             textMsg.keyValues = [self parserKeyValuesWithDic:oneDic type:type];
             textMsg.type = type;
             NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
-            NSAttributedString *attStr = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
+            dealEmoji(attStr,textMsg.emojiRange);
             textMsg.attSring= attStr;
             textMsg.contentRange = NSMakeRange(contAtt.length, showContent.length);
             [contAtt appendAttributedString:attStr];
             [msgArray addObject:textMsg];
         }else if(type == LinkType){
             TextLinkMessage *link = [[TextLinkMessage alloc]init];
+            showContent = [showContent emojizedStringWithCurrent:link];
             link.type= LinkType;
             link.keyValues =[self parserKeyValuesWithDic:oneDic type:type];
             NSDictionary *dic = [link partAttribute:defaultC.fontCig];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
+            dealEmoji(one,link.emojiRange);
             link.attSring=one;
             link.contentRange = NSMakeRange(contAtt.length, one.length);
             [contAtt appendAttributedString:one];
@@ -196,7 +214,7 @@ static NSMutableArray *videokeywords;
                 TextMessage *message = [[TextMessage alloc]init];
                 message.type=TextType;
                 message.contentRange=NSMakeRange(contAtt.length,1);
-                NSAttributedString *att =[[NSAttributedString alloc]initWithString:@"\n" attributes:nil];
+                NSMutableAttributedString *att =[[NSMutableAttributedString alloc]initWithString:@"\n" attributes:nil];
                 message.attSring=att;
                 [contAtt appendAttributedString:att];
                 [msgArray addObject:message];
@@ -211,7 +229,7 @@ static NSMutableArray *videokeywords;
             
             
             NSDictionary *dic = [imgMsg partAttribute];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contAtt.length, one.length);
             [contAtt appendAttributedString:one];

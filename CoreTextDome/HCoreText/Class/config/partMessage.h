@@ -80,7 +80,7 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  *  该part段落文本
  *  Note:解析之后就会有值
  */
-@property(nonatomic,strong)NSAttributedString *attSring;
+@property(nonatomic,strong)NSMutableAttributedString *attSring;
 @end
 
 /**
@@ -97,7 +97,10 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
  *  Note:在从创建时赋值
  */
 @property(nonatomic,strong)NSArray<keyValue *> *keyValues;
-
+/**
+ *  该文本中 Emoji表情占据的range
+ */
+@property(nonatomic,strong)NSMutableArray *emojiRange;
 /**
  *  段落配置信息   
  *   Note:在从创建时赋值  有默认值
@@ -121,13 +124,18 @@ typedef id(^parserValueHandle)(NSString * key,NSString *value,Class clazz);
 
 @interface ImageMessage : Message
 /**
- *  当前图片是否换行显示
+ *  当前图片是否换行显示 YES
  */
 @property(nonatomic,assign)BOOL isReturn;
 /**
- *  当前图片是否居中显示
+ *  当前图片是否居中显示 YES
  */
 @property(nonatomic,assign)BOOL isCenter;
+/**
+ *  是否为单行显示  default = 1 
+ *  isSingleLine  优先级 大于  isCenter
+ */
+@property(nonatomic,assign)BOOL isSingleLine;
 /**
  *  宽
  * Note:在从创建时赋值

@@ -12,8 +12,8 @@
 
 typedef enum{
     originality,   //原始格式 根据文字内容显示
-    defaultReturn, // 内容会换行再显示 如果\n 开头 将没有作用
-    returnCenter   //换行 再居中显示  如果\n 开头 将没有作用
+    defaultReturn, // 内容会换行再显示 
+    returnCenter   //换行 再居中显示
 }lineFeedType;
 @class paragraphConfig;
 /**
@@ -37,11 +37,7 @@ typedef enum{
  *  Note:  
  */
 @property(nonatomic,assign)CGSize contentSize;
-/**
- *  用于解析emoji表情的匹配规则 default (:[a-z0-9-+_]+:)
-  见 NSString+HEmoji.h
- */
-@property(nonatomic,copy)NSString *pattern;
+
 /**
  *  提供默认的文字配置信息
  */
@@ -57,13 +53,24 @@ typedef enum{
  *  default : returnCenter
  */
 @property(nonatomic,assign)lineFeedType videoShowType;
-///**
-// *  视频播放器   default:HVideoPlayView（该播放器功能不全,尽量替换为您自己的播放器控件）
-// *  这个播放器   实现CustomPlayerDelegate协议
-// *  你必须有完整的实现功能
-// *  Note:如果您的播放器视图 能处理点击事件  那么我们不会做任何处理
-// */
-//@property(nonatomic,strong)Class videoClazz;
+
+
+////////////////////////Emoji.h//////////////////////////////////
+/**
+ *  用于解析emoji表情的匹配规则 default (:[a-z0-9-+_]+:)
+ *  见 NSString+HEmoji.h
+
+ */
+@property(nonatomic,copy)NSString *pattern;
+/**
+ *  emoji 是否和文字大小一致  YES
+ */
+@property(nonatomic,assign)BOOL integrate;
+/**
+ *    [UIFont systemFontSize]
+ */
+@property(nonatomic,assign)CGFloat emojiZise;
+
 
 /**
  *  得到该对象的副本

@@ -182,7 +182,7 @@
     //<video src=\"sss\" width=\"\" height=\"\">
     void (^Block)(ImageMessage *img)=^(ImageMessage *img){
         if (![keys containsObject:@"isReturn"]) {
-            switch (cfg.imageShowType) {
+            switch (type==ImageType?cfg.imageShowType:cfg.videoShowType) {
                 case originality:
                     break;
                 case defaultReturn:
@@ -194,8 +194,9 @@
                     break;
             }
         }
+        
         if (![keys containsObject:@"isCenter"]) {
-            switch (cfg.imageShowType) {
+            switch (type==ImageType?cfg.imageShowType:cfg.videoShowType) {
                 case originality:
                     break;
                 case defaultReturn:
@@ -206,6 +207,11 @@
                     [img setValue:@(1) forKey:@"isCenter"];
                     break;
             }
+        }
+        if(![keys containsObject:@"isSingleLine"]){
+            [img setValue:@(1) forKey:@"isReturn"];
+            [img setValue:@(1) forKey:@"isCenter"];
+            [img setValue:@(cfg.integrate) forKey:@"isSingleLine"];
         }
         
     };

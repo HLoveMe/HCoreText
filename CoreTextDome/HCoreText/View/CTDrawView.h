@@ -55,6 +55,7 @@
  *  @return
  */
 -(id)drawViewWillShowVideo:(NSString *)source;
+
 @end
 
 @interface CTDrawView : UIView
@@ -64,10 +65,7 @@
  */
 @property(nonatomic,assign)BOOL beginTouchEvent;
 /**
- *   视频点击事件代理  默认为CTDrawManager
- *   如果你不想处理事件的回调，不要给delegate赋值
- *   设置delegate之后  您要处理相应回调
- *   我们实现了默认的处理 CTDrawManager  并发出相关通知
+ *   代理事件
  */
 @property(nonatomic,weak)id<CTViewTouchDelegate> delegate;
 /**

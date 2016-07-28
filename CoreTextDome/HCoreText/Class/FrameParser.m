@@ -18,12 +18,13 @@
 @implementation FrameParser
 +(CoreTextData *)parserContent:(NSString *)content withConfig:(FrameParserConfig *)config{
     NSDictionary *dic = [config defaultAttribute];
-    content = [content emojizedString];
-    NSAttributedString *attString = [[NSAttributedString alloc]initWithString:content attributes:dic];
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc]initWithString:content attributes:dic];
     TextMessage *textMsg = [[TextMessage alloc]init];
+    content = [content emojizedStringWithCurrent:textMsg];
     textMsg.type = TextType;
     textMsg.contentRange = NSMakeRange(0, content.length);
     textMsg.attSring = attString;
+    
     CTFramesetterRef setter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
     /**计算需要的空间*/
     CGSize size = config.contentSize;
@@ -50,6 +51,17 @@
     CoreTextData *data =[[CoreTextData alloc]init];
     NSMutableAttributedString *contentAtt = [[NSMutableAttributedString alloc]init];
     NSMutableArray *msgArray = [NSMutableArray array];
+    
+    void(^dealEmoji)(NSMutableAttributedString *string,NSMutableArray *ranges)=^(NSMutableAttributedString *string,NSMutableArray<NSValue *>*ranges){
+        if (!defaultC.integrate) {
+            [ranges enumerateObjectsUsingBlock:^(NSValue * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                NSRange range=[obj rangeValue];
+                [string setAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:defaultC.emojiZise]} range:range];
+            }];
+        }
+    };
+    
+    
     [parts enumerateObjectsUsingBlock:^(NSString * _Nonnull onePart, NSUInteger idx, BOOL * _Nonnull stop) {
         Message *msg = [delegate parserMessageWithPartText:onePart withDefault:defaultC];
         if (msg.type==TextType) {
@@ -60,9 +72,10 @@
             }else{
                 showContent= (NSString *)[[onePart componentsSeparatedByString:@"<text"] firstObject];
             }
-            showContent = [showContent emojizedString];
+            showContent = [showContent emojizedStringWithCurrent:textMsg];
             NSDictionary *dic = [textMsg partAttribute:defaultC.fontCig];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
+            dealEmoji(one,textMsg.emojiRange);
             textMsg.attSring=one;
             textMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
@@ -78,7 +91,7 @@
                 TextMessage *message = [[TextMessage alloc]init];
                 message.type=TextType;
                 message.contentRange=NSMakeRange(contentAtt.length,1);
-                NSAttributedString *att =[[NSAttributedString alloc]initWithString:@"\n" attributes:nil];
+                NSMutableAttributedString *att =[[NSMutableAttributedString alloc]initWithString:@"\n" attributes:nil];
                 message.attSring=att;
                 [contentAtt appendAttributedString:att];
                 [msgArray addObject:message];
@@ -90,13 +103,13 @@
             }else if (msg.type==VideoType&&imgMsg.isReturn&&msgArray.count>=1){
                 Block();
             }
+            
             NSDictionary *dic = [imgMsg partAttribute];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
             imgMsg.attSring = one;
             imgMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];
             [msgArray addObject:msg];
-            
             
             if(imgMsg.isCenter) {
                 Block();
@@ -109,9 +122,10 @@
             }else{
                 showContent= (NSString *)[[onePart componentsSeparatedByString:@"<link"] firstObject];
             }
-            showContent = [showContent emojizedString];
+            showContent = [showContent emojizedStringWithCurrent:linkMsg];
             NSDictionary *dic = [linkMsg partAttribute:defaultC.fontCig];
-            NSAttributedString *one = [[NSAttributedString alloc]initWithString:showContent attributes:dic];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc]initWithString:showContent attributes:dic];
+            dealEmoji(one,linkMsg.emojiRange);
             linkMsg.attSring=one;
             linkMsg.contentRange = NSMakeRange(contentAtt.length, one.length);
             [contentAtt appendAttributedString:one];

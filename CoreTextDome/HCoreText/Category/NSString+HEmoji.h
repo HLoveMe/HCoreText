@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "partMessage.h"
 //由于不同的业务需求对emoji显示的方式不一样
 /**
  *  该实例是 :+1: 对应 \U0001F44D
@@ -22,7 +22,7 @@
  *
  *  @return
  */
-- (NSString *)emojizedString;
+- (NSString *)emojizedStringWithCurrent:(TextMessage *)textmsg;
 /**
  *  替换Emoji
  *
@@ -30,7 +30,7 @@
  *
  *  @return
  */
-+ (NSString *)emojizedStringWithString:(NSString *)text;
++ (NSString *)emojizedStringWithString:(NSString *)text current:(TextMessage *)textmsg;
 /**
  *  得到所有emoji  emoji.plist
  *

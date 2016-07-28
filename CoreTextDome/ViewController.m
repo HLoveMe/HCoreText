@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "tempViewController.h"
+
 @interface ViewController ()
 
 @end
@@ -17,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor=[UIColor whiteColor];
- 
+    
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

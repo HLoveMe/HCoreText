@@ -117,10 +117,17 @@
 @implementation ImageMessage
 -(instancetype)init{
     if (self=[super init]) {
-        self.isReturn=NO;
-        self.isCenter=NO;
+        self.isReturn=YES;
+        self.isCenter=YES;
+        self.isSingleLine=YES;
     }
     return self;
+}
+-(void)setIsSingleLine:(BOOL)isSingleLine{
+    _isSingleLine=isSingleLine;
+    if (_isCenter&&!_isSingleLine){
+        _isCenter=NO;
+    }
 }
 void dealloc (void * refCon ){
     CFRelease(refCon);

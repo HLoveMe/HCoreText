@@ -27,5 +27,10 @@
 		<string>isCenter</string>
 		<string>NSNumber</string>
 	</array>
+	<key>isSingleLine</key>
+	<array>
+		<string>isSingleLine</string>
+		<string>NSNumber</string>
+	</array>
 </dict>
 </plist>

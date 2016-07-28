@@ -8,8 +8,8 @@
 
 #import "NSString+HEmoji.h"
 @implementation NSString (HEmoji)
-- (NSString *)emojizedString{
-     return [NSString emojizedStringWithString:self];
+- (NSString *)emojizedStringWithCurrent:(TextMessage *)textmsg{
+     return [NSString emojizedStringWithString:self current:textmsg];
 }
 static NSRegularExpression *regex = nil;
 static NSArray<NSTextCheckingResult *> *result = nil;
@@ -26,26 +26,31 @@ static NSArray<NSTextCheckingResult *> *result = nil;
     return result.count>=1;
 }
 
-+ (NSString *)emojizedStringWithString:(NSString *)text
-{
++ (NSString *)emojizedStringWithString:(NSString *)text current:(TextMessage *)textmsg{
     if (![NSString hasEmoji:text]) {
         return text;
     }
     //根据需求替换emoji表情
     __block NSString *resultText = text;
+    NSMutableArray *array = [NSMutableArray array];
+    __block int temp=0;
     [result enumerateObjectsUsingBlock:^(NSTextCheckingResult * _Nonnull result, NSUInteger idx, BOOL * _Nonnull stop) {
         if (result && ([result resultType] == NSTextCheckingTypeRegularExpression)) {
             NSRange range = result.range;
             if (range.location != NSNotFound) {
                 NSString *code = [text substringWithRange:range];
                 NSString *unicode = self.emojiAliases[code];
+                
+                NSRange tempRan = NSMakeRange(range.location-temp, unicode.length);
+                temp +=code.length-unicode.length;
                 if (unicode) {
                     resultText = [resultText stringByReplacingOccurrencesOfString:code withString:unicode];
                 }
+                [array addObject:[NSValue valueWithRange:tempRan]];
             }
         }
     }];
-    
+    textmsg.emojiRange=array;
     return resultText;
 }
 
