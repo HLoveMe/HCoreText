@@ -98,9 +98,6 @@
    
          本例提供的播放器组件只是Dome使用  建议替换为您功能更加齐全的播放器。(在每个video 所在的地方都会加载你的播放器，您必须要控制内存使用，比如说使用单利).您必须已经处理好所有播放事件 
          
-   CTDrawView--代理-->CTViewTouchDelegate:
-   
-      该框架为CTDrawView 提供默认的代理CTDrawManager（在事件发生后 发出通知）
    
          
 Note:两种解析方式 支持的关键字是一致的
@@ -129,8 +126,6 @@ Note:两种解析方式 支持的关键字是一致的
    
       使用对CTDrawView @Selector(drawWithCoreTextData:)进行绘制 
          1：用于对渲染内容的展示
-      
-         2：支持点击内容回调（具体请看CTDrawView.h 文件）
    
    
    HImageBox 是针对该解析提供的简单的图片缓存实现 
