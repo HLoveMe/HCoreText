@@ -7,7 +7,7 @@
 //
 
 #import "CTDrawView.h"
-#import <objc/runtime.h>
+//#import <objc/runtime.h>
 #import "partMessage.h"
 #import "HImageBox.h"
 #import "CoreTextData.h"
@@ -18,19 +18,23 @@
 #import "FrameParserConfig.h"
 
 @interface CTDrawView()
-@property(nonatomic,strong)Message *tempMsg;
-@property(nonatomic,strong)FontConfig *tempFont;
-
+@property(nonatomic,strong)NSMutableArray *coreDatas;
 @end
 @implementation CTDrawView{
     UIColor *hightColor;
     NSMutableArray *hightRectArray;
     NSMutableDictionary *videoViews;
+    
+}
+-(NSMutableArray *)coreDatas{
+    if (nil==_coreDatas) {
+        _coreDatas=[NSMutableArray array];
+    }
+    return _coreDatas;
 }
 -(void)initSource{
     self.beginTouchEvent = 1;
     videoViews=[NSMutableDictionary dictionary];
-    
 }
 
 -(instancetype)init{
@@ -48,18 +52,29 @@
 -(void)drawWithCoreTextData:(CoreTextData *)data{
     self.frame  = CGRectMake(self.x, self.y, self.width,data.isAutoAdjustHeight?data.realContentHeight:self.height);
     [self setNeedsLayout];
-    objc_setAssociatedObject(self, "coreDatas", @[data], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [self.coreDatas addObject:data];
     [self setNeedsDisplay];
 }
-
+-(void)appendCoreTextData:(CoreTextData *)data{
+    __block CGFloat hei;
+    [self.coreDatas enumerateObjectsUsingBlock:^(CoreTextData *_Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        hei+=obj.realContentHeight;
+    }];
+    self.frame  = CGRectMake(self.x, self.y, self.width,data.isAutoAdjustHeight?hei+data.realContentHeight:self.height);
+    [self setNeedsLayout];
+    [self.coreDatas addObject:data];
+    [self setNeedsDisplay];
+}
 -(void)drawRect:(CGRect)rect{
     CGContextRef ref=UIGraphicsGetCurrentContext();
     CGContextSaveGState(ref);
     CGContextSetTextMatrix(ref, CGAffineTransformIdentity);
+    NSLog(@"%f",self.bounds.size.height);
     CGContextTranslateCTM(ref, 0, self.bounds.size.height);
     CGContextScaleCTM(ref, 1, -1);
     
-    NSArray<CoreTextData *> *datas = objc_getAssociatedObject(self, "coreDatas");
+    
+    NSArray<CoreTextData *> *datas = self.coreDatas;
     if (hightColor&&hightRectArray) {
         [hightColor set];
         [hightRectArray enumerateObjectsUsingBlock:^(NSValue *rectValue, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -158,14 +173,13 @@
 
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    id coreD = objc_getAssociatedObject(self, "coreDatas");
-    if (!coreD) {return;}
+    if (self.coreDatas.count==0) {return;}
     if (!self.beginTouchEvent) {return;}
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-    NSArray<CoreTextData *> *cores = coreD;
+    
     CGPoint touchPoint = CGPointMake(point.x, self.height-point.y);
-    [cores enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.coreDatas enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
         CFArrayRef lines = CTFrameGetLines(data.frameRef);
         int count = (int)CFArrayGetCount(lines);
         CGPoint points[count];
@@ -186,7 +200,7 @@
                             Message * _Nonnull msg=data.msgArray[k];
                             if ([msg isKindOfClass:[ImageMessage class]]) {
                                 if (CGRectContainsPoint([(ImageMessage*)msg rect], touchPoint)) {
-                                    [self transferDelegate:msg];
+                                    [self transferDelegate:msg coreData:data];
                                     return ;
                                 }
                             }
@@ -206,7 +220,7 @@
                                 long runEnd = runRange.location+runRange.length;
                                 if (msg.contentRange.location<=runRange.location&&msgEnd>=runEnd) {
                                     if (self.delegate) {
-                                        [self transferDelegate:msg];
+                                        [self transferDelegate:msg coreData:data];
                                         return ;
                                     }
                                     *stop2 = YES;
@@ -224,15 +238,31 @@
         }
     }];
 }
--(void)transferDelegate:(Message *)msg{
+-(void)transferDelegate:(Message *)msg coreData:(CoreTextData *)core{
     if (msg.type == TextType) {
         if ([self.delegate respondsToSelector:@selector(touchView:contentString:)]) {
             [self.delegate touchView:self contentString:msg.attSring.string];
         }
         
     }else if(msg.type == ImageType) {
-        if( [self.delegate respondsToSelector:@selector(touchView:imageName:)]){
-            [self.delegate touchView:self imageName:[(ImageMessage*)msg src]];
+        if( [self.delegate respondsToSelector:@selector(touchView:imageName:contentSources:)]){
+//            NSMutableArray *all = [NSMutableArray array];
+            NSMutableArray *current = [NSMutableArray array];
+            [self.coreDatas enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                
+                [obj.msgArray enumerateObjectsUsingBlock:^(Message * _Nonnull one, NSUInteger idx, BOOL * _Nonnull stop) {
+                    if ([one isMemberOfClass:[ImageMessage class]]){
+                        ImageMessage *img = (ImageMessage *)one;
+                        if (obj==core){
+                            [current addObject:img.src];
+                        }
+//                        [all addObject:img.src];
+                    }
+                }];
+                
+            }];
+            
+            [self.delegate touchView:self imageName:[(ImageMessage*)msg src]contentSources:current];
         }
     }else if (msg.type==LinkType){
         if ([self.delegate respondsToSelector:@selector(touchView:contentString:URLString:)]) {
@@ -267,8 +297,7 @@
  */
 -(NSMutableArray *)getTouchFrameCurrentMsg:(TextMessage *)msg{
     NSMutableArray *rectArray = [NSMutableArray array];
-    NSArray<CoreTextData *> *datas = objc_getAssociatedObject(self, "coreDatas");
-    [datas enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.coreDatas enumerateObjectsUsingBlock:^(CoreTextData * _Nonnull data, NSUInteger idx, BOOL * _Nonnull stop) {
         CFArrayRef lines = CTFrameGetLines(data.frameRef);
         int count =(int)CFArrayGetCount(lines);
         CGPoint points[count];
@@ -345,7 +374,5 @@
     
     return beziPath.CGPath;
 }
--(void)dealloc{
-    objc_removeAssociatedObjects(self);
-}
+
 @end

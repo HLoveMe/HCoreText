@@ -34,8 +34,9 @@
  *
  *  @param view   当前视图
  *  @param source 图片名 或者网址
+ *  @param sources 当前内容中所有的文本
  */
--(void)touchView:(UIView *)view  imageName:(NSString *)source;
+-(void)touchView:(UIView *)view  imageName:(NSString *)source contentSources:(NSArray *)sources;
 /**
  *  视频点击事件
  *
@@ -74,4 +75,5 @@
  *  @param data CoreTextData解析对象
  */
 -(void)drawWithCoreTextData:(CoreTextData *)data;
+
 @end

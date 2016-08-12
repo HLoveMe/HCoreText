@@ -16,17 +16,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    _a=YES;
-    [self setValue:@"yes" forKey:@"a"];
-    
-    if (_a) {
-        
-        
-        int b=0;
-    }else{
-    
-        int b=0;
-    }
+    NSLog(@"%@",NSHomeDirectory());
     return YES;
 }
 
